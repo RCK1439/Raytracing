@@ -11,7 +11,7 @@ VENDOR_DIR = vendor/fpng
 INCLUDES = -I$(VENDOR_DIR) -Ivendor/glm
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(VENDOR_DIR)/*.cpp)
-BINARY = $(BIN_DIR)/RTIAW
+BINARY = $(BIN_DIR)/Raytracing
 
 .PHONY: all debug release clean
 
