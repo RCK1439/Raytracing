@@ -13,7 +13,7 @@ namespace rt
         Sphere(const glm::vec3& position, f32 radius);
         ~Sphere() = default;
 
-        bool Hit(const Ray& ray) const override;
+        bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const override;
 
     private:
         glm::vec3 m_Centre;
