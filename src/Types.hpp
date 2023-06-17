@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/vec3.hpp>
+
 typedef unsigned char       u8;
 typedef unsigned short      u16;
 typedef unsigned int        u32;
@@ -12,3 +14,14 @@ typedef signed long long    s64;
 
 typedef float               f32;
 typedef double              f64;
+
+namespace rt
+{
+    struct Ray
+    {
+        glm::vec3 Origin;
+        glm::vec3 Direction;
+
+        inline glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
+    };
+} // namespace rt
