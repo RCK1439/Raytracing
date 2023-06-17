@@ -24,4 +24,11 @@ namespace rt
 
         inline glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
     };
+
+    struct HitRecord
+    {
+        f32       t;
+        glm::vec3 Point;
+        glm::vec3 Normal;
+    };
 } // namespace rt
