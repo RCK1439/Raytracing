@@ -31,14 +31,14 @@ namespace rt
         m_Data[x + y * m_Width] = color;
     }
 
-    void Image::SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a = 0xFF)
+    void Image::SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a)
     {
         const u32 color = (a << 24) | (b << 16) | (g << 8) | (r << 0);
 
         SetColorHex(x, y, color);
     }
 
-    void Image::SetColorFloat(u32 x, u32 y, f32 r, f32 g, f32 b, f32 a = 1.0f)
+    void Image::SetColorFloat(u32 x, u32 y, f32 r, f32 g, f32 b, f32 a)
     {
         const u8 ur = u8(r * 254.99999f);
         const u8 ug = u8(g * 254.99999f);
