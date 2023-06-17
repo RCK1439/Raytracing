@@ -7,10 +7,10 @@ RELEASE_FLAGS = -Ofast
 SRC_DIR = src
 BIN_DIR = bin
 
-VENDOR_DIR = vendor/fpng
-INCLUDES = -I$(VENDOR_DIR) -Ivendor/glm
+FPNG_DIR = vendor/fpng
+INCLUDES = -I$(FPNG_DIR) -Ivendor/glm
 
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(VENDOR_DIR)/*.cpp)
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(FPNG_DIR)/*.cpp)
 BINARY = $(BIN_DIR)/Raytracing
 
 .PHONY: all debug release clean
