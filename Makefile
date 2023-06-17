@@ -8,7 +8,7 @@ SRC_DIR = src
 BIN_DIR = bin
 
 VENDOR_DIR = vendor/fpng
-INCLUDES = -I$(VENDOR_DIR)
+INCLUDES = -I$(VENDOR_DIR) -Ivendor/glm
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(VENDOR_DIR)/*.cpp)
 BINARY = $(BIN_DIR)/RTIAW
