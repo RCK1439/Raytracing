@@ -52,10 +52,19 @@ namespace rt
     {
         fpng::fpng_init();
 
-        if (fpng::fpng_encode_image_to_file(filepath.data(), m_Data, m_Width, m_Height, 4))
+        u32* flipped = new u32[m_Width * m_Height];
+        u32 i = 0;
+
+        for (u32 y = m_Height - 1; y >= 1; y--)
+            for (u32 x = 0; x < m_Width; x++)
+                flipped[i++] = m_Data[x + y * m_Width];
+
+        if (fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
         {
             std::cout << "Successfully saved image: " << filepath << std::endl;
         }
         else std::cout << "Failed to save image: " << filepath << std::endl;
+
+        delete[] flipped;
     }
 } // namespace rt
