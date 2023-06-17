@@ -14,8 +14,11 @@ int main()
             f32 r = (f32)x / (f32)WIDTH;
             f32 g = (f32)y / (f32)HEIGHT;
             f32 b = 0.2f;
+            f32 a = 1.0f;
 
-            image.SetColorFloat(x, y, r, g, b); 
+            glm::vec4 color = { r, g, b, a };
+
+            image.SetColor(x, y, color); 
         }
     }
 
