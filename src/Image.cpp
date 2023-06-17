@@ -38,12 +38,12 @@ namespace rt
         SetColorHex(x, y, color);
     }
 
-    void Image::SetColorFloat(u32 x, u32 y, f32 r, f32 g, f32 b, f32 a)
+    void Image::SetColor(u32 x, u32 y, const glm::vec4& color)
     {
-        const u8 ur = u8(r * 254.99999f);
-        const u8 ug = u8(g * 254.99999f);
-        const u8 ub = u8(b * 254.99999f);
-        const u8 ua = u8(a * 254.99999f);
+        const u8 ur = u8(color.r * 254.99999f);
+        const u8 ug = u8(color.g * 254.99999f);
+        const u8 ub = u8(color.b * 254.99999f);
+        const u8 ua = u8(color.a * 254.99999f);
 
         SetColorRGBA(x, y, ur, ug, ub, ua); 
     }

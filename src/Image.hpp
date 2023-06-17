@@ -2,6 +2,7 @@
 
 #include "Types.hpp"
 
+#include <glm/vec4.hpp>
 #include <string_view>
 
 namespace rt
@@ -20,7 +21,7 @@ namespace rt
 
         void SetColorHex(u32 x, u32 y, u32 color);
         void SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a = 0xFF);
-        void SetColorFloat(u32 x, u32 y, f32 r, f32 g, f32 b, f32 a = 1.0f);
+        void SetColor(u32 x, u32 y, const glm::vec4& color);
 
         void Save(std::string_view filepath) const;
 
