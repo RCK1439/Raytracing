@@ -18,5 +18,5 @@ namespace rt
     private:
         glm::vec3 m_Centre;
         f32 m_Radius;
-    }
+    };
 } // namespace rt
