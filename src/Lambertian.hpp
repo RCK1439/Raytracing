@@ -8,7 +8,7 @@ namespace rt
     {
     public:
         Lambertian(const glm::vec3& albedo);
-        ~Lambertian() override = default;
+        ~Lambertian() = default;
 
         bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const override;
 
