@@ -1,11 +1,15 @@
+#include "Camera.hpp"
 #include "HitableList.hpp"
 #include "Image.hpp"
+#include "Random.hpp"
 #include "Sphere.hpp"
 
 #include <glm/geometric.hpp>
 
-#define WIDTH  1024
-#define HEIGHT 512
+#define WIDTH  512
+#define HEIGHT 256
+
+#define NUM_SAMPLES 50
 
 using namespace rt;
 
@@ -45,21 +49,23 @@ int main()
     world.Add(&sphere1);
     world.Add(&sphere2);
 
-    glm::vec3 lowerLeftCorner = { -2.0f, -1.0f, -1.0f };
-    glm::vec3 horizontal      = {  4.0f,  0.0f,  0.0f };
-    glm::vec3 vertical        = {  0.0f,  2.0f,  0.0f };
-    glm::vec3 origin          = glm::vec3(0.0f);
+    Camera camera;
 
     for (u32 y = 0; y < HEIGHT; y++)
     {
         for (u32 x = 0; x < WIDTH; x++)
         {
-            f32 u = (f32)x / (f32)WIDTH;
-            f32 v = (f32)y / (f32)HEIGHT;
+            glm::vec4 color(0.0f);
+            for (u32 s = 0; s < NUM_SAMPLES; s++)
+            {
+                f32 u = f32(x + Random::Float()) / (f32)WIDTH;
+                f32 v = f32(y + Random::Float()) / (f32)HEIGHT;
 
-            Ray ray = { origin, lowerLeftCorner + u * horizontal + v * vertical };
+                Ray ray = camera.GetRay(u, v);
 
-            glm::vec4 color = GetColor(ray, world);
+                color += GetColor(ray, world);
+            }
+            color /= (f32)NUM_SAMPLES;
             image.SetColor(x, y, color); 
         }
     }
