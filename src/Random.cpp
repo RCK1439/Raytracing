@@ -1,5 +1,6 @@
 #include "Random.hpp"
 
+#include <glm/geometric.hpp>
 #include <random>
 
 namespace rt
@@ -22,5 +23,16 @@ namespace rt
     f32 Random::Float()
     {
         return s_Data.Distribution(s_Data.RandomEngine);
+    }
+
+    glm::vec3 Random::InUnitSphere()
+    {
+        glm::vec3 point;
+        do
+        {
+            point = 2.0f * glm::vec3(Float(), Float(), Float()) - glm::vec3(1.0f);
+        } while (glm::dot(point, point) >= 1.0f);
+
+        return point;
     }
 } // namespace rt

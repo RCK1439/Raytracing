@@ -10,5 +10,6 @@ namespace rt
         static void Init();
 
         static f32 Float();
+        static glm::vec3 InUnitSphere();
     };
 } // namespace rt
