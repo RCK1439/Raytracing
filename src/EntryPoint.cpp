@@ -6,10 +6,10 @@
 
 #include <glm/geometric.hpp>
 
-#define WIDTH  512
-#define HEIGHT 256
+#define WIDTH  1024
+#define HEIGHT 512
 
-#define NUM_SAMPLES 50
+#define NUM_SAMPLES 25
 
 using namespace rt;
 
@@ -22,10 +22,10 @@ static glm::vec4 GetColor(const Ray& ray, const Hitable& world)
 {
     HitRecord record;
 
-    if (world.Hit(ray, 0.0f, __FLT_MAX__, record))
+    if (world.Hit(ray, 0.0001f, __FLT_MAX__, record))
     {
-        glm::vec4 color = { record.Normal.x + 1.0f, record.Normal.y + 1.0f, record.Normal.z + 1.0f, 2.0f /*This is for the multiply in the next line*/ };
-        return 0.5f * color;
+        glm::vec3 target = record.Point + record.Normal + Random::InUnitSphere();
+        return 0.5f * GetColor({ record.Point, target - record.Point }, world);
     }
         
     glm::vec3 unitDir = glm::normalize(ray.Direction);
@@ -66,7 +66,10 @@ int main()
                 color += GetColor(ray, world);
             }
             color /= (f32)NUM_SAMPLES;
-            image.SetColor(x, y, color); 
+
+            glm::vec4 gammaCorrected = { sqrtf(color.r), sqrtf(color.g), sqrtf(color.b), 1.0f };
+
+            image.SetColor(x, y, gammaCorrected); 
         }
     }
 
