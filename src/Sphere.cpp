@@ -11,39 +11,32 @@ namespace rt
 
     bool Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
     {
-        glm::vec3 displacement = ray.Origin - m_Centre;
+        const glm::vec3 displacement = ray.Origin - m_Centre;
 
-        f32 a = glm::dot(ray.Direction, ray.Direction);
-        f32 b = glm::dot(displacement, ray.Direction);
-        f32 c = glm::dot(displacement, displacement) - m_Radius * m_Radius;
+        const f32 a = glm::dot(ray.Direction, ray.Direction);
+        const f32 b = glm::dot(displacement, ray.Direction);
+        const f32 c = glm::dot(displacement, displacement) - m_Radius * m_Radius;
 
-        f32 discriminant = b * b - a * c;
+        const f32 discriminant = b * b - a * c;
 
         if (discriminant < 0)
             return false;
 
-        const f32 root = sqrtf(b * b - a * c);
+        const f32 root = sqrtf(discriminant);
 
-        f32 temp = (-b - root) / a;
-        if (temp < tMax && temp > tMin)
-        {
-            record.t = temp;
-            record.Point = ray.PointAt(temp);
-            record.Normal = (record.Point - m_Centre) / m_Radius;
+        return CheckRoot(ray, tMin, tMax, (-b - root) / a, record) || 
+               CheckRoot(ray, tMin, tMax, (-b + root) / a, record);
+    }
 
-            return true;
-        }
+    bool Sphere::CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp, HitRecord& record) const
+    {
+        if (temp >= tMax || temp <= tMin)
+            return false;
 
-        temp = (-b + root) / a;
-        if (temp < tMax && temp > tMin)
-        {
-            record.t = temp;
-            record.Point = ray.PointAt(temp);
-            record.Normal = (record.Point - m_Centre) / m_Radius;
+        record.t      = temp;
+        record.Point  = ray.PointAt(temp);
+        record.Normal = (record.Point - m_Centre) / m_Radius;
 
-            return true;
-        }
-
-        return false;
+        return true;
     }
 } // namespace rt
