@@ -17,18 +17,21 @@ typedef double              f64;
 
 namespace rt
 {
-    struct Ray
-    {
-        glm::vec3 Origin;
-        glm::vec3 Direction;
-
-        inline glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
-    };
+    class Material;
 
     struct HitRecord
     {
         f32       t;
         glm::vec3 Point;
         glm::vec3 Normal;
+        Material* Mat;
+    };
+
+    struct Ray
+    {
+        glm::vec3 Origin;
+        glm::vec3 Direction;
+
+        inline glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
     };
 } // namespace rt
