@@ -1,4 +1,5 @@
 #include "Camera.hpp"
+#include "Dielectric.hpp"
 #include "HitableList.hpp"
 #include "Image.hpp"
 #include "Lambertian.hpp"
@@ -11,7 +12,7 @@
 #define WIDTH  1024
 #define HEIGHT 512
 
-#define NUM_SAMPLES 25
+#define NUM_SAMPLES 32
 
 using namespace rt;
 
@@ -47,15 +48,17 @@ int main()
 
     HitableList world;
 
-    Sphere sphere1({  0.0f,    0.0f, -1.0f },   0.5f, new Lambertian({ 0.8f, 0.3f, 0.3f }));
-    Sphere sphere2({  0.0f, -100.5f, -1.0f }, 100.0f, new Lambertian({ 0.8f, 0.8f, 0.0f }));
-    Sphere sphere3({  1.0f,    0.0f, -1.0f },   0.5f, new Metal({ 0.8f, 0.6f, 0.2f }, 0.1f));
-    Sphere sphere4({ -1.0f,    0.0f, -1.0f },   0.5f, new Metal({ 0.8f, 0.8f, 0.8f }, 0.6f));
+    Sphere sphere1({  0.0f,    0.0f, -1.0f },   0.50f, new Lambertian({ 0.1f, 0.2f, 0.5f }));
+    Sphere sphere2({  0.0f, -100.5f, -1.0f }, 100.00f, new Lambertian({ 0.8f, 0.8f, 0.0f }));
+    Sphere sphere3({  1.0f,    0.0f, -1.0f },   0.50f, new Metal({ 0.8f, 0.6f, 0.2f }, 0.0f));
+    Sphere sphere4({ -1.0f,    0.0f, -1.0f },   0.50f, new Dielectric(1.5f));
+    Sphere sphere5({ -1.0f,    0.0f, -1.0f },  -0.45f, new Dielectric(1.5f));
 
     world.Add(&sphere1);
     world.Add(&sphere2);
     world.Add(&sphere3);
     world.Add(&sphere4);
+    world.Add(&sphere5);
 
     Camera camera;
 
