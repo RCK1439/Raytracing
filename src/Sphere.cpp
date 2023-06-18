@@ -1,12 +1,18 @@
 #include "Sphere.hpp"
+#include "Material.hpp"
 
 #include <glm/geometric.hpp>
 
 namespace rt
 {
-    Sphere::Sphere(const glm::vec3& position, f32 radius) :
-        m_Centre(position), m_Radius(radius)
+    Sphere::Sphere(const glm::vec3& position, f32 radius, Material* material) :
+        m_Centre(position), m_Radius(radius), m_Material(material)
     {    
+    }
+
+    Sphere::~Sphere()
+    {
+        delete m_Material;
     }
 
     bool Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
@@ -36,6 +42,7 @@ namespace rt
         record.t      = temp;
         record.Point  = ray.PointAt(temp);
         record.Normal = (record.Point - m_Centre) / m_Radius;
+        record.Mat    = m_Material;
 
         return true;
     }

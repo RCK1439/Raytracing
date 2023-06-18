@@ -10,8 +10,8 @@ namespace rt
     {
     public: 
         Sphere() = default;
-        Sphere(const glm::vec3& position, f32 radius);
-        ~Sphere() = default;
+        Sphere(const glm::vec3& position, f32 radius, Material* material);
+        ~Sphere();
 
         bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const override;
 
@@ -21,5 +21,6 @@ namespace rt
     private:
         glm::vec3 m_Centre;
         f32 m_Radius;
+        Material* m_Material = nullptr;
     };
 } // namespace rt
