@@ -8,7 +8,7 @@ namespace rt
     {
     public:
         Dielectric(f32 refractiveIndex);
-        ~Dielectric() = default;
+        ~Dielectric() override = default;
 
         bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const override;
 

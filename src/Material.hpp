@@ -11,6 +11,7 @@ namespace rt
     class Material
     {
     public:
+        virtual ~Material() = default;
         virtual bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const = 0;
     };
 } // namespace rt

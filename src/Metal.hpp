@@ -8,7 +8,7 @@ namespace rt
     {
     public:
         Metal(const glm::vec3& albedo, f32 fuzz);
-        ~Metal() = default;
+        ~Metal() override = default;
 
         bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const override;
 
