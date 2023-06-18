@@ -48,16 +48,20 @@ namespace rt
         SetColorRGBA(x, y, ur, ug, ub, ua); 
     }
 
+    static void ImgCpyFlipped(u32* src, u32* dest, u32 width, u32 height)
+    {
+        u32 i = 0;
+        for (u32 y = height - 1; y >= 1; y--)
+            for (u32 x = 0; x < width; x++)
+                dest[i++] = src[x + y * width];
+    }
+
     void Image::Save(std::string_view filepath) const
     {
         fpng::fpng_init();
 
         u32* flipped = new u32[m_Width * m_Height];
-        u32 i = 0;
-
-        for (u32 y = m_Height - 1; y >= 1; y--)
-            for (u32 x = 0; x < m_Width; x++)
-                flipped[i++] = m_Data[x + y * m_Width];
+        ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
 
         if (fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
         {
