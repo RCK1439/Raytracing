@@ -12,7 +12,7 @@
 #define WIDTH  1024
 #define HEIGHT 512
 
-#define NUM_SAMPLES 32
+#define NUM_SAMPLES 256
 
 using namespace rt;
 
