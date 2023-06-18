@@ -6,7 +6,7 @@ namespace rt
 {
     class Hitable
     {
-    public: 
+    public:
         virtual bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const = 0;
     };
 } // namespace rt
