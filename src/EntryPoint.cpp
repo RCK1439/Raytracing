@@ -42,27 +42,57 @@ static glm::vec4 GetColor(const Ray& ray, const Hitable& world, u32 depth)
     return Lerp(white, blue, t);
 }
 
+static void InitRandomWorld(HitableList& world)
+{
+    world.Add(Sphere({ 0.0f, -1000.0f, 0.0f }, 1000.0f, new Lambertian({ 0.5f, 0.5f, 0.5f })));
+    for (s32 a = -11; a < 11; a++)
+    {
+        for (s32 b = -11; b < 11; b++)
+        {
+            f32 chooseMaterial = Random::Float();
+            glm::vec3 center = { a + 0.9f * Random::Float(), 0.2f, b + 0.9f * Random::Float() };
+
+            if (chooseMaterial < 0.8f)
+            {
+                world.Add(Sphere(center, 0.2f, new Lambertian(
+                    { 
+                        Random::Float() * Random::Float(),
+                        Random::Float() * Random::Float(),
+                        Random::Float() * Random::Float(),
+                    })));
+            }
+            else if (chooseMaterial < 0.95f)
+            {
+                world.Add(Sphere(center, 0.2f, new Metal(
+                    {
+                        0.5f * (1.0f + Random::Float()),
+                        0.5f * (1.0f + Random::Float()),
+                        0.5f * (1.0f + Random::Float()),
+                    }, 0.5f * (1.0f + Random::Float()))));
+            }
+            else
+            {
+                world.Add(Sphere(center, 0.2f, new Dielectric(1.5f)));
+            }
+        }
+    }
+
+    world.Add(Sphere({  0.0f, 1.0f, 0.0f }, 1.0f, new Dielectric(1.5f)));
+    world.Add(Sphere({ -4.0f, 1.0f, 0.0f},  1.0f, new Lambertian({ 0.4f, 0.2f, 0.1f })));
+    world.Add(Sphere({  4.0f, 1.0f, 0.0f},  1.0f, new Metal({ 0.7f, 0.6f, 0.5f }, 0.0f)));
+}
+
 int main()
 {
-    Image image(WIDTH, HEIGHT);
-
     HitableList world;
 
-    Sphere sphere1({  0.0f,    0.0f, -1.0f },   0.50f, new Lambertian({ 0.1f, 0.2f, 0.5f }));
-    Sphere sphere2({  0.0f, -100.5f, -1.0f }, 100.00f, new Lambertian({ 0.8f, 0.8f, 0.0f }));
-    Sphere sphere3({  1.0f,    0.0f, -1.0f },   0.50f, new Metal({ 0.8f, 0.6f, 0.2f }, 0.0f));
-    Sphere sphere4({ -1.0f,    0.0f, -1.0f },   0.50f, new Dielectric(1.5f));
-    Sphere sphere5({ -1.0f,    0.0f, -1.0f },  -0.45f, new Dielectric(1.5f));
+    InitRandomWorld(world);
 
-    world.Add(&sphere1);
-    world.Add(&sphere2);
-    world.Add(&sphere3);
-    world.Add(&sphere4);
-    world.Add(&sphere5);
+    glm::vec3 lookFrom = { 13.0f, 2.0f, 3.0f };
+    glm::vec3 lookAt   = {  0.0f, 0.0f, 0.0f };
+    Camera camera(lookFrom, lookAt, { 0.0f, 1.0f, 0.0f }, 20.0f, (f32)WIDTH / (f32)HEIGHT, 0.1f, 10.0f);
 
-    glm::vec3 lookFrom = { 3.0f, 3.0f,  2.0f };
-    glm::vec3 lookAt   = { 0.0f, 0.0f, -1.0f };
-    Camera camera(lookFrom, lookAt, { 0.0f, 1.0f, 0.0f }, 60.0f, (f32)WIDTH / (f32)HEIGHT, 2.0f, glm::length(lookFrom - lookAt));
+    Image image(WIDTH, HEIGHT);
 
     for (u32 y = 0; y < HEIGHT; y++)
     {
