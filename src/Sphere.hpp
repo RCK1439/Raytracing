@@ -3,6 +3,7 @@
 #include "Hitable.hpp"
 
 #include <glm/vec3.hpp>
+#include <memory>
 
 namespace rt
 {
@@ -11,7 +12,7 @@ namespace rt
     public: 
         Sphere() = default;
         Sphere(const glm::vec3& position, f32 radius, Material* material);
-        ~Sphere();
+        ~Sphere() = default;
 
         bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const override;
 
@@ -21,8 +22,6 @@ namespace rt
     private:
         glm::vec3 m_Centre;
         f32 m_Radius;
-        Material* m_Material = nullptr;
-
-        friend class HitableList;
+        std::shared_ptr<Material> m_Material = nullptr;
     };
 } // namespace rt
