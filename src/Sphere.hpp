@@ -22,5 +22,7 @@ namespace rt
         glm::vec3 m_Centre;
         f32 m_Radius;
         Material* m_Material = nullptr;
+
+        friend class HitableList;
     };
 } // namespace rt
