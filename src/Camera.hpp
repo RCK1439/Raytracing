@@ -7,15 +7,17 @@ namespace rt
     class Camera
     {
     public:
-        Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, f32 vFOV, f32 aspectRatio);
+        Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, f32 vFOV, f32 aspectRatio, f32 aperture, f32 focusDistance);
         ~Camera() = default;
 
-        inline Ray GetRay(f32 u, f32 v) const { return { m_Origin, m_LowerLeftCorner + u * m_Horizontal + v * m_Vertical - m_Origin }; }
+        Ray GetRay(f32 s, f32 t) const;
 
     private:
         glm::vec3 m_Origin;
         glm::vec3 m_LowerLeftCorner;
         glm::vec3 m_Horizontal;
         glm::vec3 m_Vertical;
+        glm::vec3 u, v, w;
+        f32 m_LensRadius;
     };
 } // namespace rt
