@@ -3,12 +3,6 @@
 
 namespace rt
 {
-    HitableList::~HitableList()
-    {
-        for (auto& hitable : m_Data)
-            delete hitable.m_Material;
-    }
-
     bool HitableList::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
     {
         HitRecord tempRecord;

@@ -10,7 +10,7 @@ namespace rt
     {
     public:
         HitableList() = default;
-        ~HitableList();
+        ~HitableList() = default;
 
         bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const;
 
