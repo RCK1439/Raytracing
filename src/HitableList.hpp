@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hitable.hpp"
+#include "Sphere.hpp"
 
 #include <vector>
 
@@ -10,12 +10,12 @@ namespace rt
     {
     public:
         HitableList() = default;
-        ~HitableList() = default;
+        ~HitableList();
 
         bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const;
 
-        void Add(Hitable* hitable);
+        void Add(const Sphere& hitable);
     private:
-        std::vector<Hitable*> m_Data;
+        std::vector<Sphere> m_Data;
     };
 } // namespace rt
