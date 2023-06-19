@@ -37,7 +37,7 @@ namespace rt
 
     bool Metal::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
     {
-        glm::vec3 reflected = glm::reflect(glm::normalize(ray.Direction), record.Normal);
+        glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
         scattered = { record.Point, reflected + m_Fuzz * Random::InUnitSphere() };
         attenuation = m_Albedo;
 
@@ -56,14 +56,14 @@ namespace rt
     bool Dielectric::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
     {
         glm::vec3 outwardNormal;
-        glm::vec3 refracted;
+        glm::vec3 refracted = glm::vec3(0.0f);
         glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
 
         f32 niOverNT;
         f32 cosine;
 
         const f32 dotDirNorm = glm::dot(ray.Direction, record.Normal);
-        const f32 dirLength  = glm::length(ray.Direction);
+        const f32 dirLength  = 1.0f; // glm::length(ray.Direction); This will always be 1.
 
         if (dotDirNorm > 0.0f)
         {
@@ -87,15 +87,13 @@ namespace rt
     }
 
     bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const
-    {
-        glm::vec3 uv = glm::normalize(v);
-        
-        f32 dt = glm::dot(uv, n);
+    {   
+        f32 dt = glm::dot(v, n);
         f32 discriminant = 1.0f - niOverNT * niOverNT * (1.0f - dt * dt);
 
         if (discriminant > 0.0f)
         {
-            refracted = niOverNT * (uv - n * dt) - n * sqrtf(discriminant);
+            refracted = niOverNT * (v - n * dt) - n * sqrtf(discriminant);
             return true;
         }
 
