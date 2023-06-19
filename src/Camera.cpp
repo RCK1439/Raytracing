@@ -27,7 +27,10 @@ namespace rt
         glm::vec3 rd = m_LensRadius * Random::InUnitDisk();
         glm::vec3 offset = u * rd.x + v * rd.y;
 
-        return { m_Origin + offset, m_LowerLeftCorner + s * m_Horizontal + t * m_Vertical - m_Origin - offset };
+        glm::vec3 origin = m_Origin + offset;
+        glm::vec3 direction = glm::normalize(m_LowerLeftCorner + s * m_Horizontal + t * m_Vertical - m_Origin - offset);
+
+        return { origin, direction };
     }
 
 } // namespace rt
