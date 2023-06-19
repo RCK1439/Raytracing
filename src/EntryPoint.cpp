@@ -60,7 +60,9 @@ int main()
     world.Add(&sphere4);
     world.Add(&sphere5);
 
-    Camera camera({ -2.0f, 2.0f, 1.0f }, { 0.0f, 0.0f, -1.0f }, { 0.0f, 1.0f, 0.0f }, 60.0f, (f32)WIDTH / (f32)HEIGHT);
+    glm::vec3 lookFrom = { 3.0f, 3.0f,  2.0f };
+    glm::vec3 lookAt   = { 0.0f, 0.0f, -1.0f };
+    Camera camera(lookFrom, lookAt, { 0.0f, 1.0f, 0.0f }, 60.0f, (f32)WIDTH / (f32)HEIGHT, 2.0f, glm::length(lookFrom - lookAt));
 
     for (u32 y = 0; y < HEIGHT; y++)
     {
