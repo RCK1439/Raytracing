@@ -1,13 +1,12 @@
 #include "Camera.hpp"
-#include "Dielectric.hpp"
 #include "HitableList.hpp"
 #include "Image.hpp"
-#include "Lambertian.hpp"
-#include "Metal.hpp"
+#include "Materials.hpp"
 #include "Random.hpp"
 #include "Sphere.hpp"
 
 #include <glm/geometric.hpp>
+#include <stdio.h>
 
 #define WIDTH  1024
 #define HEIGHT 512
@@ -94,6 +93,9 @@ int main()
 
     Image image(WIDTH, HEIGHT);
 
+    u32 current = 0;
+    u32 total = WIDTH * HEIGHT;
+
     for (u32 y = 0; y < HEIGHT; y++)
     {
         for (u32 x = 0; x < WIDTH; x++)
@@ -113,8 +115,11 @@ int main()
             glm::vec4 gammaCorrected = { sqrtf(color.r), sqrtf(color.g), sqrtf(color.b), 1.0f };
 
             image.SetColor(x, y, gammaCorrected); 
+
+            printf("\rProgress: %.5f%%", 100.0f * f32(++current) / (f32)total);
         }
     }
+    printf("\n");
 
     image.Save("out/test.png");
 
