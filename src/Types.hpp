@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/vec3.hpp>
+#include <memory>
 
 typedef unsigned char       u8;
 typedef unsigned short      u16;
@@ -21,10 +22,10 @@ namespace rt
 
     struct HitRecord
     {
-        f32       t;
-        glm::vec3 Point;
-        glm::vec3 Normal;
-        Material* Mat;
+        f32                       t;
+        glm::vec3                 Point;
+        glm::vec3                 Normal;
+        std::shared_ptr<Material> Mat;
     };
 
     struct Ray
