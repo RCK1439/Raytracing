@@ -35,4 +35,15 @@ namespace rt
 
         return point;
     }
+
+    glm::vec3 Random::InUnitDisk()
+    {
+        glm::vec3 point;
+        do
+        {
+            point = 2.0f * glm::vec3(Float(), Float(), 0.0f) - glm::vec3(1.0f, 1.0f, 0.0f);
+        } while (glm::dot(point, point) >= 1.0f);
+
+        return point;
+    }
 } // namespace rt
