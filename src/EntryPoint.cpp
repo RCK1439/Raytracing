@@ -11,14 +11,9 @@
 #define WIDTH  1024
 #define HEIGHT 512
 
-#define NUM_SAMPLES 32
+#define NUM_SAMPLES 128
 
 using namespace rt;
-
-static glm::vec4 Lerp(const glm::vec4& from, const glm::vec4 to, f32 t)
-{
-    return (1.0f - t) * from + t * to;
-}
 
 static glm::vec4 GetColor(const Ray& ray, const Hitable& world, u32 depth)
 {
@@ -38,7 +33,7 @@ static glm::vec4 GetColor(const Ray& ray, const Hitable& world, u32 depth)
     glm::vec4 white = glm::vec4(1.0f);
     glm::vec4 blue  = { 0.5f, 0.7f, 1.0f, 1.0f };
 
-    return Lerp(white, blue, t);
+    return glm::mix(white, blue, t);
 }
 
 static void InitRandomWorld(HitableList& world)
@@ -116,7 +111,7 @@ int main()
 
             image.SetColor(x, y, gammaCorrected); 
 
-            printf("\rProgress: %.5f%%", 100.0f * f32(++current) / (f32)total);
+            printf("\r[%.2f%%]", 100.0f * f32(++current) / (f32)total);
         }
     }
     printf("\n");
