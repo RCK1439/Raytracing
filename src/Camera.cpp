@@ -1,9 +1,23 @@
 #include "Camera.hpp"
 
+#include <glm/geometric.hpp>
+#include <math.h>
+
 namespace rt
 {
-    Camera::Camera() :
-        m_Origin(0.0f), m_LowerLeftCorner(-2.0f, -1.0f, -1.0f), m_Horizontal(4.0f, 0.0f, 0.0f), m_Vertical(0.0f, 2.0f, 0.0f)
+    Camera::Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, f32 vFOV, f32 aspectRatio) :
+        m_Origin(lookFrom)
     {
+        const f32 theta      = vFOV * M_PI / 180.0f;
+        const f32 halfHeight = tanf(theta * 0.5f);
+        const f32 halfWidth  = aspectRatio * halfHeight;
+
+        glm::vec3 w = glm::normalize(lookFrom - lookAt);
+        glm::vec3 u = glm::normalize(glm::cross(vUP, w));
+        glm::vec3 v = glm::cross(w, u);
+
+        m_LowerLeftCorner = m_Origin - halfWidth * u - halfHeight * v - w;
+        m_Horizontal      = 2.0f * halfWidth * u;
+        m_Vertical        = 2.0f * halfHeight * v;
     }
 } // namespace rt
