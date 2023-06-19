@@ -12,7 +12,7 @@ namespace rt
 
     Sphere::~Sphere()
     {
-        delete m_Material;
+        // delete m_Material;
     }
 
     bool Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
