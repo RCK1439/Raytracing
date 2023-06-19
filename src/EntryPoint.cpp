@@ -6,14 +6,37 @@
 #include "Sphere.hpp"
 
 #include <glm/geometric.hpp>
+#include <iostream>
+#include <iomanip>
 #include <stdio.h>
 
 #define WIDTH  1024
 #define HEIGHT 512
 
-#define NUM_SAMPLES 128
+#define NUM_SAMPLES 32
 
 using namespace rt;
+
+static void ShowProgressBar(f32 progress)
+{
+    u32 barWidth = 70;
+
+    std::cout << "Renderering: [";
+    u32 pos = barWidth * progress;
+    for (u32 i = 0; i < barWidth; i++) 
+    {
+        char bar;
+
+        if      (i < pos)  bar = '=';
+        else if (i == pos) bar = '>';
+        else               bar = ' ';
+
+        std::cout << bar;
+    }
+
+    std::cout << "] " << std::setw(3) << u32(progress * 100.0f) << "%\r";
+    std::cout.flush();
+}
 
 static glm::vec4 GetColor(const Ray& ray, const Hitable& world, u32 depth)
 {
@@ -111,7 +134,7 @@ int main()
 
             image.SetColor(x, y, gammaCorrected); 
 
-            printf("\r[%.2f%%]", 100.0f * f32(++current) / (f32)total);
+            ShowProgressBar(f32(++current) / (f32)total);
         }
     }
     printf("\n");
