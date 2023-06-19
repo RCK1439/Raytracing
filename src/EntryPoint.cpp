@@ -12,7 +12,7 @@
 #define WIDTH  1024
 #define HEIGHT 512
 
-#define NUM_SAMPLES 256
+#define NUM_SAMPLES 32
 
 using namespace rt;
 
@@ -60,7 +60,7 @@ int main()
     world.Add(&sphere4);
     world.Add(&sphere5);
 
-    Camera camera;
+    Camera camera({ -2.0f, 2.0f, 1.0f }, { 0.0f, 0.0f, -1.0f }, { 0.0f, 1.0f, 0.0f }, 60.0f, (f32)WIDTH / (f32)HEIGHT);
 
     for (u32 y = 0; y < HEIGHT; y++)
     {
