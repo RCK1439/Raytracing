@@ -17,6 +17,16 @@ namespace rt
         delete[] m_Data;
     }
 
+    void Image::Resize(u32 width, u32 height)
+    {
+        delete[] m_Data;
+        
+        m_Data = new u32[width * height];
+
+        m_Width  = width;
+        m_Height = height;
+    }
+
     u32 Image::GetColor(u32 x, u32 y) const
     {
         assert(x < m_Width && y < m_Height);

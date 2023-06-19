@@ -14,6 +14,8 @@ namespace rt
         Image(u32 width, u32 height);
         ~Image();
 
+        void Resize(u32 width, u32 height);
+
         u32 GetColor(u32 x, u32 y) const;
         inline u32 GetWidth() const { return m_Width; }
         inline u32 GetHeight() const { return m_Height; }
