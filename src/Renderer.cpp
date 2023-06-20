@@ -5,6 +5,7 @@
 
 #include <glm/geometric.hpp>
 
+#include <omp.h>
 #include <iostream>
 #include <iomanip>
 
@@ -41,14 +42,18 @@ namespace rt
         const u32 width  = s_Data.Img.GetWidth();
         const u32 height = s_Data.Img.GetHeight();
 
+        #pragma omp parallel for collapse(2)
         for (u32 y = 0; y < height; y++)
         {
             for (u32 x = 0; x < width; x++)
             {
-                ++s_Data.CurrentPixel;
-
                 PerPixel(x, y, scene, camera);
-                ShowProgressBar();
+
+                #pragma omp critical
+                {
+                    ++s_Data.CurrentPixel;
+                    ShowProgressBar();
+                }
             }
         }
 
