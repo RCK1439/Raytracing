@@ -35,11 +35,11 @@ public:
         {
             const std::string& arg = args[i];
 
-            if      (IsFlag(arg, "/^-[sS]$/")) i += ParseSize(settings, i, args) ? 2 : 0;
-            else if (IsFlag(arg, "/^-[aA]$/")) i += (u32)ParseSamples(settings, i, args);
-            else if (IsFlag(arg, "/^-[dD]$/")) i += (u32)ParseDepth(settings, i, args);
-            else if (arg == "-MT")             settings.MultiThreading = ++i;
-            else if (arg == "-o")              i += (u32)ParseOutput(settings, i, args);
+            if      (IsFlag(arg, "-[sS]")) i += ParseSize(settings, i, args) ? 2 : 0;
+            else if (IsFlag(arg, "-[aA]")) i += (u32)ParseSamples(settings, i, args);
+            else if (IsFlag(arg, "-[dD]")) i += (u32)ParseDepth(settings, i, args);
+            else if (arg == "-MT")         settings.MultiThreading = ++i;
+            else if (arg == "-o")          i += (u32)ParseOutput(settings, i, args);
             else if (arg == "-help")
             {
                 settings.ShowHelp = true;
@@ -63,7 +63,7 @@ private:
 
     static bool ParseSize(Arguments& settings, size_t i, const std::vector<std::string>& args)
     {
-        if (i + 2 < args.size())
+        if (i + 2 >= args.size())
             return false;
 
         if (IsNumeric(args[i + 1]) && IsNumeric(args[i + 2]))
@@ -79,7 +79,7 @@ private:
 
     static bool ParseSamples(Arguments& settings, size_t i, const std::vector<std::string>& args)
     {
-        if (i + 1 < args.size())
+        if (i + 1 >= args.size())
             return false;
 
         if (IsNumeric(args[i + 1]))
@@ -93,7 +93,7 @@ private:
 
     static bool ParseDepth(Arguments& settings, size_t i, const std::vector<std::string>& args)
     {
-        if (i + 1 < args.size())
+        if (i + 1 >= args.size())
             return false;
 
         if (IsNumeric(args[i + 1]))
@@ -107,7 +107,7 @@ private:
 
     static bool ParseOutput(Arguments& settings, size_t i, const std::vector<std::string>& args)
     {
-        if (i + 1 < args.size())
+        if (i + 1 >= args.size())
             return false;
 
         settings.OutputPath = args[i + 1];
