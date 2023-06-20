@@ -64,6 +64,10 @@ namespace rt
         for (u32 y = height - 1; y >= 1; y--)
             for (u32 x = 0; x < width; x++)
                 dest[i++] = src[x + y * width];
+
+        // This copies the last bit line.
+        for (u32 x = 0; x < width; x++)
+            dest[i++] = src[x];
     }
 
     void Image::Save(std::string_view filepath) const
