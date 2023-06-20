@@ -22,7 +22,7 @@ To build the project:
 ## Run
 
 To run the program:
- 1. ```bash ./Raytracing``` or if you're in the root directory ```./bin/Raytracing``` (easy, huh?)
+ 1. ```./Raytracing``` or if you're in the root directory ```./bin/Raytracing``` (easy, huh?)
 
 ### Some input arguments
 
