@@ -1,20 +1,19 @@
 #pragma once
 
-#include "Hitable.hpp"
+#include "Types.hpp"
 
-#include <glm/vec3.hpp>
 #include <memory>
 
 namespace rt
 {
-    class Sphere final : public Hitable
+    class Sphere
     {
     public: 
         Sphere() = default;
         Sphere(const glm::vec3& position, f32 radius, Material* material);
         ~Sphere() = default;
 
-        bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const override;
+        bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const;
 
     private:
         bool CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp, HitRecord& record) const;

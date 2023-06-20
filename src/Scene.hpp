@@ -6,7 +6,7 @@
 
 namespace rt
 {
-    class Scene final : public Hitable
+    class Scene
     {
     public:
         Scene();
