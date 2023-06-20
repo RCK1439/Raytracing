@@ -16,7 +16,6 @@ struct Arguments
     u32         Height          = 512;
     u32         NumberOfSamples = 32;
     u32         Depth           = 50;
-    bool        MultiThreading  = false;
     bool        ShowHelp        = false;
     std::string OutputPath      = "out/raytracing.png";
 };
@@ -39,7 +38,6 @@ public:
             if      (IsFlag(arg, "-[sS]")) i += ParseSize(settings, i, args) ? 2 : 0;
             else if (IsFlag(arg, "-[aA]")) i += (u32)ParseSamples(settings, i, args);
             else if (IsFlag(arg, "-[dD]")) i += (u32)ParseDepth(settings, i, args);
-            else if (arg == "-MT")         settings.MultiThreading = ++i;
             else if (arg == "-o")          i += (u32)ParseOutput(settings, i, args);
             else if (arg == "-help")
             {
@@ -130,7 +128,6 @@ int main(int argc, char* argv[])
         std::cout << "-s or -S: Size of output image.            (e.g. -s 1280 720)\n";
         std::cout << "-a or -A: Number of anti-aliasing samples. (e.g. -a 32)\n";
         std::cout << "-d or -D: Depth of ray bounces.            (e.g. -d 8)\n";
-        std::cout << "-MT:      Activate multi-threading.        (e.g. -MT)\n";
         std::cout << "-o:       Output path for rendered image.  (e.g. -o path/on/disk/name.png)\n";
         std::cout << "-help:    Shows this dialog.               (e.g. -help)\n";
 
@@ -140,8 +137,6 @@ int main(int argc, char* argv[])
     std::cout << "Dimensions: " << settings.Width << "x" << settings.Height << std::endl;
     std::cout << "Anti-aliasing samples: " << settings.NumberOfSamples << std::endl;
     std::cout << "Maximum bounce depth: " << settings.Depth << std::endl;
-    std::cout << "Multi-threading: " << (settings.MultiThreading ? "true" : "false") << std::endl;
-
 
     Scene scene;
     Camera camera({ 13.0f, 2.0f, 3.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 20.0f, (f32)settings.Width / (f32)settings.Height, 0.1f, 10.0f);
