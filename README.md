@@ -29,6 +29,7 @@ To run the program:
  - ```-s``` or ```-S```: This specifies the resolution of the image to output. (e.g. ```-s 1280 720```)
  - ```-a``` or ```-A```: This specifies the anti-aliasing number of samples. (e.g. ```-a 32```)
  - ```-d``` or ```-D```: This specifies the amounts of bounces a ray can have. (e.g. ```-d 8```)
+ - ```-o```: This specifies the output directory to save the rendered image to. (e.g. ```-o path/to/dir/name.png```)
  - ```-help```: Shows a little help menu in the terminal that describes the valid input arguments. (e.g. ```-help```)
 
 My personal favourite configuration: ```./Raytracing -s 1280 720 -a 128 -d 50```
