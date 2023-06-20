@@ -1,14 +1,12 @@
 #include "Camera.hpp"
 #include "Scene.hpp"
 #include "Renderer.hpp"
+#include "Timer.hpp"
 
-#include <chrono>
 #include <iostream>
 #include <string>
 #include <regex>
 #include <vector>
-
-using namespace rt;
 
 struct Arguments
 {
@@ -121,7 +119,6 @@ int main(int argc, char* argv[])
         args.emplace_back(argv[i]);
 
     Arguments settings = ArgumentParser::Parse(args);
-
     if (settings.ShowHelp)
     {
         std::cout << "-----------Valid Arguments----------\n";
@@ -138,21 +135,18 @@ int main(int argc, char* argv[])
     std::cout << "Anti-aliasing samples: " << settings.NumberOfSamples << std::endl;
     std::cout << "Maximum bounce depth: " << settings.Depth << std::endl;
 
-    Scene scene;
-    Camera camera({ 13.0f, 2.0f, 3.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 20.0f, (f32)settings.Width / (f32)settings.Height, 0.1f, 10.0f);
+    rt::Scene scene;
+    rt::Camera camera({ 13.0f, 2.0f, 3.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 20.0f, (f32)settings.Width / (f32)settings.Height, 0.1f, 10.0f);
 
-    Renderer::Init(settings.Width, settings.Height, settings.NumberOfSamples, settings.Depth);
+    rt::Renderer::Init(settings.Width, settings.Height, settings.NumberOfSamples, settings.Depth);
 
-    std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
+    Timer timer;
 
-    Renderer::Render(scene, camera);
+    timer.Start();
+    rt::Renderer::Render(scene, camera);
+    timer.Stop();
 
-    std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<float> duration = end - start;
-
-    Renderer::Export(settings.OutputPath);
-
-    std::cout << "Time elapsed: " << duration.count() << "s" << std::endl;
+    rt::Renderer::Export(settings.OutputPath);
 
     return 0;
 }
