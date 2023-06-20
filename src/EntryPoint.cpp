@@ -2,6 +2,7 @@
 #include "Scene.hpp"
 #include "Renderer.hpp"
 
+#include <chrono>
 #include <iostream>
 #include <string>
 #include <regex>
@@ -146,8 +147,17 @@ int main(int argc, char* argv[])
     Camera camera({ 13.0f, 2.0f, 3.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 20.0f, (f32)settings.Width / (f32)settings.Height, 0.1f, 10.0f);
 
     Renderer::Init(settings.Width, settings.Height, settings.NumberOfSamples, settings.Depth);
+
+    std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
+
     Renderer::Render(scene, camera);
+
+    std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<float> duration = end - start;
+
     Renderer::Export(settings.OutputPath);
+
+    std::cout << "Time elapsed: " << duration.count() << "s" << std::endl;
 
     return 0;
 }
