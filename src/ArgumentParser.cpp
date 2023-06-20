@@ -2,6 +2,16 @@
 
 #include <regex>
 
+static bool IsNumeric(const std::string& val)
+{
+    return std::regex_match(val, std::regex("-?[0-9]+"));
+}
+
+static bool IsFlag(const std::string& arg, const std::string& expr)
+{
+    return std::regex_match(arg, std::regex(expr));
+}
+
 Arguments ArgumentParser::Parse(const std::vector<std::string>& args)
 {
     const size_t size = args.size();
@@ -26,16 +36,6 @@ Arguments ArgumentParser::Parse(const std::vector<std::string>& args)
     }
 
     return settings;
-}
-
-bool ArgumentParser::IsNumeric(const std::string& val)
-{
-    return std::regex_match(val, std::regex("-?[0-9]+"));
-}
-
-bool ArgumentParser::IsFlag(const std::string& arg, const std::string& expr)
-{
-    return std::regex_match(arg, std::regex(expr));
 }
 
 bool ArgumentParser::ParseSize(Arguments& settings, size_t i, const std::vector<std::string>& args)

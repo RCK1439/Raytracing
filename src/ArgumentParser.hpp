@@ -21,9 +21,6 @@ public:
     static Arguments Parse(const std::vector<std::string>& args);
 
 private:
-    static bool IsNumeric(const std::string& val);
-    static bool IsFlag(const std::string& arg, const std::string& expr);
-
     static bool ParseSize(Arguments& settings, size_t i, const std::vector<std::string>& args);
     static bool ParseSamples(Arguments& settings, size_t i, const std::vector<std::string>& args);
     static bool ParseDepth(Arguments& settings, size_t i, const std::vector<std::string>& args);
