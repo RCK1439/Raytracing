@@ -1,3 +1,8 @@
+/**
+ * Ruan C. Keet (2023)
+ * EntryPoint.cpp
+*/
+
 #include "ArgumentParser.hpp"
 #include "Camera.hpp"
 #include "Renderer.hpp"
@@ -8,6 +13,14 @@
 #include <string>
 #include <vector>
 
+/**
+ * Entry point to the program.
+ * 
+ * \param argc  The amount of arguments passed in.
+ * \param argv  The arguments passed from the command-line.
+ * 
+ * \return The exit status of the program.
+*/
 int main(int argc, char* argv[])
 {
     std::vector<std::string> args;

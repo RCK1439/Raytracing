@@ -1,3 +1,8 @@
+/**
+ * Ruan C. Keet (2023)
+ * Types.hpp
+*/
+
 #pragma once
 
 #include <glm/vec3.hpp>
@@ -34,6 +39,13 @@ namespace rt
         glm::vec3 Origin;
         glm::vec3 Direction;
 
+        /**
+         * Gets the point on the ray at the specified parameter.
+         * 
+         * \param t The parameter to get the point at.
+         * 
+         * \return The point on the ray at the t-parameter.
+        */
         inline glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
     };
 } // namespace rt

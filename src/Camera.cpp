@@ -1,3 +1,8 @@
+/**
+ * Ruan C. Keet (2023)
+ * Camera.cpp
+*/
+
 #include "Camera.hpp"
 
 #include "Random.hpp"

@@ -1,3 +1,8 @@
+/**
+ * Ruan C. Keet (2023)
+ * Sphere.cpp
+*/
+
 #include "Sphere.hpp"
 
 #include "Material.hpp"

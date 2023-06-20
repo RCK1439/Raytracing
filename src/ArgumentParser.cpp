@@ -1,12 +1,32 @@
+/**
+ * Ruan C. Keet (2023)
+ * ArgumentParser.cpp
+*/
+
 #include "ArgumentParser.hpp"
 
 #include <regex>
 
+/**
+ * Checks if the input string consists of numeric characters.
+ * 
+ * \param val   The string to check for.
+ * 
+ * \return true, if the input string consists of numeric characters.
+*/
 static bool IsNumeric(const std::string& val)
 {
     return std::regex_match(val, std::regex("-?[0-9]+"));
 }
 
+/**
+ * Checks if the given string is an acceptable flag.
+ * 
+ * \param arg   The argument to check for.
+ * \param expr  The regular expression defining a valid argument.
+ * 
+ * \return true, if the argument matches the regex.
+*/
 static bool IsFlag(const std::string& arg, const std::string& expr)
 {
     return std::regex_match(arg, std::regex(expr));

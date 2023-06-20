@@ -1,3 +1,8 @@
+/**
+ * Ruan C. Keet (2023)
+ * Renderer.cpp
+*/
+
 #include "Renderer.hpp"
 
 #include "Image.hpp"

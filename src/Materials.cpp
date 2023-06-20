@@ -1,3 +1,8 @@
+/**
+ * Ruan C. Keet (2023)
+ * Materials.cpp
+*/
+
 #include "Materials.hpp"
 
 #include "Random.hpp"

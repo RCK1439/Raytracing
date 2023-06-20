@@ -1,3 +1,8 @@
+/**
+ * Ruan C. Keet (2023)
+ * Image.cpp
+*/
+
 #include "Image.hpp"
 
 #include <fpng.h>
@@ -59,6 +64,15 @@ namespace rt
         SetColorRGBA(x, y, ur, ug, ub, ua); 
     }
 
+    /**
+     * Copies a vertically flipped version of the image to the destination
+     * memory.
+     * 
+     * \param src       The data to copy.
+     * \param dest      The memory to copy to.
+     * \param width     The width of the image.
+     * \param height    The height of the image.
+    */
     static void ImgCpyFlipped(u32* src, u32* dest, u32 width, u32 height)
     {
         u32 i = 0;
@@ -66,7 +80,7 @@ namespace rt
             for (u32 x = 0; x < width; x++)
                 dest[i++] = src[x + y * width];
 
-        // This copies the last bit line.
+        // This copies the last horizontal line.
         for (u32 x = 0; x < width; x++)
             dest[i++] = src[x];
     }
