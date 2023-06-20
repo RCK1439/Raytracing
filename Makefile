@@ -1,6 +1,6 @@
 CXX = g++
 
-COMMON_FLAGS = -msse4.1 -mpclmul -Wall -Werror -Wpedantic
+COMMON_FLAGS = -fopenmp -msse4.1 -mpclmul -Wall -Werror -Wpedantic
 DEBUG_FLAGS = -g
 RELEASE_FLAGS = -Ofast
 
