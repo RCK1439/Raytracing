@@ -33,3 +33,7 @@ To run the program:
  - ```-help```: Shows a little help menu in the terminal that describes the valid input arguments. (e.g. ```-help```)
 
 My personal favourite configuration: ```./Raytracing -s 1280 720 -a 128 -d 50```
+
+## TODO
+
+ - Find out what exactly tMin and tMax means lmao. I'm not sure if it means near/far plane :\
