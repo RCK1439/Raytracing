@@ -7,7 +7,7 @@ Things like:
  - Timing and performance metrics.
  - Input arguments.
 
-# Platforms
+## Platforms
 
 Currently this project only supports Linux. I've been working on this project on Ubuntu.
 But I do have plans to add support for Windows.
