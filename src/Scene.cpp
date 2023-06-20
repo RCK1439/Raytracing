@@ -4,6 +4,33 @@
 
 namespace rt
 {
+    constexpr f32 RADIUS = 0.2f;
+
+    inline static Sphere CreateMatteSphere(const glm::vec3& position)
+    {
+        return Sphere(position, RADIUS, new Lambertian(
+        { 
+            Random::Float() * Random::Float(),
+            Random::Float() * Random::Float(), 
+            Random::Float() * Random::Float() 
+        }));
+    }
+
+    inline static Sphere CreateMetalSphere(const glm::vec3& position)
+    {
+        return Sphere(position, 0.2f, new Metal(
+        { 
+            0.5f * (1.0f + Random::Float()), 
+            0.5f * (1.0f + Random::Float()), 
+            0.5f * (1.0f + Random::Float()) 
+        },  0.5f * (1.0f + Random::Float())));
+    }
+
+    inline static Sphere CreateDielectricSphere(const glm::vec3& position)
+    {
+        return Sphere(position, 0.2f, new Dielectric(1.5f));
+    }
+
     Scene::Scene() // This makes the default cover-page scene.
     {
         Add(Sphere({ 0.0f, -1000.0f, 0.0f }, 1000.0f, new Lambertian({ 0.5f, 0.5f, 0.5f })));
@@ -14,15 +41,9 @@ namespace rt
                 f32 chooseMaterial = Random::Float();
                 glm::vec3 center = { a + 0.9f * Random::Float(), 0.2f, b + 0.9f * Random::Float() };
 
-                if (chooseMaterial < 0.8f)
-                {
-                    Add(Sphere(center, 0.2f, new Lambertian({ Random::Float() * Random::Float(), Random::Float() * Random::Float(), Random::Float() * Random::Float() })));
-                }
-                else if (chooseMaterial < 0.95f)
-                {
-                    Add(Sphere(center, 0.2f, new Metal({ 0.5f * (1.0f + Random::Float()), 0.5f * (1.0f + Random::Float()), 0.5f * (1.0f + Random::Float()) }, 0.5f * (1.0f + Random::Float()))));
-                }
-                else Add(Sphere(center, 0.2f, new Dielectric(1.5f)));
+                if      (chooseMaterial < 0.80f) m_Objects.emplace_back(CreateMatteSphere(center));
+                else if (chooseMaterial < 0.95f) m_Objects.emplace_back(CreateMetalSphere(center));
+                else                             m_Objects.emplace_back(CreateDielectricSphere(center));
             }
         }
 
