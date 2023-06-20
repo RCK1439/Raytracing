@@ -1,7 +1,7 @@
 #include "ArgumentParser.hpp"
 #include "Camera.hpp"
-#include "Scene.hpp"
 #include "Renderer.hpp"
+#include "Scene.hpp"
 #include "Timer.hpp"
 
 #include <iostream>
