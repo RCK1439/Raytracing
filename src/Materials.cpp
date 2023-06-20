@@ -1,7 +1,9 @@
 #include "Materials.hpp"
+
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>
+
 #include <algorithm>
 
 namespace rt

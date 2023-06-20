@@ -3,6 +3,7 @@
 #include "Types.hpp"
 
 #include <glm/vec4.hpp>
+
 #include <string_view>
 
 namespace rt

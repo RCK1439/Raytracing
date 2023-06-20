@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+
 #include "Materials.hpp"
 #include "Random.hpp"
 

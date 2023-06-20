@@ -1,4 +1,5 @@
 #include "Sphere.hpp"
+
 #include "Material.hpp"
 
 #include <glm/geometric.hpp>

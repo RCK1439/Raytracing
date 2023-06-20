@@ -1,8 +1,8 @@
 #include "Camera.hpp"
+
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>
-#include <math.h>
 
 namespace rt
 {

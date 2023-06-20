@@ -1,6 +1,7 @@
 #include "Image.hpp"
 
 #include <fpng.h>
+
 #include <assert.h>
 #include <iostream>
 

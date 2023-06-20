@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/vec3.hpp>
+
 #include <memory>
 
 typedef unsigned char       u8;

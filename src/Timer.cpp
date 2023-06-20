@@ -1,4 +1,5 @@
 #include "Timer.hpp"
+
 #include "Types.hpp"
 
 #include <stdio.h>

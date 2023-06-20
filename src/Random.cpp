@@ -1,6 +1,7 @@
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>
+
 #include <random>
 
 namespace rt
