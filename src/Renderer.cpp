@@ -63,7 +63,7 @@ namespace rt
             }
         }
 
-        std::cout << std::endl;
+        std::cout << std::endl; // This is for the progress bar.
     }
 
     void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
@@ -88,23 +88,23 @@ namespace rt
 
     glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth)
     {   
+        constexpr glm::vec4 BLACK = { 0.0f, 0.0f, 0.0f, 1.0f };
+        constexpr glm::vec4 BLUE  = { 0.5f, 0.7f, 1.0f, 1.0f };
+        constexpr glm::vec4 WHITE = { 1.0f, 1.0f, 1.0f, 1.0f };
+
         HitRecord record;
 
-        if (scene.Hit(ray, 0.0001f, std::numeric_limits<float>::max(), record))
+        if (scene.Hit(ray, 0.0001f, std::numeric_limits<f32>::max(), record))
         {
             Ray scattered;
             glm::vec4 attenuation;
 
-            return depth < s_Data.MaxDepth && record.Mat->Scatter(ray, record, attenuation, scattered) ? attenuation * GetColor(scattered, scene, depth + 1) : glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            return depth < s_Data.MaxDepth && record.Mat->Scatter(ray, record, attenuation, scattered) ? attenuation * GetColor(scattered, scene, depth + 1) : BLACK;
         }
 
-        glm::vec3 unitDir = glm::normalize(ray.Direction);
-        f32 t = 0.5f * unitDir.y + 1.0f;
+        f32 t = 0.5f * ray.Direction.y + 1.0f;
 
-        glm::vec4 white = glm::vec4(1.0f);
-        glm::vec4 blue  = { 0.5f, 0.7f, 1.0f, 1.0f };
-
-        return glm::mix(white, blue, t);
+        return glm::mix(WHITE, BLUE, t);    // This gives us the sky colour.
     }
 
     void Renderer::ShowProgressBar()
