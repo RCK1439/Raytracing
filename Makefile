@@ -11,7 +11,7 @@ FPNG_DIR = vendor/fpng
 INCLUDES = -I$(FPNG_DIR) -Ivendor/glm
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(FPNG_DIR)/*.cpp)
-BINARY = $(BIN_DIR)/Raytracing
+BINARY = $(BIN_DIR)/rtk
 
 .PHONY: all debug release clean
 

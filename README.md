@@ -22,7 +22,7 @@ To build the project:
 ## Run
 
 To run the program:
- 1. ```./Raytracing``` or if you're in the root directory ```./bin/Raytracing``` (easy, huh?)
+ 1. ```./rtk``` or if you're in the root directory ```./bin/rtk``` (easy, huh?)
 
 ### Some input arguments
 
@@ -32,7 +32,7 @@ To run the program:
  - ```-o```: This specifies the output directory to save the rendered image to. (e.g. ```-o path/to/dir/name.png```)
  - ```-help```: Shows a little help menu in the terminal that describes the valid input arguments. (e.g. ```-help```)
 
-My personal favourite configuration: ```./Raytracing -s 1280 720 -a 128 -d 50```
+My personal favourite configuration: ```./rtk -s 1280 720 -a 128 -d 50```
 
 ## TODO
 
