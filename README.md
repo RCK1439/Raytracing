@@ -1,8 +1,8 @@
 # Raytracing
 
-This project is an implementation and follow through of the Ray Tracing in a Weekend series (specifically the first book). I did add some of my own personal touches to the project.
+This project is an implementation and follow through of the [Ray Tracing in a Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) series (specifically the first book). This is my first finished graphics-related project with more coming soon hopefully.
 
-Things like:
+I added some things as a personal touch:
  - Multi-threading with OpenMP.
  - Timing and performance metrics.
  - Input arguments.
