@@ -116,15 +116,7 @@ namespace rt
 
         std::cout << "Renderering: [";
         for (u32 i = 0; i < BAR_WIDTH; i++) 
-        {
-            char bar;
-
-            if      (i < pos)  bar = '=';
-            else if (i == pos) bar = '>';
-            else               bar = ' ';
-
-            std::cout << bar;
-        }
+            std::cout << (i < pos) ? '#' : '.';
 
         std::cout << "] " << std::setw(3) << u32(progress * 100.0f) << "%\r";
         std::cout.flush();
