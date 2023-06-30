@@ -17,7 +17,7 @@ struct Arguments
     u32         NumberOfSamples = 32;
     u32         Depth           = 50;
     bool        ShowHelp        = false;
-    std::string OutputPath      = "out/raytracing.png";
+    std::string OutputPath      = "rtk.png";
 };
 
 /**
