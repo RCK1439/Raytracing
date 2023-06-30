@@ -18,7 +18,7 @@ namespace rt
         std::uniform_real_distribution<f32> Distribution;
     };
 
-    static RandomData s_Data;
+    thread_local static RandomData s_Data;
 
     void Random::Init()
     {
