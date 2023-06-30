@@ -1,3 +1,9 @@
+# Directories
+
 bin
 out
 .vscode
+
+# Files
+
+*.png
