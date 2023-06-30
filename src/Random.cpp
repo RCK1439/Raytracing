@@ -13,12 +13,12 @@ namespace rt
 {
     struct RandomData
     {
-        std::random_device                    RandomDevice;
-        std::mt19937                          RandomEngine;
+        std::random_device                  RandomDevice;
+        std::mt19937                        RandomEngine;
         std::uniform_real_distribution<f32> Distribution;
     };
 
-    thread_local static RandomData s_Data;
+    static RandomData s_Data;
 
     void Random::Init()
     {
