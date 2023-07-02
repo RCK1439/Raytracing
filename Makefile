@@ -23,6 +23,9 @@ release: mkbin $(BINARY)
 debug: FLAGS := $(DEBUG_FLAGS) $(COMMON_FLAGS)
 debug: mkbin $(BINARY)
 
+mkbin:
+	mkdir -p bin
+
 $(BINARY): $(SOURCES)
 	$(CXX) $(FLAGS) $(INCLUDES) -o $@ $^
 
