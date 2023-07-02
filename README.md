@@ -32,3 +32,8 @@ To run the program:
  - ```-help```: Shows a little help menu in the terminal that describes the valid input arguments. (e.g. ```-help```)
 
 My personal favourite configuration: ```./rtk -s 1280 720 -a 128 -d 50```
+
+## Dependencies
+
+ - [fpng](https://github.com/richgel999/fpng)
+ - [glm](https://github.com/g-truc/glm)
