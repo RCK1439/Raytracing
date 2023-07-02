@@ -16,8 +16,7 @@ But I do have plans to add support for Windows.
 
 To build the project:
  1. Clone the project to the directory of choice
- 2. Create a bin folder in the root directory.
- 3. Run the following command: ```make```
+ 2. Run the following command: ```make```
 
 ## Run
 
