@@ -13,15 +13,15 @@ INCLUDES = -I$(FPNG_DIR) -Ivendor/glm
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(FPNG_DIR)/*.cpp)
 BINARY = $(BIN_DIR)/rtk
 
-.PHONY: all debug release clean
+.PHONY: all debug release clean mkbin
 
 all: release
 
 release: FLAGS := $(RELEASE_FLAGS) $(COMMON_FLAGS)
-release: $(BINARY)
+release: mkbin $(BINARY)
 
 debug: FLAGS := $(DEBUG_FLAGS) $(COMMON_FLAGS)
-debug: $(BINARY)
+debug: mkbin $(BINARY)
 
 $(BINARY): $(SOURCES)
 	$(CXX) $(FLAGS) $(INCLUDES) -o $@ $^
