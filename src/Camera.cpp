@@ -8,14 +8,16 @@
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>
+#include <glm/trigonometric.hpp>
+#include <glm/gtc/constants.hpp>
 
 namespace rt
 {
     Camera::Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, f32 vFOV, f32 aspectRatio, f32 aperture, f32 focusDistance) :
         m_Origin(lookFrom), m_LensRadius(aperture * 0.5f)
     {
-        const f32 theta      = vFOV * M_PI / 180.0f;
-        const f32 halfHeight = tanf(theta * 0.5f);
+        const f32 theta      = vFOV * glm::pi<float>() / 180.0f;
+        const f32 halfHeight = glm::tan(theta * 0.5f);
         const f32 halfWidth  = aspectRatio * halfHeight;
 
         w = glm::normalize(lookFrom - lookAt);
