@@ -65,7 +65,7 @@ namespace rt
     }
 
     /**
-     * Copies a vertically flipped version of the image to the destination
+     * \brief Copies a vertically flipped version of the image to the destination
      * memory.
      * 
      * \param src       The data to copy.

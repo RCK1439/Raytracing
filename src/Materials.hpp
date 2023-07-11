@@ -15,25 +15,25 @@ namespace rt
 //  ==================================================
 
     /**
-     * Defines a matte material.
+     * \brief Defines a matte material.
     */
     class Lambertian final : public Material
     {
     public:
         /**
-         * Constructs a new matte material.
+         * \brief Constructs a new matte material.
          * 
          * \param albedo    The color of the material.
         */
         Lambertian(const glm::vec3& albedo);
 
         /**
-         * Destroys the material.
+         * \brief Destroys the material.
         */
         ~Lambertian() override = default;
 
         /**
-         * Scatters the ray if it has been hit.
+         * \brief Scatters the ray if it has been hit.
          * 
          * \param ray           The incoming ray.
          * \param record        The hit information of the ray.
@@ -53,13 +53,13 @@ namespace rt
 //  ==================================================
 
     /**
-     * Defines a metal material.
+     * \brief Defines a metal material.
     */
     class Metal final : public Material
     {
     public:
         /**
-         * Constructs a new metal material.
+         * \brief Constructs a new metal material.
          * 
          * \param albedo    The color of the material.
          * \param fuzz      The reflective muffling level of the metal. 
@@ -67,12 +67,12 @@ namespace rt
         Metal(const glm::vec3& albedo, f32 fuzz);
 
         /**
-         * Destroys the material.
+         * \brief Destroys the material.
         */
         ~Metal() override = default;
 
         /**
-         * Scatters the ray if it has been hit.
+         * \brief Scatters the ray if it has been hit.
          * 
          * \param ray           The incoming ray.
          * \param record        The hit information of the ray.
@@ -93,25 +93,25 @@ namespace rt
 //  ==================================================
 
     /**
-     * Defines a glass-like material.
+     * \brief Defines a glass-like material.
     */
     class Dielectric final : public Material
     {
     public:
         /**
-         * Constructs a new dielectric material.
+         * \brief Constructs a new dielectric material.
          * 
          * \param refractiveIndex   The level of transparency.
         */
         Dielectric(f32 refractiveIndex);
 
         /**
-         * Destroys the material.
+         * \brief Destroys the material.
         */
         ~Dielectric() override = default;
 
         /**
-         * Scatters the ray if it has been hit.
+         * \brief Scatters the ray if it has been hit.
          * 
          * \param ray           The incoming ray.
          * \param record        The hit information of the ray.
@@ -124,7 +124,7 @@ namespace rt
 
     private:
         /**
-         * Calculates the refraction of the input vector.
+         * \brief Calculates the refraction of the input vector.
          * 
          * \param v         The vector to calculate the refraction for.
          * \param n         The normal of the surface.
@@ -136,7 +136,7 @@ namespace rt
         bool Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const;
 
         /**
-         * Calculates the reflectance of light.
+         * \brief Calculates the reflectance of light.
          * 
          * \param cosine Cosine of angle between the ray and surface normal.
          * 

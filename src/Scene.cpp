@@ -13,7 +13,7 @@ namespace rt
     constexpr f32 RADIUS = 0.2f;
 
     /**
-     * Creates a sphere with a lambertian material.
+     * \brief Creates a sphere with a lambertian material.
      * 
      * \param position  The position to make the sphere at.
      * 
@@ -30,7 +30,7 @@ namespace rt
     }
 
     /**
-     * Creates a sphere with a metal material.
+     * \brief Creates a sphere with a metal material.
      * 
      * \param position  The position to make the sphere at.
      * 
@@ -47,7 +47,7 @@ namespace rt
     }
 
     /**
-     * Creates a sphere with a dielectric material.
+     * \brief Creates a sphere with a dielectric material.
      * 
      * \param position  The position to make the sphere at.
      * 

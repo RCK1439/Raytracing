@@ -10,32 +10,32 @@
 namespace rt
 {
     /**
-     * Class to generate random values.
+     * \brief Class to generate random values.
     */
     class Random
     {
     public:
         /**
-         * Initializes the random number generator.
+         * \brief Initializes the random number generator.
         */
         static void Init();
 
         /**
-         * Gets a random float between 0 and 1.
+         * \brief Gets a random float between 0 and 1.
          * 
          * \return A random floating point value.
         */
         static f32 Float();
 
         /**
-         * Gets a random point inside a unit sphere.
+         * \brief Gets a random point inside a unit sphere.
          * 
          * \return A random position inside a unit sphere.
         */
         static glm::vec3 InUnitSphere();
 
         /**
-         * Gets a random point on a unit disk.
+         * \brief Gets a random point on a unit disk.
          * 
          * \return A random point on a unit disk.
         */

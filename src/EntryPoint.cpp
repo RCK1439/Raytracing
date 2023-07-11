@@ -14,7 +14,7 @@
 #include <vector>
 
 /**
- * Entry point to the program.
+ * \brief Entry point to the program.
  * 
  * \param argc  The amount of arguments passed in.
  * \param argv  The arguments passed from the command-line.

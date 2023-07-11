@@ -21,13 +21,13 @@ struct Arguments
 };
 
 /**
- * Class used for parsing command-line arguments.
+ * \brief Class used for parsing command-line arguments.
 */
 class ArgumentParser
 {
 public: 
     /**
-     * Parses the command-line arguments into usable data for the program
+     * \brief Parses the command-line arguments into usable data for the program
      * as parameters to run with.
      * 
      * \param args  Arguments passed from the command-line.
@@ -36,7 +36,7 @@ public:
 
 private:
     /**
-     * Parses the size flag (-s/-S) arguments and saves the results
+     * \brief Parses the size flag (-s/-S) arguments and saves the results
      * into the settings.
      * 
      * \param settings  The struct holding the running parameters for the program.
@@ -48,7 +48,7 @@ private:
     static bool ParseSize(Arguments& settings, size_t i, const std::vector<std::string>& args);
 
     /**
-     * Parses the anti-aliasing samples flag (-a/-A) arguments and saves the results
+     * \brief Parses the anti-aliasing samples flag (-a/-A) arguments and saves the results
      * into the settings.
      * 
      * \param settings  The struct holding the running parameters for the program.
@@ -60,7 +60,7 @@ private:
     static bool ParseSamples(Arguments& settings, size_t i, const std::vector<std::string>& args);
 
     /**
-     * Parses the ray bounce depth flag (-d/-D) arguments and saves the results
+     * \brief Parses the ray bounce depth flag (-d/-D) arguments and saves the results
      * into the settings.
      * 
      * \param settings  The struct holding the running parameters for the program.
@@ -72,7 +72,7 @@ private:
     static bool ParseDepth(Arguments& settings, size_t i, const std::vector<std::string>& args);
 
     /**
-     * Parses the output path flag (-o) arguments and saves the results
+     * \brief Parses the output path flag (-o) arguments and saves the results
      * into the settings.
      * 
      * \param settings  The struct holding the running parameters for the program.

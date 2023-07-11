@@ -40,7 +40,7 @@ namespace rt
         glm::vec3 Direction;
 
         /**
-         * Gets the point on the ray at the specified parameter.
+         * \brief Gets the point on the ray at the specified parameter.
          * 
          * \param t The parameter to get the point at.
          * 

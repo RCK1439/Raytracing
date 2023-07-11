@@ -8,7 +8,7 @@
 #include <regex>
 
 /**
- * Checks if the input string consists of numeric characters.
+ * \brief Checks if the input string consists of numeric characters.
  * 
  * \param val   The string to check for.
  * 
@@ -20,7 +20,7 @@ static bool IsNumeric(const std::string& val)
 }
 
 /**
- * Checks if the given string is an acceptable flag.
+ * \brief Checks if the given string is an acceptable flag.
  * 
  * \param arg   The argument to check for.
  * \param expr  The regular expression defining a valid argument.

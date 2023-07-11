@@ -12,18 +12,18 @@
 namespace rt
 {
     /**
-     * This class defines a sphere object.
+     * \brief This class defines a sphere object.
     */
     class Sphere
     {
     public:
         /**
-         * Constructs a new sphere.
+         * \brief Constructs a new sphere.
         */
         Sphere() = default;
 
         /**
-         * Constructs a new sphere with parameters.
+         * \brief Constructs a new sphere with parameters.
          * 
          * \param position  The position of the center of the sphere.
          * \param radius    The radius of the sphere.
@@ -32,12 +32,12 @@ namespace rt
         Sphere(const glm::vec3& position, f32 radius, Material* material);
 
         /**
-         * Destroys the sphere.
+         * \brief Destroys the sphere.
         */
         ~Sphere() = default;
 
         /**
-         * Checks if the incoming ray hits the sphere.
+         * \brief Checks if the incoming ray hits the sphere.
          * 
          * \param ray       The incoming ray.
          * \param tMin      The near plane.
@@ -50,7 +50,7 @@ namespace rt
 
     private:
         /**
-         * Checks if the root falls between the planes.
+         * \brief Checks if the root falls between the planes.
          * 
          * \param ray       The incoming ray.
          * \param tMin      The near plane.

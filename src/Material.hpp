@@ -14,18 +14,18 @@ namespace rt
     struct HitRecord;
     
     /**
-     * This class defines the API to be used by different materials.
+     * \brief Defines the API to be used by different materials.
     */
     class Material
     {
     public:
         /**
-         * Default destructor for the material.
+         * \brief Default destructor for the material.
         */
         virtual ~Material() = default;
 
         /**
-         * Scatters the ray if it has been hit.
+         * \brief Scatters the ray if it has been hit.
          * 
          * \param ray           The incoming ray.
          * \param record        The hit information of the ray.

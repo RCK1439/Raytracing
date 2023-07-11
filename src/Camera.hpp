@@ -10,13 +10,13 @@
 namespace rt
 {
     /**
-     * Class representing the camera looking into our scene.
+     * \brief Class representing the camera looking into our scene.
     */
     class Camera
     {
     public:
         /**
-         * Constructs a new camera.
+         * \brief Constructs a new camera.
          * 
          * \param lookFrom      The position of the camera
          * \param lookAt        The position the camera is looking at.
@@ -29,12 +29,12 @@ namespace rt
         Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, f32 vFOV, f32 aspectRatio, f32 aperture, f32 focusDistance);
 
         /**
-         * Destroys the camera
+         * \brief Destroys the camera
         */
         ~Camera() = default;
 
         /**
-         * Gets the ray at the specified pixel-coordinates.
+         * \brief Gets the ray at the specified pixel-coordinates.
          * 
          * \param s The x-coordinate of the pixel.
          * \param t The y-coordinate of the pixel.

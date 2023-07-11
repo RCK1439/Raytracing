@@ -12,25 +12,27 @@
 namespace rt
 {
     /**
-     * Class to define our scene.
+     * \brief Class to define our scene.
+     * 
      * Holds all the objects in our scene.
     */
     class Scene
     {
     public:
         /**
-         * Constructs a new scene.
+         * \brief Constructs a new scene.
+         * 
          * The scene constructed is the one on the cover.
         */
         Scene();
 
         /**
-         * Destroys the scene.
+         * \brief Destroys the scene.
         */
         ~Scene() = default;
 
         /**
-         * Checks if the incoming ray has hit anything in the scene and saves
+         * \brief Checks if the incoming ray has hit anything in the scene and saves
          * the hit information into the record.
          * 
          * \param ray       The incoming ray.
@@ -43,7 +45,7 @@ namespace rt
         bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const;
 
         /**
-         * Adds a sphere to the scene.
+         * \brief Adds a sphere to the scene.
          * 
          * \param obj   The sphere to add to the scene.
         */
