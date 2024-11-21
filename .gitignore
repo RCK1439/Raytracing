@@ -3,4 +3,4 @@ bin/
 out/
 
 # Files
-*.png
+*.o
