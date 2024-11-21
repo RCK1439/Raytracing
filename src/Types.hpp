@@ -48,4 +48,4 @@ namespace rt
         */
         inline glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
     };
-} // namespace rt
+}

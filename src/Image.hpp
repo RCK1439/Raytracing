@@ -120,8 +120,8 @@ namespace rt
 
     private:
         u32* m_Data = nullptr;
-        u32 m_Width = 0;
-        u32 m_Height = 0;
-        u32 m_Channels = 0;
+        u32  m_Width = 0;
+        u32  m_Height = 0;
+        u32  m_Channels = 0;
     };
-} // namespace rt
+}

@@ -49,8 +49,8 @@ namespace rt
          * 
          * \param obj   The sphere to add to the scene.
         */
-        void Add(const Sphere& obj);
+        void Add(Sphere&& obj);
     private:
         std::vector<Sphere> m_Objects;
     };
-} // namespace rt
+}

@@ -49,6 +49,6 @@ namespace rt
         glm::vec3 m_Horizontal;
         glm::vec3 m_Vertical;
         glm::vec3 u, v, w;
-        f32 m_LensRadius;
+        f32       m_LensRadius;
     };
-} // namespace rt
+}

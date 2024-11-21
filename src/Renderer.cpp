@@ -6,7 +6,7 @@
 #include "Renderer.hpp"
 
 #include "Image.hpp"
-#include "Materials.hpp"
+#include "Material.hpp"
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>
@@ -72,16 +72,16 @@ namespace rt
 
         for (u32 s = 0; s < s_Data.NumSamples; s++)
         {
-            f32 u = f32(x + Random::Float()) / (f32)s_Data.Img.GetWidth();
-            f32 v = f32(y + Random::Float()) / (f32)s_Data.Img.GetHeight();
+            const f32 u = static_cast<f32>(x + Random::Float()) / static_cast<f32>(s_Data.Img.GetWidth());
+            const f32 v = static_cast<f32>(y + Random::Float()) / static_cast<f32>(s_Data.Img.GetHeight());
 
-            Ray ray = camera.GetRay(u, v);
+            const Ray ray = camera.GetRay(u, v);
 
             color += GetColor(ray, scene, 0);
         }
 
-        color /= (f32)s_Data.NumSamples;
-        glm::vec4 gammaCorrected = { sqrtf(color.r), sqrtf(color.g), sqrtf(color.b), 1.0f };
+        color /= static_cast<f32>(s_Data.NumSamples);
+        const glm::vec4 gammaCorrected = { sqrtf(color.r), sqrtf(color.g), sqrtf(color.b), 1.0f };
 
         s_Data.Img.SetColor(x, y, gammaCorrected); 
     }
@@ -102,7 +102,7 @@ namespace rt
             return depth < s_Data.MaxDepth && record.Mat->Scatter(ray, record, attenuation, scattered) ? attenuation * GetColor(scattered, scene, depth + 1) : BLACK;
         }
 
-        f32 t = 0.5f * ray.Direction.y + 1.0f;
+        const f32 t = 0.5f * ray.Direction.y + 1.0f;
 
         return glm::mix(WHITE, BLUE, t);    // This gives us the sky colour.
     }
@@ -121,4 +121,4 @@ namespace rt
         std::cout << "] " << std::setw(3) << u32(progress * 100.0f) << "%\r";
         std::cout.flush();
     }
-} // namespace rt
+}

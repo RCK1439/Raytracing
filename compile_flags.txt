@@ -1,0 +1,10 @@
+-Wall
+-Werror
+-Wpedantic
+-fopenmp
+-msse4.1
+-mpclmul
+-std=c++23
+
+-Ivendor/fpng
+-Ivendor/glm

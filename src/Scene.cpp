@@ -65,12 +65,21 @@ namespace rt
         {
             for (s32 b = -11; b < 11; b++)
             {
-                f32 chooseMaterial = Random::Float();
-                glm::vec3 center = { a + 0.9f * Random::Float(), 0.2f, b + 0.9f * Random::Float() };
+                const f32 chooseMaterial = Random::Float();
+                const glm::vec3 center = { a + 0.9f * Random::Float(), 0.2f, b + 0.9f * Random::Float() };
 
-                if      (chooseMaterial < 0.80f) m_Objects.emplace_back(CreateMatteSphere(center));
-                else if (chooseMaterial < 0.95f) m_Objects.emplace_back(CreateMetalSphere(center));
-                else                             m_Objects.emplace_back(CreateDielectricSphere(center));
+                if (chooseMaterial < 0.80f)
+                {
+                    m_Objects.emplace_back(CreateMatteSphere(center));
+                }
+                else if (chooseMaterial < 0.95f)
+                {
+                    m_Objects.emplace_back(CreateMetalSphere(center));
+                }
+                else
+                {
+                    m_Objects.emplace_back(CreateDielectricSphere(center));
+                }
             }
         }
 
@@ -98,8 +107,8 @@ namespace rt
         return hitAnything;
     }
 
-    void Scene::Add(const Sphere& obj)
+    void Scene::Add(Sphere&& obj)
     {
-        m_Objects.push_back(obj);
+        m_Objects.emplace_back(obj);
     }
-} // namespace rt
+}

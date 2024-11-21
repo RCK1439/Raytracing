@@ -41,4 +41,4 @@ namespace rt
         */
         static glm::vec3 InUnitDisk();
     };
-} // namespace rt
+}

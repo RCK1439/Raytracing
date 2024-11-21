@@ -1,33 +1,33 @@
 CXX = g++
 
-COMMON_FLAGS = -fopenmp -msse4.1 -mpclmul -Wall -Werror -Wpedantic
-DEBUG_FLAGS = -g
-RELEASE_FLAGS = -Ofast
+CFLAGS = -Wall -Werror -Wpedantic -msse4.1 -mpclmul -std=c++23 -fopenmp -fno-exceptions
+ifeq ($(MAKECMDGOALS), release)
+	CFLAGS += -O3 -DNDEBUG
+endif
 
 SRC_DIR = src
 BIN_DIR = bin
-
 FPNG_DIR = vendor/fpng
-INCLUDES = -I$(FPNG_DIR) -Ivendor/glm
 
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(FPNG_DIR)/*.cpp)
-BINARY = $(BIN_DIR)/rtk
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp $(FPNG_DIR)/*.cpp)
+OBJ_FILES = $(patsubst %.cpp, $(BIN_DIR)/%.o, $(SRC_FILES))
 
-.PHONY: all debug release clean mkbin
+INCL = -Ivendor/fpng -Ivendor/glm
 
-all: release
+TARGET = $(BIN_DIR)/rtk
 
-release: FLAGS := $(RELEASE_FLAGS) $(COMMON_FLAGS)
-release: mkbin $(BINARY)
+.PHONY: all release clean
 
-debug: FLAGS := $(DEBUG_FLAGS) $(COMMON_FLAGS)
-debug: mkbin $(BINARY)
+all: $(TARGET)
 
-mkbin:
-	mkdir -p bin
+release: all
 
-$(BINARY): $(SOURCES)
-	$(CXX) $(FLAGS) $(INCLUDES) -o $@ $^
+$(TARGET): $(OBJ_FILES)
+	$(CXX) $(CFLAGS) -o $@ $^
+
+$(BIN_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CFLAGS) -c $< -o $@ $(INCL)
 
 clean:
-	rm -f $(BINARY)
+	rm -f $(TARGET) $(OBJ_FILES)

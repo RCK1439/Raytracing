@@ -52,4 +52,4 @@ namespace rt
 
         return point;
     }
-} // namespace rt
+}

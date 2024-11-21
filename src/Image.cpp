@@ -56,12 +56,12 @@ namespace rt
 
     void Image::SetColor(u32 x, u32 y, const glm::vec4& color)
     {
-        const u8 ur = u8(color.r * 254.99999f);
-        const u8 ug = u8(color.g * 254.99999f);
-        const u8 ub = u8(color.b * 254.99999f);
-        const u8 ua = u8(color.a * 254.99999f);
+        const u8 r = static_cast<u8>(color.r * 254.99999f);
+        const u8 g = static_cast<u8>(color.g * 254.99999f);
+        const u8 b = static_cast<u8>(color.b * 254.99999f);
+        const u8 a = static_cast<u8>(color.a * 254.99999f);
 
-        SetColorRGBA(x, y, ur, ug, ub, ua); 
+        SetColorRGBA(x, y, r, g, b, a); 
     }
 
     /**
@@ -73,7 +73,7 @@ namespace rt
      * \param width     The width of the image.
      * \param height    The height of the image.
     */
-    static void ImgCpyFlipped(u32* src, u32* dest, u32 width, u32 height)
+    static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 height)
     {
         u32 i = 0;
         for (u32 y = height - 1; y >= 1; y--)
@@ -89,7 +89,7 @@ namespace rt
     {
         fpng::fpng_init();
 
-        u32* flipped = new u32[m_Width * m_Height];
+        u32* const flipped = new u32[m_Width * m_Height];
         ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
 
         if (fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
@@ -100,4 +100,4 @@ namespace rt
 
         delete[] flipped;
     }
-} // namespace rt
+}

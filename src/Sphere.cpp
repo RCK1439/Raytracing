@@ -40,11 +40,11 @@ namespace rt
         if (temp >= tMax || temp <= tMin)
             return false;
 
-        record.t      = temp;
-        record.Point  = ray.PointAt(temp);
+        record.t = temp;
+        record.Point = ray.PointAt(temp);
         record.Normal = (record.Point - m_Centre) / m_Radius;
-        record.Mat    = m_Material;
+        record.Mat = m_Material;
 
         return true;
     }
-} // namespace rt
+}

@@ -25,7 +25,7 @@ namespace rt
 
     bool Lambertian::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
     {
-        glm::vec3 target = record.Point + record.Normal + Random::InUnitSphere();
+        const glm::vec3 target = record.Point + record.Normal + Random::InUnitSphere();
         scattered = { record.Point, target - record.Point };
         attenuation = m_Albedo;
 
@@ -37,14 +37,13 @@ namespace rt
 //  ==================================================
 
     Metal::Metal(const glm::vec3& albedo, f32 fuzz) :
-        m_Albedo(albedo, 1.0f), m_Fuzz(fuzz)
+        m_Albedo(albedo, 1.0f), m_Fuzz(std::clamp(fuzz, 0.0f, 1.0f))
     {
-        std::clamp(m_Fuzz, 0.0f, 1.0f);
     }
 
     bool Metal::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
     {
-        glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
+        const glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
         scattered = { record.Point, reflected + m_Fuzz * Random::InUnitSphere() };
         attenuation = m_Albedo;
 
@@ -64,7 +63,7 @@ namespace rt
     {
         glm::vec3 outwardNormal;
         glm::vec3 refracted = glm::vec3(0.0f);
-        glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
+        const glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
 
         f32 niOverNT;
         f32 cosine;
@@ -94,9 +93,9 @@ namespace rt
     }
 
     bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const
-    {   
-        f32 dt = glm::dot(v, n);
-        f32 discriminant = 1.0f - niOverNT * niOverNT * (1.0f - dt * dt);
+    {
+        const f32 dt = glm::dot(v, n);
+        const f32 discriminant = 1.0f - niOverNT * niOverNT * (1.0f - dt * dt);
 
         if (discriminant > 0.0f)
         {
@@ -115,4 +114,4 @@ namespace rt
         return r0 + (1.0f - r0) * glm::pow((1 - cosine), 5);
     }
     
-} // namespace rt
+}

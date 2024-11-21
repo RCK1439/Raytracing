@@ -44,10 +44,22 @@ Arguments ArgumentParser::Parse(const std::vector<std::string>& args)
     {
         const std::string& arg = args[i];
 
-        if      (IsFlag(arg, "-[sS]")) i += ParseSize(settings, i, args) ? 2 : 0;
-        else if (IsFlag(arg, "-[aA]")) i += (u32)ParseSamples(settings, i, args);
-        else if (IsFlag(arg, "-[dD]")) i += (u32)ParseDepth(settings, i, args);
-        else if (arg == "-o")          i += (u32)ParseOutput(settings, i, args);
+        if (IsFlag(arg, "-[sS]"))
+        {
+            i += ParseSize(settings, i, args) ? 2 : 0;
+        }
+        else if (IsFlag(arg, "-[aA]"))
+        {
+            i += static_cast<u32>(ParseSamples(settings, i, args));
+        }
+        else if (IsFlag(arg, "-[dD]"))
+        {
+            i += static_cast<u32>(ParseDepth(settings, i, args));
+        }
+        else if (arg == "-o")
+        {
+            i += static_cast<u32>(ParseOutput(settings, i, args));
+        }
         else if (arg == "-help")
         {
             settings.ShowHelp = true;
@@ -65,8 +77,8 @@ bool ArgumentParser::ParseSize(Arguments& settings, size_t i, const std::vector<
 
     if (IsNumeric(args[i + 1]) && IsNumeric(args[i + 2]))
     {
-        settings.Width  = (u32)std::stoul(args[i + 1]);
-        settings.Height = (u32)std::stoul(args[i + 2]);
+        settings.Width  = static_cast<u32>(std::stoul(args[i + 1]));
+        settings.Height = static_cast<u32>(std::stoul(args[i + 2]));
 
         return true;
     }
@@ -81,7 +93,7 @@ bool ArgumentParser::ParseSamples(Arguments& settings, size_t i, const std::vect
 
     if (IsNumeric(args[i + 1]))
     {
-        settings.NumberOfSamples = (u32)std::stoul(args[i + 1]);
+        settings.NumberOfSamples = static_cast<u32>(std::stoul(args[i + 1]));
         return true;
     }
 
@@ -95,7 +107,7 @@ bool ArgumentParser::ParseDepth(Arguments& settings, size_t i, const std::vector
 
     if (IsNumeric(args[i + 1]))
     {
-        settings.Depth = (u32)std::stoul(args[i + 1]);
+        settings.Depth = static_cast<u32>(std::stoul(args[i + 1]));
         return true;
     }
 

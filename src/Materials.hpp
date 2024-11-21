@@ -85,7 +85,7 @@ namespace rt
 
     private:
         glm::vec4 m_Albedo;
-        f32 m_Fuzz = 0.0f;
+        f32       m_Fuzz = 0.0f;
     };
 
 //  ==================================================
@@ -148,4 +148,4 @@ namespace rt
         f32 m_RefractiveIndex;
     };
 
-} // namespace rt
+}

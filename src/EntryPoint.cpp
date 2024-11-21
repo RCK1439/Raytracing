@@ -50,7 +50,15 @@ int main(int argc, char* argv[])
     Timer timer;
 
     rt::Scene scene;
-    rt::Camera camera({ 13.0f, 2.0f, 3.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 20.0f, (f32)settings.Width / (f32)settings.Height, 0.1f, 10.0f);
+    rt::Camera camera(
+        { 13.0f, 2.0f, 3.0f },
+        { 0.0f, 0.0f, 0.0f },
+        { 0.0f, 1.0f, 0.0f },
+        20.0f,
+        static_cast<f32>(settings.Width) / static_cast<f32>(settings.Height),
+        0.1f,
+        10.0f
+    );
 
     timer.Start();
     rt::Renderer::Render(scene, camera);

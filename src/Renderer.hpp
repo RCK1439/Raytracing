@@ -72,4 +72,4 @@ namespace rt
         */
         static void ShowProgressBar();
     };
-} // namespace rt
+}

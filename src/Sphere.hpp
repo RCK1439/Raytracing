@@ -63,8 +63,8 @@ namespace rt
         bool CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp, HitRecord& record) const;
 
     private:
-        glm::vec3 m_Centre;
-        f32 m_Radius;
+        glm::vec3                 m_Centre;
+        f32                       m_Radius;
         std::shared_ptr<Material> m_Material = nullptr;
     };
-} // namespace rt
+}
