@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.hpp"
+#include <glm/glm.hpp>
 
 namespace rt
 {
@@ -9,7 +9,7 @@ namespace rt
     public: 
         static void Init();
 
-        static f32 Float();
+        static float Float();
         static glm::vec3 InUnitSphere();
         static glm::vec3 InUnitDisk();
     };

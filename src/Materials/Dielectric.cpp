@@ -11,11 +11,11 @@ namespace rt
         glm::vec3 refracted = glm::vec3(0.0f);
         const glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
 
-        f32 niOverNT;
-        f32 cosine;
+        float niOverNT;
+        float cosine;
 
-        const f32 dotDirNorm = glm::dot(ray.Direction, record.Normal);
-        const f32 dirLength  = 1.0f; // glm::length(ray.Direction); This will always be 1.
+        const float dotDirNorm = glm::dot(ray.Direction, record.Normal);
+        const float dirLength  = 1.0f; // glm::length(ray.Direction); This will always be 1.
 
         if (dotDirNorm > 0.0f)
         {
@@ -30,7 +30,7 @@ namespace rt
             cosine = -dotDirNorm / dirLength;
         }
 
-        const f32 reflectProbability = Refract(ray.Direction, outwardNormal, niOverNT, refracted) ? Schlick(cosine) : 1.0f;
+        const float reflectProbability = Refract(ray.Direction, outwardNormal, niOverNT, refracted) ? Schlick(cosine) : 1.0f;
 
         scattered   = Random::Float() < reflectProbability ? Ray{ record.Point, reflected } : Ray{ record.Point, refracted };
         attenuation = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -38,10 +38,10 @@ namespace rt
         return true;
     }
 
-    bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const
+    bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, float niOverNT, glm::vec3& refracted) const
     {
-        const f32 dt = glm::dot(v, n);
-        const f32 discriminant = 1.0f - niOverNT * niOverNT * (1.0f - dt * dt);
+        const float dt = glm::dot(v, n);
+        const float discriminant = 1.0f - niOverNT * niOverNT * (1.0f - dt * dt);
 
         if (discriminant > 0.0f)
         {
@@ -52,9 +52,9 @@ namespace rt
         return false;
     }
 
-    f32 Dielectric::Schlick(f32 cosine) const
+    float Dielectric::Schlick(float cosine) const
     {
-        f32 r0 = (1.0f - m_RefractiveIndex) / (1.0f + m_RefractiveIndex);
+        float r0 = (1.0f - m_RefractiveIndex) / (1.0f + m_RefractiveIndex);
         r0 = r0 * r0;
 
         return r0 + (1.0f - r0) * glm::pow((1 - cosine), 5);

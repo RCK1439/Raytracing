@@ -1,13 +1,12 @@
 #include "Timer.hpp"
 
-#include "Types.hpp"
-
+#include <cstdint>
 #include <print>
 
-static constexpr f32 SEC_TO_HRS = 0.00027777777f;
-static constexpr f32 HRS_TO_MIN = 60.0f;
-static constexpr f32 MIN_TO_SEC = 60.0f;
-static constexpr f32 SEC_TO_MS = 1000.0f;
+static constexpr float SEC_TO_HRS = 0.00027777777f;
+static constexpr float HRS_TO_MIN = 60.0f;
+static constexpr float MIN_TO_SEC = 60.0f;
+static constexpr float SEC_TO_MS = 1000.0f;
 
 void Timer::Start()
 {
@@ -18,23 +17,23 @@ void Timer::Stop()
 {
     m_End = std::chrono::high_resolution_clock::now();
 
-    const std::chrono::duration<f32> duration = m_End - m_Start;
+    const std::chrono::duration<float> duration = m_End - m_Start;
         
-    f32 remainder;
+    float remainder;
 
-    const f32 pHours = duration.count() * SEC_TO_HRS;
-    const u32 rHours = (u32)pHours;
-    remainder = pHours - static_cast<f32>(rHours);
+    const float pHours = duration.count() * SEC_TO_HRS;
+    const uint32_t rHours = static_cast<uint32_t>(pHours);
+    remainder = pHours - static_cast<float>(rHours);
 
-    const f32 pMinutes = remainder * HRS_TO_MIN;
-    const u32 rMinutes = static_cast<u32>(pMinutes);
-    remainder = pMinutes - static_cast<f32>(rMinutes);
+    const float pMinutes = remainder * HRS_TO_MIN;
+    const uint32_t rMinutes = static_cast<uint32_t>(pMinutes);
+    remainder = pMinutes - static_cast<float>(rMinutes);
 
-    const f32 pSeconds = remainder * MIN_TO_SEC;
-    const u32 rSeconds = static_cast<u32>(pSeconds);
-    remainder = pSeconds - static_cast<f32>(rSeconds);
+    const float pSeconds = remainder * MIN_TO_SEC;
+    const uint32_t rSeconds = static_cast<uint32_t>(pSeconds);
+    remainder = pSeconds - static_cast<float>(rSeconds);
 
-    u32 ms = static_cast<u32>(remainder * SEC_TO_MS);
+    const uint32_t ms = static_cast<uint32_t>(remainder * SEC_TO_MS);
 
     std::println("Time elapsed: {:02}h{:02}m{:02}s{:03}ms", rHours, rMinutes, rSeconds, ms);
 }

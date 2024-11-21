@@ -30,15 +30,15 @@ Arguments ArgumentParser::Parse(const std::vector<std::string>& args)
         }
         else if (IsFlag(arg, "-[aA]"))
         {
-            i += static_cast<u32>(ParseSamples(settings, i, args));
+            i += static_cast<uint32_t>(ParseSamples(settings, i, args));
         }
         else if (IsFlag(arg, "-[dD]"))
         {
-            i += static_cast<u32>(ParseDepth(settings, i, args));
+            i += static_cast<uint32_t>(ParseDepth(settings, i, args));
         }
         else if (arg == "-o")
         {
-            i += static_cast<u32>(ParseOutput(settings, i, args));
+            i += static_cast<uint32_t>(ParseOutput(settings, i, args));
         }
         else if (arg == "-help")
         {
@@ -57,8 +57,8 @@ bool ArgumentParser::ParseSize(Arguments& settings, size_t i, const std::vector<
 
     if (IsNumeric(args[i + 1]) && IsNumeric(args[i + 2]))
     {
-        settings.Width  = static_cast<u32>(std::stoul(args[i + 1]));
-        settings.Height = static_cast<u32>(std::stoul(args[i + 2]));
+        settings.Width  = static_cast<uint32_t>(std::stoul(args[i + 1]));
+        settings.Height = static_cast<uint32_t>(std::stoul(args[i + 2]));
 
         return true;
     }
@@ -73,7 +73,7 @@ bool ArgumentParser::ParseSamples(Arguments& settings, size_t i, const std::vect
 
     if (IsNumeric(args[i + 1]))
     {
-        settings.NumberOfSamples = static_cast<u32>(std::stoul(args[i + 1]));
+        settings.NumberOfSamples = static_cast<uint32_t>(std::stoul(args[i + 1]));
         return true;
     }
 
@@ -87,7 +87,7 @@ bool ArgumentParser::ParseDepth(Arguments& settings, size_t i, const std::vector
 
     if (IsNumeric(args[i + 1]))
     {
-        settings.Depth = static_cast<u32>(std::stoul(args[i + 1]));
+        settings.Depth = static_cast<uint32_t>(std::stoul(args[i + 1]));
         return true;
     }
 

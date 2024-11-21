@@ -1,12 +1,10 @@
 #include "Scene.hpp"
-
-#include "Materials/Materials.hpp"
-
 #include "Random.hpp"
+#include "Materials/Materials.hpp"
 
 namespace rt
 {
-    constexpr f32 RADIUS = 0.2f;
+    constexpr float RADIUS = 0.2f;
 
     inline static Sphere CreateMatteSphere(const glm::vec3& position)
     {
@@ -36,11 +34,11 @@ namespace rt
     Scene::Scene() // This makes the default cover-page scene.
     {
         Add(Sphere({ 0.0f, -1000.0f, 0.0f }, 1000.0f, new Lambertian({ 0.5f, 0.5f, 0.5f })));
-        for (s32 a = -11; a < 11; a++)
+        for (int32_t a = -11; a < 11; a++)
         {
-            for (s32 b = -11; b < 11; b++)
+            for (int32_t b = -11; b < 11; b++)
             {
-                const f32 chooseMaterial = Random::Float();
+                const float chooseMaterial = Random::Float();
                 const glm::vec3 center = { a + 0.9f * Random::Float(), 0.2f, b + 0.9f * Random::Float() };
 
                 if (chooseMaterial < 0.80f)
@@ -63,12 +61,12 @@ namespace rt
         Add(Sphere({  4.0f, 1.0f, 0.0f},  1.0f, new Metal({ 0.7f, 0.6f, 0.5f }, 0.0f)));
     }
 
-    bool Scene::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
+    bool Scene::Hit(const Ray& ray, float tMin, float tMax, HitRecord& record) const
     {
         HitRecord tempRecord;
 
         bool hitAnything = false;
-        f32 closest = tMax;
+        float closest = tMax;
         for (const auto& obj : m_Objects)
         {
             if (obj.Hit(ray, tMin, closest, tempRecord))

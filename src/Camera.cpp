@@ -1,5 +1,4 @@
 #include "Camera.hpp"
-
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>
@@ -8,12 +7,12 @@
 
 namespace rt
 {
-    Camera::Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, f32 vFOV, f32 aspectRatio, f32 aperture, f32 focusDistance) :
+    Camera::Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, float vFOV, float aspectRatio, float aperture, float focusDistance) :
         m_Origin(lookFrom), m_LensRadius(aperture * 0.5f)
     {
-        const f32 theta = vFOV * glm::pi<float>() / 180.0f;
-        const f32 halfHeight = glm::tan(theta * 0.5f);
-        const f32 halfWidth = aspectRatio * halfHeight;
+        const float theta = vFOV * glm::pi<float>() / 180.0f;
+        const float halfHeight = glm::tan(theta * 0.5f);
+        const float halfWidth = aspectRatio * halfHeight;
 
         w = glm::normalize(lookFrom - lookAt);
         u = glm::normalize(glm::cross(vUP, w));
@@ -24,7 +23,7 @@ namespace rt
         m_Vertical = 2.0f * halfHeight * focusDistance * v;
     }
 
-    Ray Camera::GetRay(f32 s, f32 t) const
+    Ray Camera::GetRay(float s, float t) const
     {
         const glm::vec3 rd = m_LensRadius * Random::InUnitDisk();
         const glm::vec3 offset = u * rd.x + v * rd.y;

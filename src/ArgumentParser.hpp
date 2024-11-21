@@ -1,16 +1,15 @@
 #pragma once
 
-#include "Types.hpp"
-
+#include <cstdint>
 #include <string>
 #include <vector>
 
 struct Arguments
 {
-    u32         Width           = 1024;
-    u32         Height          = 512;
-    u32         NumberOfSamples = 32;
-    u32         Depth           = 50;
+    uint32_t    Width           = 1024;
+    uint32_t    Height          = 512;
+    uint32_t    NumberOfSamples = 32;
+    uint32_t    Depth           = 50;
     bool        ShowHelp        = false;
     std::string OutputPath      = "rtk.png";
 };

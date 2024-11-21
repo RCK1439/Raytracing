@@ -12,8 +12,10 @@ int main(int argc, char* argv[])
 {
     std::vector<std::string> args;
 
-    for (s32 i = 1; i < argc; i++)
+    for (int32_t i = 1; i < argc; i++)
+    {
         args.emplace_back(argv[i]);
+    }
 
     Arguments settings = ArgumentParser::Parse(args);
     if (settings.ShowHelp)
@@ -42,7 +44,7 @@ int main(int argc, char* argv[])
         { 0.0f, 0.0f, 0.0f },
         { 0.0f, 1.0f, 0.0f },
         20.0f,
-        static_cast<f32>(settings.Width) / static_cast<f32>(settings.Height),
+        static_cast<float>(settings.Width) / static_cast<float>(settings.Height),
         0.1f,
         10.0f
     );
