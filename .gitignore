@@ -1,9 +1,6 @@
 # Directories
-
-bin
-out
-.vscode
+bin/
+out/
 
 # Files
-
 *.png

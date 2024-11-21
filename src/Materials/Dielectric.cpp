@@ -1,64 +1,10 @@
-/**
- * Ruan C. Keet (2023)
- * Materials.cpp
-*/
-
-#include "Materials.hpp"
-
+#include "Dielectric.hpp"
 #include "Random.hpp"
 
-#include <glm/geometric.hpp>
-
-#include <algorithm>
+#include <glm/glm.hpp>
 
 namespace rt
-{
-    
-//  ==================================================
-//  Lambertian
-//  ==================================================
-
-    Lambertian::Lambertian(const glm::vec3& albedo) :
-        m_Albedo(albedo, 1.0f)
-    {
-    }
-
-    bool Lambertian::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
-    {
-        const glm::vec3 target = record.Point + record.Normal + Random::InUnitSphere();
-        scattered = { record.Point, target - record.Point };
-        attenuation = m_Albedo;
-
-        return true;
-    }
-
-//  ==================================================
-//  Metal
-//  ==================================================
-
-    Metal::Metal(const glm::vec3& albedo, f32 fuzz) :
-        m_Albedo(albedo, 1.0f), m_Fuzz(std::clamp(fuzz, 0.0f, 1.0f))
-    {
-    }
-
-    bool Metal::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
-    {
-        const glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
-        scattered = { record.Point, reflected + m_Fuzz * Random::InUnitSphere() };
-        attenuation = m_Albedo;
-
-        return glm::dot(scattered.Direction, record.Normal) > 0.0f;
-    }
-
-//  ==================================================
-//  Dielectric
-//  ==================================================
-
-    Dielectric::Dielectric(f32 refractiveIndex) :
-        m_RefractiveIndex(refractiveIndex)
-    {
-    }
-
+{ 
     bool Dielectric::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
     {
         glm::vec3 outwardNormal;
@@ -113,5 +59,4 @@ namespace rt
 
         return r0 + (1.0f - r0) * glm::pow((1 - cosine), 5);
     }
-    
 }

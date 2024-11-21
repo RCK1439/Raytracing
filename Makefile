@@ -1,4 +1,4 @@
-CXX = g++
+CXX = c++
 
 CFLAGS = -Wall -Werror -Wpedantic -msse4.1 -mpclmul -std=c++23 -fopenmp -fno-exceptions
 ifeq ($(MAKECMDGOALS), release)
@@ -7,12 +7,14 @@ endif
 
 SRC_DIR = src
 BIN_DIR = bin
+
+MATERIALS_DIR = src/Materials
 FPNG_DIR = vendor/fpng
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp $(FPNG_DIR)/*.cpp)
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp $(FPNG_DIR)/*.cpp $(MATERIALS_DIR)/*.cpp)
 OBJ_FILES = $(patsubst %.cpp, $(BIN_DIR)/%.o, $(SRC_FILES))
 
-INCL = -Ivendor/fpng -Ivendor/glm
+INCL = -Isrc -Ivendor/fpng -Ivendor/glm
 
 TARGET = $(BIN_DIR)/rtk
 

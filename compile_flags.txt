@@ -6,5 +6,6 @@
 -mpclmul
 -std=c++23
 
+-Isrc/
 -Ivendor/fpng
 -Ivendor/glm

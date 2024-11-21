@@ -1,8 +1,3 @@
-/**
- * Ruan C. Keet (2023)
- * Timer.cpp
-*/
-
 #include "Timer.hpp"
 
 #include "Types.hpp"

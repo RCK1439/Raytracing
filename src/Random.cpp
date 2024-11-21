@@ -1,8 +1,3 @@
-/**
- * Ruan C. Keet (2023)
- * Random.cpp
-*/
-
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>

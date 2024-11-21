@@ -1,21 +1,9 @@
-/**
- * Ruan C. Keet (2023)
- * Sphere.cpp
-*/
-
 #include "Sphere.hpp"
-
-#include "Material.hpp"
 
 #include <glm/geometric.hpp>
 
 namespace rt
 {
-    Sphere::Sphere(const glm::vec3& position, f32 radius, Material* material) :
-        m_Centre(position), m_Radius(radius), m_Material(material)
-    {    
-    }
-
     bool Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
     {
         const glm::vec3 displacement = ray.Origin - m_Centre;

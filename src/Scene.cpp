@@ -1,24 +1,13 @@
-/**
- * Ruan C. Keet (2023)
- * Scene.cpp
-*/
-
 #include "Scene.hpp"
 
-#include "Materials.hpp"
+#include "Materials/Materials.hpp"
+
 #include "Random.hpp"
 
 namespace rt
 {
     constexpr f32 RADIUS = 0.2f;
 
-    /**
-     * \brief Creates a sphere with a lambertian material.
-     * 
-     * \param position  The position to make the sphere at.
-     * 
-     * \return The newly created sphere
-    */
     inline static Sphere CreateMatteSphere(const glm::vec3& position)
     {
         return Sphere(position, RADIUS, new Lambertian(
@@ -29,13 +18,6 @@ namespace rt
         }));
     }
 
-    /**
-     * \brief Creates a sphere with a metal material.
-     * 
-     * \param position  The position to make the sphere at.
-     * 
-     * \return The newly created sphere
-    */
     inline static Sphere CreateMetalSphere(const glm::vec3& position)
     {
         return Sphere(position, 0.2f, new Metal(
@@ -46,13 +28,6 @@ namespace rt
         },  0.5f * (1.0f + Random::Float())));
     }
 
-    /**
-     * \brief Creates a sphere with a dielectric material.
-     * 
-     * \param position  The position to make the sphere at.
-     * 
-     * \return The newly created sphere
-    */
     inline static Sphere CreateDielectricSphere(const glm::vec3& position)
     {
         return Sphere(position, 0.2f, new Dielectric(1.5f));

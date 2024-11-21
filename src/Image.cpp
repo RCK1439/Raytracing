@@ -1,8 +1,3 @@
-/**
- * Ruan C. Keet (2023)
- * Image.cpp
-*/
-
 #include "Image.hpp"
 
 #include <fpng.h>
@@ -64,15 +59,6 @@ namespace rt
         SetColorRGBA(x, y, r, g, b, a); 
     }
 
-    /**
-     * \brief Copies a vertically flipped version of the image to the destination
-     * memory.
-     * 
-     * \param src       The data to copy.
-     * \param dest      The memory to copy to.
-     * \param width     The width of the image.
-     * \param height    The height of the image.
-    */
     static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 height)
     {
         u32 i = 0;

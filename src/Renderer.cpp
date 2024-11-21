@@ -6,7 +6,7 @@
 #include "Renderer.hpp"
 
 #include "Image.hpp"
-#include "Material.hpp"
+#include "Materials/Material.hpp"
 #include "Random.hpp"
 
 #include <glm/geometric.hpp>
