@@ -1,4 +1,5 @@
 #include "Sphere.hpp"
+#include "Materials/HitRecord.hpp"
 
 #include <glm/geometric.hpp>
 

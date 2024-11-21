@@ -11,38 +11,41 @@ This project is an implementation and follow through of the [Ray Tracing in a We
 ```
 Raytracing/
 ├── resources/
-│   └── rtk.png
+│   └── rtk.png
 ├── src/
-│   ├── Materials/
-│   │   ├── Dielectric.cpp
-│   │   ├── Dielectric.hpp
-│   │   ├── Lambertian.cpp
-│   │   ├── Lambertian.hpp
-│   │   ├── Material.hpp
-│   │   ├── Materials.hpp
-│   │   ├── Metal.cpp
-│   │   └── Metal.hpp
-│   ├── ArgumentParser.cpp
-│   ├── ArgumentParser.hpp
-│   ├── Camera.cpp
-│   ├── Camera.hpp
-│   ├── EntryPoint.cpp
-│   ├── Image.cpp
-│   ├── Image.hpp
-│   ├── Random.cpp
-│   ├── Random.hpp
-│   ├── Renderer.cpp
-│   ├── Renderer.hpp
-│   ├── Scene.cpp
-│   ├── Scene.hpp
-│   ├── Sphere.cpp
-│   ├── Sphere.hpp
-│   ├── Timer.cpp
-│   ├── Timer.hpp
-│   └── Types.hpp
+│   ├── Renderer/
+│   │   ├── Image.cpp
+│   │   ├── Image.hpp
+│   │   ├── Ray.hpp
+│   │   ├── Renderer.cpp
+│   │   └── Renderer.hpp
+│   ├── Scene/
+│   │   ├── Materials/
+│   │   │   ├── Dielectric.cpp
+│   │   │   ├── Dielectric.hpp
+│   │   │   ├── HitRecord.hpp
+│   │   │   ├── Lambertian.cpp
+│   │   │   ├── Lambertian.hpp
+│   │   │   ├── Material.hpp
+│   │   │   ├── Materials.hpp
+│   │   │   ├── Metal.cpp
+│   │   │   └── Metal.hpp
+│   │   ├── Camera.cpp
+│   │   ├── Camera.hpp
+│   │   ├── Scene.cpp
+│   │   ├── Scene.hpp
+│   │   ├── Sphere.cpp
+│   │   └── Sphere.hpp
+│   ├── ArgumentParser.cpp
+│   ├── ArgumentParser.hpp
+│   ├── EntryPoint.cpp
+│   ├── Random.cpp
+│   ├── Random.hpp
+│   ├── Timer.cpp
+│   └── Timer.hpp
 ├── vendor/
-│   ├── fpng/
-│   └── glm/
+│   ├── fpng/
+│   └── glm/
 ├── compile_flags.txt
 ├── Makefile
 └── README.md

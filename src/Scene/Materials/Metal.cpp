@@ -1,7 +1,9 @@
 #include "Metal.hpp"
+#include "HitRecord.hpp"
 #include "Random.hpp"
 
-#include <glm/glm.hpp>
+#include <glm/vec3.hpp>
+#include <glm/geometric.hpp>
 
 namespace rt
 {

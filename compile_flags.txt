@@ -2,6 +2,7 @@
 -Werror
 -Wpedantic
 -fopenmp
+-fno-exceptions
 -msse4.1
 -mpclmul
 -std=c++23

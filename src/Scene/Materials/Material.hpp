@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Types.hpp"
+#include "Renderer/Ray.hpp"
 
 #include <glm/vec4.hpp>
 
 namespace rt
 {
     struct HitRecord;
-     
+
     class Material
     {
     public: 

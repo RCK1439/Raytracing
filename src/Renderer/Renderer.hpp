@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Camera.hpp"
-#include "Types.hpp"
-#include "Scene.hpp"
+#include "Scene/Camera.hpp"
+#include "Scene/Scene.hpp"
 
 #include <glm/vec4.hpp>
 

@@ -2,6 +2,8 @@
 
 #include "Material.hpp"
 
+#include <algorithm>
+
 namespace rt
 {
     class Metal final : public Material

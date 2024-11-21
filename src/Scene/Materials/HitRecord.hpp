@@ -15,12 +15,4 @@ namespace rt
         glm::vec3                 Normal;
         std::shared_ptr<Material> Mat;
     };
-
-    struct Ray
-    {
-        glm::vec3 Origin;
-        glm::vec3 Direction;
-
-        inline glm::vec3 PointAt(float t) const { return Origin + t * Direction; }
-    };
 }

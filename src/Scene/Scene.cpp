@@ -1,6 +1,7 @@
 #include "Scene.hpp"
 #include "Random.hpp"
 #include "Materials/Materials.hpp"
+#include "Materials/HitRecord.hpp"
 
 namespace rt
 {

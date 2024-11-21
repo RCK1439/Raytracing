@@ -8,10 +8,12 @@ endif
 SRC_DIR = src
 BIN_DIR = bin
 
-MATERIALS_DIR = src/Materials
+RENDERER_DIR = $(SRC_DIR)/Renderer
+SCENE_DIR = $(SRC_DIR)/Scene
+MATERIALS_DIR = $(SCENE_DIR)/Materials
 FPNG_DIR = vendor/fpng
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp $(FPNG_DIR)/*.cpp $(MATERIALS_DIR)/*.cpp)
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp $(RENDERER_DIR)/*.cpp $(SCENE_DIR)/*.cpp $(MATERIALS_DIR)/*.cpp $(FPNG_DIR)/*.cpp)
 OBJ_FILES = $(patsubst %.cpp, $(BIN_DIR)/%.o, $(SRC_FILES))
 
 INCL = -Isrc -Ivendor/fpng -Ivendor/glm

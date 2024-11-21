@@ -1,4 +1,5 @@
 #include "Lambertian.hpp"
+#include "HitRecord.hpp"
 #include "Random.hpp"
 
 namespace rt

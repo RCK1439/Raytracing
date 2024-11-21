@@ -1,7 +1,8 @@
 #include "Renderer.hpp"
 #include "Image.hpp"
-#include "Materials/Material.hpp"
 #include "Random.hpp"
+#include "Scene/Materials/Material.hpp"
+#include "Scene/Materials/HitRecord.hpp"
 
 #include <glm/geometric.hpp>
 #include <omp.h>
