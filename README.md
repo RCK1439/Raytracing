@@ -4,7 +4,51 @@ This project is an implementation and follow through of the [Ray Tracing in a We
 
 ![image](resources/rtk.png "Ran with arguments '-s 1920 1080 -a 256 -d 8'")
 
-## Build
+## Getting Started
+
+### Project Setup
+
+```
+Raytracing/
+├── resources/
+│   └── rtk.png
+├── src/
+│   ├── Materials/
+│   │   ├── Dielectric.cpp
+│   │   ├── Dielectric.hpp
+│   │   ├── Lambertian.cpp
+│   │   ├── Lambertian.hpp
+│   │   ├── Material.hpp
+│   │   ├── Materials.hpp
+│   │   ├── Metal.cpp
+│   │   └── Metal.hpp
+│   ├── ArgumentParser.cpp
+│   ├── ArgumentParser.hpp
+│   ├── Camera.cpp
+│   ├── Camera.hpp
+│   ├── EntryPoint.cpp
+│   ├── Image.cpp
+│   ├── Image.hpp
+│   ├── Random.cpp
+│   ├── Random.hpp
+│   ├── Renderer.cpp
+│   ├── Renderer.hpp
+│   ├── Scene.cpp
+│   ├── Scene.hpp
+│   ├── Sphere.cpp
+│   ├── Sphere.hpp
+│   ├── Timer.cpp
+│   ├── Timer.hpp
+│   └── Types.hpp
+├── vendor/
+│   ├── fpng/
+│   └── glm/
+├── compile_flags.txt
+├── Makefile
+└── README.md
+```
+
+### Building
 
 1. Clone the project to the directory of choice:
 ```bash
@@ -16,14 +60,14 @@ git clone https://github.com/RCK1439/Raytracing.git
 make release
 ```
 
-## Running
+### Running
 
 Running the program is quite simple; simply execute the following in the project root directory:
 ```bash
 ./bin/rtk
 ```
 
-### Additional arguments
+#### Additional arguments
 
  - ```-s``` or ```-S```: This specifies the resolution of the image to output. (e.g. ```-s 1280 720```)
  - ```-a``` or ```-A```: This specifies the anti-aliasing number of samples. (e.g. ```-a 32```)
