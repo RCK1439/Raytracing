@@ -13,14 +13,18 @@ Raytracing/
 ├── resources/
 │   └── rtk.png
 ├── src/
-│   ├── Renderer/
+│   ├── Error/ <----------------------- Error module
+│   │   └── BaseError.hpp
+│   ├── Renderer/ <-------------------- The rendering and graphics module
+│   │   ├── Error.cpp
+│   │   ├── Error.hpp
 │   │   ├── Image.cpp
 │   │   ├── Image.hpp
 │   │   ├── Ray.hpp
 │   │   ├── Renderer.cpp
 │   │   └── Renderer.hpp
-│   ├── Scene/
-│   │   ├── Materials/
+│   ├── Scene/ <----------------------- Scene and related modules
+│   │   ├── Materials/ <--------------- Different materials to be used in scenes
 │   │   │   ├── Dielectric.cpp
 │   │   │   ├── Dielectric.hpp
 │   │   │   ├── HitRecord.hpp
@@ -36,14 +40,14 @@ Raytracing/
 │   │   ├── Scene.hpp
 │   │   ├── Sphere.cpp
 │   │   └── Sphere.hpp
-│   ├── ArgumentParser.cpp
-│   ├── ArgumentParser.hpp
-│   ├── EntryPoint.cpp
+│   ├── Config.cpp
+│   ├── Config.hpp
+│   ├── EntryPoint.cpp <--------------- Main function lives here
 │   ├── Random.cpp
 │   ├── Random.hpp
 │   ├── Timer.cpp
 │   └── Timer.hpp
-├── vendor/
+├── vendor/ <-------------------------- This is where we put out libraries
 │   ├── fpng/
 │   └── glm/
 ├── compile_flags.txt
