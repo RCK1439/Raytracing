@@ -47,7 +47,7 @@ Raytracing/
 │   ├── Random.hpp
 │   ├── Timer.cpp
 │   └── Timer.hpp
-├── vendor/ <-------------------------- This is where we put out libraries
+├── vendor/ <-------------------------- This is where we put our libraries
 │   ├── fpng/
 │   └── glm/
 ├── compile_flags.txt
