@@ -33,9 +33,9 @@ namespace rt
         s_Data.NumSamples   = numSamples;
     }
 
-    void Renderer::Export(std::string_view filepath)
+    std::expected<void, RendererError> Renderer::Export(std::string_view filepath)
     {
-        s_Data.Img.Save(filepath);
+        return s_Data.Img.Save(filepath);
     }
 
     void Renderer::Render(const Scene& scene, const Camera& camera)

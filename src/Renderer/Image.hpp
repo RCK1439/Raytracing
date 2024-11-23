@@ -1,7 +1,10 @@
 #pragma once
 
+#include "Error.hpp"
+
 #include <glm/vec4.hpp>
 
+#include <expected>
 #include <string_view>
 
 namespace rt
@@ -24,7 +27,7 @@ namespace rt
         void SetColorRGBA(uint32_t x, uint32_t y, uint8_t r, uint8_t g, uint8_t b, uint8_t a = 0xFF);
         void SetColor(uint32_t x, uint32_t y, const glm::vec4& color);
 
-        void Save(std::string_view filepath) const;
+        std::expected<void, RendererError> Save(std::string_view filepath) const;
 
     private:
         uint32_t* m_Data = nullptr;

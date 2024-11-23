@@ -14,7 +14,7 @@ int32_t main(int32_t argc, char* argv[])
     if (!parsed.has_value())
     {
         const ConfigError err = parsed.error();
-        std::println("{}: {}", argv[0], err.What());
+        std::println("{}", err.What());
 
         return EXIT_FAILURE;
     }
@@ -54,5 +54,12 @@ int32_t main(int32_t argc, char* argv[])
     rt::Renderer::Render(scene, camera);
     timer.Stop();
 
-    rt::Renderer::Export(cfg.OutputPath);
+    const auto result = rt::Renderer::Export(cfg.OutputPath);
+    if (!result)
+    {
+        const rt::RendererError err = result.error();
+        
+        std::println("{}", err.What());
+        return EXIT_FAILURE;
+    }
 }

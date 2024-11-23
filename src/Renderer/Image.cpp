@@ -1,4 +1,5 @@
 #include "Image.hpp"
+#include "Renderer/Error.hpp"
 
 #include <fpng.h>
 
@@ -61,23 +62,20 @@ namespace rt
         SetColorRGBA(x, y, r, g, b, a); 
     }
 
-    void Image::Save(std::string_view filepath) const
+    std::expected<void, RendererError> Image::Save(std::string_view filepath) const
     {
         fpng::fpng_init();
 
         uint32_t* const flipped = new uint32_t[m_Width * m_Height];
         ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
 
-        if (fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
+        if (!fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
         {
-            std::println("Successfully saved image: {}", filepath);
-        }
-        else
-        {
-            std::println("Failed to save image: {}", filepath);
+            return std::unexpected(RendererError(RendererError::Type::FAILED_TO_SAVE_IMAGE, filepath));
         }
 
         delete[] flipped;
+        return {};
     }
 
     static void ImgCpyFlipped(const uint32_t* const src, uint32_t* const dest, uint32_t width, uint32_t height)

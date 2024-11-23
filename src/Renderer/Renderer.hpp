@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Error.hpp"
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"
 
 #include <glm/vec4.hpp>
 
+#include <expected>
 #include <string_view>
 
 namespace rt
@@ -14,7 +16,7 @@ namespace rt
     public:
         static void Init(uint32_t width, uint32_t height, uint32_t numSamples, uint32_t depth);
 
-        static void Export(std::string_view filepath);
+        static std::expected<void, RendererError> Export(std::string_view filepath);
 
         static void Render(const Scene& scene, const Camera& camera);
 
