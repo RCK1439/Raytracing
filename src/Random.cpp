@@ -13,7 +13,7 @@ namespace rt
         std::uniform_real_distribution<float> Distribution;
     };
 
-    static RandomData s_Data;
+    static thread_local RandomData s_Data;
 
     void Random::Init()
     {
