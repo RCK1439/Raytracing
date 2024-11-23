@@ -3,10 +3,12 @@
 #include <fpng.h>
 
 #include <cassert>
-#include <iostream>
+#include <print>
 
 namespace rt
 {
+    static void ImgCpyFlipped(const uint32_t* const src, uint32_t* const dest, uint32_t width, uint32_t height);
+
     Image::Image(uint32_t width, uint32_t height) :
         m_Width(width), m_Height(height), m_Channels(0)
     {
@@ -59,6 +61,25 @@ namespace rt
         SetColorRGBA(x, y, r, g, b, a); 
     }
 
+    void Image::Save(std::string_view filepath) const
+    {
+        fpng::fpng_init();
+
+        uint32_t* const flipped = new uint32_t[m_Width * m_Height];
+        ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
+
+        if (fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
+        {
+            std::println("Successfully saved image: {}", filepath);
+        }
+        else
+        {
+            std::println("Failed to save image: {}", filepath);
+        }
+
+        delete[] flipped;
+    }
+
     static void ImgCpyFlipped(const uint32_t* const src, uint32_t* const dest, uint32_t width, uint32_t height)
     {
         uint32_t i = 0;
@@ -75,21 +96,5 @@ namespace rt
         {
             dest[i++] = src[x];
         }
-    }
-
-    void Image::Save(std::string_view filepath) const
-    {
-        fpng::fpng_init();
-
-        uint32_t* const flipped = new uint32_t[m_Width * m_Height];
-        ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
-
-        if (fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
-        {
-            std::cout << "Successfully saved image: " << filepath << std::endl;
-        }
-        else std::cout << "Failed to save image: " << filepath << std::endl;
-
-        delete[] flipped;
     }
 }

@@ -5,7 +5,7 @@
 #include "Scene/Scene.hpp"
 
 #include <cstdlib>
-#include <iostream>
+#include <print>
 #include <string>
 #include <vector>
 
@@ -20,20 +20,20 @@ int main(int argc, char* argv[])
     const Arguments settings = ArgumentParser::Parse(args);
     if (settings.ShowHelp)
     {
-        std::cout << "-s or -S: Size of output image.            (e.g. -s 1280 720)\n";
-        std::cout << "-a or -A: Number of anti-aliasing samples. (e.g. -a 32)\n";
-        std::cout << "-d or -D: Depth of ray bounces.            (e.g. -d 8)\n";
-        std::cout << "-o:       Output path for rendered image.  (e.g. -o path/on/disk/name.png)\n";
-        std::cout << "-help:    Shows this dialog.               (e.g. -help)\n";
+        std::println("-s or -S: Size of output image.            (e.g. -s 1280 720)");
+        std::println("-a or -A: Number of anti-aliasing samples. (e.g. -a 32)");
+        std::println("-d or -D: Depth of ray bounces.            (e.g. -d 8)");
+        std::println("-o:       Output path for rendered image.  (e.g. -o path/on/disk/name.png)");
+        std::println("-help:    Shows this dialog.               (e.g. -help)");
 
         return EXIT_SUCCESS;
     }
 
     rt::Renderer::Init(settings.Width, settings.Height, settings.NumberOfSamples, settings.Depth);
 
-    std::cout << "Dimensions: " << settings.Width << "x" << settings.Height << '\n';
-    std::cout << "Anti-aliasing samples: " << settings.NumberOfSamples << '\n';
-    std::cout << "Maximum bounce depth: " << settings.Depth << '\n';
+    std::println("Dimensions: {}x{}", settings.Width, settings.Height);
+    std::println("Anti-aliasing samples: {}", settings.NumberOfSamples);
+    std::println("Maximum bounce depth: {}", settings.Depth);
 
     Timer timer;
 
