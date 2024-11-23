@@ -1,24 +1,26 @@
-#include "ArgumentParser.hpp"
+#include "Config.hpp"
 #include "Timer.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"
 
 #include <cstdlib>
+#include <expected>
 #include <print>
-#include <string>
-#include <vector>
 
-int main(int argc, char* argv[])
+int32_t main(int32_t argc, char* argv[])
 {
-    std::vector<std::string> args;
-    for (int32_t i = 1; i < argc; i++)
+    const auto parsed = Config::FromArgs(argc, argv);
+    if (!parsed.has_value())
     {
-        args.emplace_back(argv[i]);
+        const ConfigError err = parsed.error();
+        std::println("{}: {}", argv[0], err.What());
+
+        return EXIT_FAILURE;
     }
 
-    const Arguments settings = ArgumentParser::Parse(args);
-    if (settings.ShowHelp)
+    const Config cfg = parsed.value();
+    if (cfg.ShowHelp)
     {
         std::println("-s or -S: Size of output image.            (e.g. -s 1280 720)");
         std::println("-a or -A: Number of anti-aliasing samples. (e.g. -a 32)");
@@ -29,11 +31,11 @@ int main(int argc, char* argv[])
         return EXIT_SUCCESS;
     }
 
-    rt::Renderer::Init(settings.Width, settings.Height, settings.NumberOfSamples, settings.Depth);
+    rt::Renderer::Init(cfg.Width, cfg.Height, cfg.NumberOfSamples, cfg.Depth);
 
-    std::println("Dimensions: {}x{}", settings.Width, settings.Height);
-    std::println("Anti-aliasing samples: {}", settings.NumberOfSamples);
-    std::println("Maximum bounce depth: {}", settings.Depth);
+    std::println("Dimensions: {}x{}", cfg.Width, cfg.Height);
+    std::println("Anti-aliasing samples: {}", cfg.NumberOfSamples);
+    std::println("Maximum bounce depth: {}", cfg.Depth);
 
     Timer timer;
 
@@ -43,7 +45,7 @@ int main(int argc, char* argv[])
         { 0.0f, 0.0f, 0.0f },
         { 0.0f, 1.0f, 0.0f },
         20.0f,
-        static_cast<float>(settings.Width) / static_cast<float>(settings.Height),
+        static_cast<float>(cfg.Width) / static_cast<float>(cfg.Height),
         0.1f,
         10.0f
     );
@@ -52,5 +54,5 @@ int main(int argc, char* argv[])
     rt::Renderer::Render(scene, camera);
     timer.Stop();
 
-    rt::Renderer::Export(settings.OutputPath);
+    rt::Renderer::Export(cfg.OutputPath);
 }
