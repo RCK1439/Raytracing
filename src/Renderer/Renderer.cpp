@@ -40,21 +40,19 @@ namespace rt
 
     void Renderer::Render(const Scene& scene, const Camera& camera)
     {
-        const uint32_t width  = s_Data.Img.GetWidth();
-        const uint32_t height = s_Data.Img.GetHeight();
+        const uint32_t width = s_Data.Img.GetWidth();
 
-        #pragma omp parallel for collapse(2)
-        for (uint32_t y = 0; y < height; y++)
+        #pragma omp parallel for
+        for (uint32_t p = 0; p < s_Data.TotalPixels; p++)
         {
-            for (uint32_t x = 0; x < width; x++)
+            const uint32_t x = p % width;
+            const uint32_t y = p / width;
+            PerPixel(x, y, scene, camera);
+            
+            #pragma omp critical
             {
-                PerPixel(x, y, scene, camera);
-
-                #pragma omp critical
-                {
-                    ++s_Data.CurrentPixel;
-                    ShowProgressBar();
-                }
+                ++s_Data.CurrentPixel;
+                ShowProgressBar();
             }
         }
 
