@@ -11,7 +11,7 @@
 
 namespace rt
 {
-    class Renderer
+    class Renderer final
     {
     public:
         static void Init(uint32_t width, uint32_t height, uint32_t numSamples, uint32_t depth);

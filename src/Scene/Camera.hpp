@@ -4,7 +4,7 @@
 
 namespace rt
 { 
-    class Camera
+    class Camera final
     {
     public: 
         Camera(const glm::vec3& lookFrom, const glm::vec3& lookAt, const glm::vec3& vUP, float vFOV, float aspectRatio, float aperture, float focusDistance); 

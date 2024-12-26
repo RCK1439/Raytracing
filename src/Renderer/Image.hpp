@@ -9,7 +9,7 @@
 
 namespace rt
 { 
-    class Image
+    class Image final
     {
     public:
         Image() = default;

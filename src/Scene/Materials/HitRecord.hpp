@@ -8,11 +8,11 @@ namespace rt
 {
     class Material;
 
-    struct HitRecord
+    struct HitRecord final
     {
-        float                     t;
+        std::shared_ptr<Material> Mat;
         glm::vec3                 Point;
         glm::vec3                 Normal;
-        std::shared_ptr<Material> Mat;
+        float                     t;
     };
 }

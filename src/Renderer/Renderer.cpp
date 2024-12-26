@@ -12,7 +12,7 @@
 
 namespace rt
 {
-    struct RendererData
+    struct RendererData final
     {
         Image    Img;
         uint32_t MaxDepth;

@@ -8,7 +8,7 @@
 class ConfigError final : public BaseError
 {
 public:
-    enum class Type
+    enum class Type : uint8_t
     {
         INVALID_DIMENSIONS_FORMAT,
         INVALID_SAMPLES_FORMAT,
@@ -33,12 +33,12 @@ private:
 struct Config
 {
 public:
+    std::string OutputPath      = "rtk.png";
     uint32_t    Width           = 1024;
     uint32_t    Height          = 512;
     uint32_t    NumberOfSamples = 32;
     uint32_t    Depth           = 50;
     bool        ShowHelp        = false;
-    std::string OutputPath      = "rtk.png";
 
 public:
     static std::expected<Config, ConfigError> FromArgs(int32_t argc, char* argv[]);

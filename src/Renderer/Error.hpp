@@ -14,12 +14,12 @@ namespace rt
 
     public:
         RendererError(Type type, std::string_view detail) :
-            m_Type(type), m_Detail(detail) {}
+            m_Detail(detail), m_Type(type) {}
 
         std::string What() const override;
 
     private:
-        Type m_Type;
         std::string m_Detail;
+        Type m_Type;
     };
 }

@@ -6,7 +6,7 @@
 
 namespace rt
 {
-    struct RandomData
+    struct RandomData final
     {
         std::random_device                    RandomDevice;
         std::mt19937                          RandomEngine;
