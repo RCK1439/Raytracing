@@ -1,6 +1,7 @@
 # Directories
 bin/
 out/
+build/
 
 # Files
 *.o

@@ -8,12 +8,12 @@ namespace rt
 {
     struct RandomData final
     {
-        std::random_device                    RandomDevice;
-        std::mt19937                          RandomEngine;
-        std::uniform_real_distribution<float> Distribution;
+        std::random_device                    RandomDevice{};
+        std::mt19937                          RandomEngine{};
+        std::uniform_real_distribution<float> Distribution{};
     };
 
-    static thread_local RandomData s_Data;
+    static thread_local RandomData s_Data{};
 
     void Random::Init()
     {
@@ -28,7 +28,8 @@ namespace rt
 
     glm::vec3 Random::InUnitSphere()
     {
-        glm::vec3 point;
+        glm::vec3 point{};
+        
         do
         {
             point = 2.0f * glm::vec3(Float(), Float(), Float()) - glm::vec3(1.0f);
@@ -39,7 +40,8 @@ namespace rt
 
     glm::vec3 Random::InUnitDisk()
     {
-        glm::vec3 point;
+        glm::vec3 point{};
+
         do
         {
             point = 2.0f * glm::vec3(Float(), Float(), 0.0f) - glm::vec3(1.0f, 1.0f, 0.0f);

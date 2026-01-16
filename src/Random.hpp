@@ -4,7 +4,7 @@
 
 namespace rt
 {
-    class Random
+    class Random final
     {
     public: 
         static void Init();
