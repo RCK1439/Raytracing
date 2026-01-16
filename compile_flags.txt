@@ -8,5 +8,5 @@
 -std=c++23
 
 -Isrc/
--Ivendor/fpng
--Ivendor/glm
+-Ivendor/fpng/
+-Ivendor/glm/

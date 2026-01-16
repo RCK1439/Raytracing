@@ -105,7 +105,7 @@ namespace rt
         constexpr uint32_t BAR_WIDTH = 50;
 
         const float progress = static_cast<float>(s_Data.CurrentPixel) / static_cast<float>(s_Data.TotalPixels);
-        const uint32_t pos = BAR_WIDTH * progress;
+        const uint32_t pos = static_cast<uint32_t>(static_cast<float>(BAR_WIDTH) * progress);
 
         std::cout << "Renderering: [";
         for (uint32_t i = 0; i < BAR_WIDTH; i++) 

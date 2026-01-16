@@ -59,6 +59,6 @@ namespace rt
         float r0 = (1.0f - m_RefractiveIndex) / (1.0f + m_RefractiveIndex);
         r0 = r0 * r0;
 
-        return r0 + (1.0f - r0) * glm::pow((1 - cosine), 5);
+        return r0 + (1.0f - r0) * glm::pow((1.0f - cosine), 5.0f);
     }
 }

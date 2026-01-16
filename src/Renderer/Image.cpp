@@ -1,10 +1,9 @@
 #include "Image.hpp"
 #include "Renderer/Error.hpp"
 
-#include <fpng.h>
+#include <fpng.hpp>
 
 #include <cassert>
-#include <print>
 
 namespace rt
 {

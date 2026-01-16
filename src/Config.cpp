@@ -1,5 +1,6 @@
 #include "Config.hpp"
 
+#include <optional>
 #include <sstream>
 #include <vector>
 
