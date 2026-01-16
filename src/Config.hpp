@@ -1,14 +1,15 @@
 #pragma once
 
+#include "Types.hpp"
+
 #include "Error/BaseError.hpp"
 
-#include <cstdint>
-#include <expected>
+namespace rt {
 
 class ConfigError final : public BaseError
 {
 public:
-    enum class Type : uint8_t
+    enum class Type : u8
     {
         INVALID_DIMENSIONS_FORMAT,
         INVALID_SAMPLES_FORMAT,
@@ -27,19 +28,21 @@ public:
     std::string What() const override;
 
 private:
-    Type m_Type;
+    Type m_Type{};
 };
 
 struct Config
 {
 public:
-    std::string OutputPath      = "rtk.png";
-    uint32_t    Width           = 1024;
-    uint32_t    Height          = 512;
-    uint32_t    NumberOfSamples = 32;
-    uint32_t    Depth           = 50;
-    bool        ShowHelp        = false;
+    std::string OutputPath{"rtk.png"};
+    u32         Width{1024};
+    u32         Height{512};
+    u32         NumberOfSamples{32};
+    u32         Depth{50};
+    bool        ShowHelp{};
 
 public:
-    static std::expected<Config, ConfigError> FromArgs(int32_t argc, char* argv[]);
+    static Result<Config, ConfigError> FromArgs(i32 argc, char* argv[]);
 };
+
+}

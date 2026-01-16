@@ -1,28 +1,30 @@
 #pragma once
 
+#include "Types.hpp"
+
 #include "Error.hpp"
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"
 
 #include <glm/vec4.hpp>
 
-#include <expected>
 #include <string_view>
 
-namespace rt
+namespace rt {
+
+class Renderer final
 {
-    class Renderer final
-    {
-    public:
-        static void Init(uint32_t width, uint32_t height, uint32_t numSamples, uint32_t depth);
+public:
+    static void Init(u32 width, u32 height, u32 numSamples, u32 depth);
 
-        static std::expected<void, RendererError> Export(std::string_view filepath);
+    static Result<void, RendererError> Export(std::string_view filepath);
 
-        static void Render(const Scene& scene, const Camera& camera);
+    static void Render(const Scene& scene, const Camera& camera);
 
-    private:
-        static void PerPixel(uint32_t x, uint32_t y, const Scene& scene, const Camera& camera);
-        static glm::vec4 GetColor(const Ray& ray, const Scene& scene, uint32_t depth);
-        static void ShowProgressBar();
-    };
+private:
+    static void PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera);
+    static glm::vec4 GetColor(const Ray& ray, const Scene& scene, u32 depth);
+    static void ShowProgressBar();
+};
+
 }

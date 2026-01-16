@@ -4,17 +4,18 @@
 
 #include <vector>
 
-namespace rt
-{
-    class Scene final
-    {
-    public: 
-        Scene();
+namespace rt {
 
-        bool Hit(const Ray& ray, float tMin, float tMax, HitRecord& record) const;
-        void Add(Sphere&& obj);
+class Scene final
+{
+public: 
+    Scene();
+
+    bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const;
+    void Add(Sphere&& obj);
         
-    private:
-        std::vector<Sphere> m_Objects;
-    };
+private:
+    std::vector<Sphere> m_Objects;
+};
+
 }

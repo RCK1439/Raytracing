@@ -4,15 +4,16 @@
 
 #include <glm/vec4.hpp>
 
-namespace rt
+namespace rt {
+
+struct HitRecord;
+
+class Material
 {
-    struct HitRecord;
+public: 
+    virtual ~Material() = default;
 
-    class Material
-    {
-    public: 
-        virtual ~Material() = default;
+    virtual bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const = 0;
+};
 
-        virtual bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const = 0;
-    };
 }

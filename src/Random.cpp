@@ -8,9 +8,9 @@ namespace rt
 {
     struct RandomData final
     {
-        std::random_device                    RandomDevice{};
-        std::mt19937                          RandomEngine{};
-        std::uniform_real_distribution<float> Distribution{};
+        std::random_device                  RandomDevice{};
+        std::mt19937                        RandomEngine{};
+        std::uniform_real_distribution<f32> Distribution{};
     };
 
     static thread_local RandomData s_Data{};
@@ -18,10 +18,10 @@ namespace rt
     void Random::Init()
     {
         s_Data.RandomEngine = std::mt19937(s_Data.RandomDevice());
-        s_Data.Distribution = std::uniform_real_distribution<float>(0.0f, 1.0f);
+        s_Data.Distribution = std::uniform_real_distribution<f32>(0.0f, 1.0f);
     }
 
-    float Random::Float()
+    f32 Random::Float()
     {
         return s_Data.Distribution(s_Data.RandomEngine);
     }

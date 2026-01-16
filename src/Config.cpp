@@ -1,10 +1,11 @@
 #include "Config.hpp"
 
-#include <optional>
 #include <sstream>
 #include <vector>
 
-static constexpr std::optional<uint32_t> ParseNumber(std::string_view arg);
+namespace rt {
+
+static constexpr Option<u32> ParseNumber(std::string_view arg);
 static constexpr bool IsDigit(char ch);
 
 std::string ConfigError::What() const
@@ -42,42 +43,42 @@ std::string ConfigError::What() const
     return stream.str();
 }
 
-std::expected<Config, ConfigError> Config::FromArgs(int32_t argc, char* argv[])
+Result<Config, ConfigError> Config::FromArgs(i32 argc, char* argv[])
 {
-    std::vector<std::string> args;
-    for (int32_t i = 1; i < argc; i++)
+    std::vector<std::string> args{};
+    for (i32 i{1}; i < argc; i++)
     {
         args.emplace_back(argv[i]);
     }
 
-    const std::size_t numArgs = args.size();
+    const size_t numArgs = args.size();
 
-    Config cfg;
+    Config cfg{};
     if (numArgs == 0)
     {
         return cfg;
     }
 
-    std::size_t i = 0;
+    size_t i{};
     while (i < numArgs)
     {
         if (args[i] == "-s" || args[i] == "-S")
         {
             if (i + 2 >= numArgs)
             {
-                return std::unexpected(ConfigError::Type::INVALID_DIMENSIONS_FORMAT);
+                return Err(ConfigError::Type::INVALID_DIMENSIONS_FORMAT);
             }
 
             const auto width = ParseNumber(args[i + 1]);
             if (!width.has_value())
             {
-                return std::unexpected(ConfigError::Type::INVALID_WIDTH);
+                return Err(ConfigError::Type::INVALID_WIDTH);
             }
 
             const auto height = ParseNumber(args[i + 2]);
             if (!height.has_value())
             {
-                return std::unexpected(ConfigError::Type::INVALID_HEIGHT);
+                return Err(ConfigError::Type::INVALID_HEIGHT);
             }
 
             cfg.Width = width.value();
@@ -89,13 +90,13 @@ std::expected<Config, ConfigError> Config::FromArgs(int32_t argc, char* argv[])
         {
             if (i + 1 >= numArgs)
             {
-                return std::unexpected(ConfigError::Type::INVALID_SAMPLES_FORMAT);
+                return Err(ConfigError::Type::INVALID_SAMPLES_FORMAT);
             }
 
             const auto numSamples = ParseNumber(args[i + 1]);
             if (!numSamples.has_value())
             {
-                return std::unexpected(ConfigError::Type::INVALID_NUM_SAMPLES);
+                return Err(ConfigError::Type::INVALID_NUM_SAMPLES);
             }
 
             cfg.NumberOfSamples = numSamples.value();
@@ -106,13 +107,13 @@ std::expected<Config, ConfigError> Config::FromArgs(int32_t argc, char* argv[])
         {
             if (i + 1 >= numArgs)
             {
-                return std::unexpected(ConfigError::Type::INVALID_DEPTH_FORMAT);
+                return Err(ConfigError::Type::INVALID_DEPTH_FORMAT);
             }
 
             const auto depth = ParseNumber(args[i + 1]);
             if (!depth)
             {
-                return std::unexpected(ConfigError::Type::INVALID_DEPTH);
+                return Err(ConfigError::Type::INVALID_DEPTH);
             }
 
             cfg.Depth = depth.value();
@@ -123,7 +124,7 @@ std::expected<Config, ConfigError> Config::FromArgs(int32_t argc, char* argv[])
         {
             if (i + 1 >= numArgs)
             {
-                return std::unexpected(ConfigError::Type::INVALID_OUTPUT_FORMAT);
+                return Err(ConfigError::Type::INVALID_OUTPUT_FORMAT);
             }
 
             cfg.OutputPath = args[i + 1];
@@ -144,16 +145,16 @@ std::expected<Config, ConfigError> Config::FromArgs(int32_t argc, char* argv[])
     return cfg;
 }
 
-static constexpr std::optional<uint32_t> ParseNumber(std::string_view str)
+static constexpr Option<u32> ParseNumber(std::string_view str)
 {
     if (str[0] == '-')
     {
         return {};
     }
 
-    uint32_t num = 0;
+    uint32_t num{};
 
-    std::size_t i = 0;
+    std::size_t i{};
     while (i < str.size())
     {
         if (!IsDigit(str[i]))
@@ -170,4 +171,6 @@ static constexpr std::optional<uint32_t> ParseNumber(std::string_view str)
 static constexpr bool IsDigit(char ch)
 {
     return ch >= '0' && ch <= '9';
+}
+
 }

@@ -1,38 +1,40 @@
 #pragma once
 
+#include "Types.hpp"
+
 #include "Error.hpp"
 
 #include <glm/vec4.hpp>
 
-#include <expected>
 #include <string_view>
 
-namespace rt
-{ 
-    class Image final
-    {
-    public:
-        Image() = default;
-        Image(uint32_t width, uint32_t height); 
-        ~Image();
+namespace rt {
 
-        void Resize(uint32_t width, uint32_t height);
+class Image final
+{
+public:
+    Image() = default;
+    Image(u32 width, u32 height); 
+    ~Image();
 
-        uint32_t GetColor(uint32_t x, uint32_t y) const;
-        inline uint32_t GetWidth() const { return m_Width; }
-        inline uint32_t GetHeight() const { return m_Height; } 
-        inline uint32_t GetChannels() const { return m_Channels; }
+    void Resize(u32 width, u32 height);
 
-        void SetColorHex(uint32_t x, uint32_t y, uint32_t color);
-        void SetColorRGBA(uint32_t x, uint32_t y, uint8_t r, uint8_t g, uint8_t b, uint8_t a = 0xFF);
-        void SetColor(uint32_t x, uint32_t y, const glm::vec4& color);
+    u32 GetColor(u32 x, u32 y) const;
+    inline u32 GetWidth() const { return m_Width; }
+    inline u32 GetHeight() const { return m_Height; } 
+    inline u32 GetChannels() const { return m_Channels; }
 
-        std::expected<void, RendererError> Save(std::string_view filepath) const;
+    void SetColorHex(u32 x, u32 y, u32 color);
+    void SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a = 0xFF);
+    void SetColor(u32 x, u32 y, const glm::vec4& color);
 
-    private:
-        uint32_t* m_Data = nullptr;
-        uint32_t  m_Width = 0;
-        uint32_t  m_Height = 0;
-        uint32_t  m_Channels = 0;
-    };
+    Result<void, RendererError> Save(std::string_view filepath) const;
+
+private:
+    u32* m_Data{};
+    u32  m_Width{};
+    u32  m_Height{};
+    u32  m_Channels{};
+};
+
 }

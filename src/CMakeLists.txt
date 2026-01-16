@@ -39,6 +39,7 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/Config.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Random.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Timer.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Types.hpp
 )
 
 add_executable(rtk ${SOURCES} ${HEADERS})

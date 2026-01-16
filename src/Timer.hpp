@@ -2,6 +2,8 @@
 
 #include <chrono>
 
+namespace rt {
+
 class Timer final
 {
 public:
@@ -17,3 +19,5 @@ private:
     TimePoint m_Start{};
     TimePoint m_End{};
 };
+
+}

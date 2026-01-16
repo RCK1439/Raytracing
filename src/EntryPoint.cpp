@@ -5,21 +5,20 @@
 #include "Scene/Scene.hpp"
 
 #include <cstdlib>
-#include <expected>
 #include <print>
 
 int32_t main(int32_t argc, char* argv[])
 {
-    const auto parsed = Config::FromArgs(argc, argv);
+    const auto parsed = rt::Config::FromArgs(argc, argv);
     if (!parsed.has_value())
     {
-        const ConfigError err = parsed.error();
+        const rt::ConfigError err = parsed.error();
         std::println("{}", err.What());
 
         return EXIT_FAILURE;
     }
 
-    const Config cfg = parsed.value();
+    const rt::Config cfg = parsed.value();
     if (cfg.ShowHelp)
     {
         std::println("-s or -S: Size of output image.            (e.g. -s 1280 720)");
@@ -37,7 +36,7 @@ int32_t main(int32_t argc, char* argv[])
     std::println("Anti-aliasing samples: {}", cfg.NumberOfSamples);
     std::println("Maximum bounce depth: {}", cfg.Depth);
 
-    Timer timer;
+    rt::Timer timer;
 
     rt::Scene scene;
     rt::Camera camera(
