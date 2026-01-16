@@ -4,9 +4,8 @@
 
 #include "Error.hpp"
 
+#include <filesystem>
 #include <glm/vec4.hpp>
-
-#include <string_view>
 
 namespace rt {
 
@@ -28,7 +27,7 @@ public:
     void SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a = 0xFF);
     void SetColor(u32 x, u32 y, const glm::vec4& color);
 
-    Result<void, RendererError> Save(std::string_view filepath) const;
+    Result<void, RendererError> Save(std::filesystem::path path) const;
 
 private:
     u32* m_Data{};

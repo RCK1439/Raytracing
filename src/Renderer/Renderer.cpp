@@ -33,9 +33,9 @@ void Renderer::Init(u32 width, u32 height, u32 numSamples, u32 depth)
     s_Data.NumSamples = numSamples;
 }
 
-Result<void, RendererError> Renderer::Export(std::string_view filepath)
+Result<void, RendererError> Renderer::Export(std::filesystem::path outputPath)
 {
-    return s_Data.Img.Save(filepath);
+    return s_Data.Img.Save(outputPath);
 }
 
 void Renderer::Render(const Scene& scene, const Camera& camera)

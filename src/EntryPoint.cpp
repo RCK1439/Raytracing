@@ -10,11 +10,10 @@
 int main(int argc, char* argv[])
 {
     const auto parsed = rt::Config::FromArgs(argc, argv);
-    if (!parsed.has_value())
+    if (!parsed)
     {
         const rt::ConfigError err = parsed.error();
         std::println("{}", err.What());
-
         return EXIT_FAILURE;
     }
 
@@ -53,11 +52,9 @@ int main(int argc, char* argv[])
     rt::Renderer::Render(scene, camera);
     timer.Stop();
 
-    const auto result = rt::Renderer::Export(cfg.OutputPath);
-    if (!result)
+    if (const auto result = rt::Renderer::Export(cfg.OutputPath); !result.has_value())
     {
         const rt::RendererError err = result.error();
-        
         std::println("{}", err.What());
         return EXIT_FAILURE;
     }

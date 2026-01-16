@@ -8,7 +8,7 @@
 
 #include <glm/vec4.hpp>
 
-#include <string_view>
+#include <filesystem>
 
 namespace rt {
 
@@ -17,7 +17,7 @@ class Renderer final
 public:
     static void Init(u32 width, u32 height, u32 numSamples, u32 depth);
 
-    static Result<void, RendererError> Export(std::string_view filepath);
+    static Result<void, RendererError> Export(std::filesystem::path outputPath);
 
     static void Render(const Scene& scene, const Camera& camera);
 

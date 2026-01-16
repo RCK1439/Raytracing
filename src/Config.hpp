@@ -4,6 +4,8 @@
 
 #include "Error/BaseError.hpp"
 
+#include <filesystem>
+
 namespace rt {
 
 class ConfigError final : public BaseError
@@ -34,12 +36,12 @@ private:
 struct Config
 {
 public:
-    std::string OutputPath{"rtk.png"};
-    u32         Width{1024};
-    u32         Height{512};
-    u32         NumberOfSamples{32};
-    u32         Depth{50};
-    bool        ShowHelp{};
+    std::filesystem::path OutputPath{"rtk.png"};
+    u32                   Width{1024};
+    u32                   Height{512};
+    u32                   NumberOfSamples{32};
+    u32                   Depth{50};
+    bool                  ShowHelp{};
 
 public:
     static Result<Config, ConfigError> FromArgs(i32 argc, char* argv[]);
