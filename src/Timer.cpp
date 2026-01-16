@@ -8,22 +8,19 @@ static constexpr float HRS_TO_MIN = 60.0f;
 static constexpr float MIN_TO_SEC = 60.0f;
 static constexpr float SEC_TO_MS = 1000.0f;
 
-void Timer::Start()
+void Timer::Start() noexcept
 {
-    m_Start = std::chrono::high_resolution_clock::now();
+    m_Start = Clock::now();
 }
 
-void Timer::Stop()
+void Timer::Stop() noexcept
 {
-    m_End = std::chrono::high_resolution_clock::now();
-
-    const std::chrono::duration<float> duration = m_End - m_Start;
-        
-    float remainder;
+    m_End = Clock::now();
+    const Duration duration = m_End - m_Start;
 
     const float pHours = duration.count() * SEC_TO_HRS;
     const uint32_t rHours = static_cast<uint32_t>(pHours);
-    remainder = pHours - static_cast<float>(rHours);
+    float remainder = pHours - static_cast<float>(rHours);
 
     const float pMinutes = remainder * HRS_TO_MIN;
     const uint32_t rMinutes = static_cast<uint32_t>(pMinutes);

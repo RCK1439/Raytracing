@@ -5,10 +5,15 @@
 class Timer final
 {
 public:
-    void Start();
-    void Stop();
+    using Clock     = std::chrono::high_resolution_clock;
+    using Duration  = std::chrono::duration<float>;
+    using TimePoint = std::chrono::time_point<Clock, Duration>;
+
+public:
+    void Start() noexcept;
+    void Stop() noexcept;
     
 private:
-    std::chrono::time_point<std::chrono::high_resolution_clock> m_Start;
-    std::chrono::time_point<std::chrono::high_resolution_clock> m_End;
+    TimePoint m_Start{};
+    TimePoint m_End{};
 };
