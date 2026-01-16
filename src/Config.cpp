@@ -47,17 +47,13 @@ Result<Config, ConfigError> Config::FromArgs(i32 argc, char* argv[])
 {
     std::vector<std::string> args{};
     for (i32 i{1}; i < argc; i++)
-    {
         args.emplace_back(argv[i]);
-    }
 
     const size_t numArgs = args.size();
 
     Config cfg{};
     if (numArgs == 0)
-    {
         return cfg;
-    }
 
     size_t i{};
     while (i < numArgs)
@@ -65,67 +61,48 @@ Result<Config, ConfigError> Config::FromArgs(i32 argc, char* argv[])
         if (args[i] == "-s" || args[i] == "-S")
         {
             if (i + 2 >= numArgs)
-            {
                 return Err(ConfigError::Type::INVALID_DIMENSIONS_FORMAT);
-            }
 
-            const auto width = ParseNumber(args[i + 1]);
-            if (!width.has_value())
-            {
+            if (const auto width = ParseNumber(args[i+1]))
+                cfg.Width = width.value();
+            else
                 return Err(ConfigError::Type::INVALID_WIDTH);
-            }
 
-            const auto height = ParseNumber(args[i + 2]);
-            if (!height.has_value())
-            {
+            if (const auto height = ParseNumber(args[i+2]))
+                cfg.Height = height.value();
+            else
                 return Err(ConfigError::Type::INVALID_HEIGHT);
-            }
-
-            cfg.Width = width.value();
-            cfg.Height = height.value();
 
             i += 3;
         }
         else if (args[i] == "-a" || args[i] == "-A")
         {
             if (i + 1 >= numArgs)
-            {
                 return Err(ConfigError::Type::INVALID_SAMPLES_FORMAT);
-            }
 
-            const auto numSamples = ParseNumber(args[i + 1]);
-            if (!numSamples.has_value())
-            {
+            if (const auto numSamples = ParseNumber(args[i+1]))
+                cfg.NumberOfSamples = numSamples.value();
+            else
                 return Err(ConfigError::Type::INVALID_NUM_SAMPLES);
-            }
-
-            cfg.NumberOfSamples = numSamples.value();
 
             i += 2;
         }
         else if (args[i] == "-d" || args[i] == "-D")
         {
             if (i + 1 >= numArgs)
-            {
                 return Err(ConfigError::Type::INVALID_DEPTH_FORMAT);
-            }
 
-            const auto depth = ParseNumber(args[i + 1]);
-            if (!depth)
-            {
+            if (const auto depth = ParseNumber(args[i+1]))
+                cfg.Depth = depth.value();
+            else
                 return Err(ConfigError::Type::INVALID_DEPTH);
-            }
-
-            cfg.Depth = depth.value();
 
             i += 2;
         }
         else if (args[i] == "-o")
         {
             if (i + 1 >= numArgs)
-            {
                 return Err(ConfigError::Type::INVALID_OUTPUT_FORMAT);
-            }
 
             cfg.OutputPath = args[i + 1];
 
@@ -148,19 +125,15 @@ Result<Config, ConfigError> Config::FromArgs(i32 argc, char* argv[])
 static constexpr Option<u32> ParseNumber(std::string_view str)
 {
     if (str[0] == '-')
-    {
         return {};
-    }
 
-    uint32_t num{};
+    uint32_t num = 0;
 
-    std::size_t i{};
+    size_t i{};
     while (i < str.size())
     {
         if (!IsDigit(str[i]))
-        {
             return {};
-        }
 
         num = 10 * num + (str[i++] - '0');
     }

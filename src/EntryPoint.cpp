@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <print>
 
-int32_t main(int32_t argc, char* argv[])
+int main(int argc, char* argv[])
 {
     const auto parsed = rt::Config::FromArgs(argc, argv);
     if (!parsed.has_value())

@@ -65,9 +65,7 @@ Result<void, RendererError> Image::Save(std::string_view filepath) const
     ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
 
     if (!fpng::fpng_encode_image_to_file(filepath.data(), flipped, m_Width, m_Height, 4))
-    {
         return Err(RendererError(RendererError::Type::FAILED_TO_SAVE_IMAGE, filepath));
-    }
 
     delete[] flipped;
     return {};
@@ -77,18 +75,12 @@ static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 
 {
     u32 i{};
     for (u32 y = height - 1; y >= 1; y--)
-    {
         for (u32 x{}; x < width; x++)
-        {
             dest[i++] = src[x + y * width];
-        }
-    }
 
     // This copies the last horizontal line.
     for (u32 x{}; x < width; x++)
-    {
         dest[i++] = src[x];
-    }
 }
 
 }

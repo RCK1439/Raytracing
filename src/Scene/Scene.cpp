@@ -43,17 +43,11 @@ Scene::Scene() // This makes the default cover-page scene.
             const glm::vec3 center = { a + 0.9f * Random::Float(), 0.2f, b + 0.9f * Random::Float() };
 
             if (chooseMaterial < 0.80f)
-            {
                 m_Objects.emplace_back(CreateMatteSphere(center));
-            }
             else if (chooseMaterial < 0.95f)
-            {
                 m_Objects.emplace_back(CreateMetalSphere(center));
-            }
             else
-            {
                 m_Objects.emplace_back(CreateDielectricSphere(center));
-            }
         }
     }
 
