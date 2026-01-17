@@ -17,10 +17,10 @@ public:
     Sphere(const glm::vec3& position, f32 radius, Material* material) :
         m_Material(material), m_Centre(position), m_Radius(radius) {}
 
-    bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const;
+    Option<HitRecord> Hit(const Ray& ray, f32 tMin, f32 tMax) const;
 
 private:
-    bool CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp, HitRecord& record) const;
+    Option<HitRecord> CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp) const;
 
 private:
     std::shared_ptr<Material> m_Material{};

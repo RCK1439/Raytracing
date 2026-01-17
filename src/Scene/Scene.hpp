@@ -11,7 +11,7 @@ class Scene final
 public: 
     Scene();
 
-    bool Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const;
+    Option<HitRecord> Hit(const Ray& ray, f32 tMin, f32 tMax) const;
     void Add(Sphere&& obj);
         
 private:

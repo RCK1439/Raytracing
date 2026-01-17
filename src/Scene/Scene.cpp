@@ -56,23 +56,21 @@ Scene::Scene() // This makes the default cover-page scene.
     Add(Sphere({  4.0f, 1.0f, 0.0f},  1.0f, new Metal({ 0.7f, 0.6f, 0.5f }, 0.0f)));
 }
 
-bool Scene::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
+Option<HitRecord> Scene::Hit(const Ray& ray, f32 tMin, f32 tMax) const
 {
-    HitRecord tempRecord{};
+    Option<HitRecord> finalHit{};
 
-    bool hitAnything = false;
     f32 closest = tMax;
     for (const auto& obj : m_Objects)
     {
-        if (obj.Hit(ray, tMin, closest, tempRecord))
+        if (const auto hit = obj.Hit(ray, tMin, closest))
         {
-            hitAnything = true;
-            closest = tempRecord.t;
-            record = tempRecord;
+            closest = hit->t;
+            finalHit = hit.value();
         }
     }
 
-    return hitAnything;
+    return finalHit;
 }
 
 void Scene::Add(Sphere&& obj)

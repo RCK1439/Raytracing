@@ -5,7 +5,7 @@
 
 namespace rt {
 
-bool Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
+Option<HitRecord> Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax) const
 {
     const glm::vec3 displacement = ray.Origin - m_Centre;
 
@@ -16,25 +16,30 @@ bool Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax, HitRecord& record) const
     const f32 discriminant = b * b - a * c;
 
     if (discriminant < 0)
-        return false;
+        return {};
 
     const f32 root = sqrtf(discriminant);
 
-    return CheckRoot(ray, tMin, tMax, (-b - root) / a, record) || 
-            CheckRoot(ray, tMin, tMax, (-b + root) / a, record);
+    if (const auto pHit = CheckRoot(ray, tMin, tMax, (-b - root) / a))
+        return pHit.value();
+    else if (const auto nHit = CheckRoot(ray, tMin, tMax, (-b + root) / a))
+        return nHit.value();
+
+    return {};
 }
 
-bool Sphere::CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp, HitRecord& record) const
+Option<HitRecord> Sphere::CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp) const
 {
     if (temp >= tMax || temp <= tMin)
-        return false;
+        return {};
 
-    record.t = temp;
-    record.Point = ray.PointAt(temp);
-    record.Normal = (record.Point - m_Centre) / m_Radius;
-    record.Mat = m_Material;
-
-    return true;
+    const glm::vec3 point = ray.PointAt(temp);
+    return HitRecord {
+        .Mat = m_Material,
+        .Point = point,
+        .Normal = (point - m_Centre) / m_Radius,
+        .t = temp,
+    };
 }
 
 }

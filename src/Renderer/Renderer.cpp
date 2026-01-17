@@ -85,13 +85,14 @@ glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth)
     constexpr glm::vec4 BLUE  = { 0.5f, 0.7f, 1.0f, 1.0f };
     constexpr glm::vec4 WHITE = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-    HitRecord record{};
-    if (scene.Hit(ray, 0.0001f, std::numeric_limits<f32>::max(), record))
+    if (const auto hit = scene.Hit(ray, 0.0001f, std::numeric_limits<f32>::max()))
     {
+        const HitRecord record = hit.value();
         Ray scattered{};
         glm::vec4 attenuation{};
 
-        return depth < s_Data.MaxDepth && record.Mat->Scatter(ray, record, attenuation, scattered) ? attenuation * GetColor(scattered, scene, depth + 1) : BLACK;
+        return depth < s_Data.MaxDepth && record.Mat->Scatter(ray, record, attenuation, scattered) ?
+            attenuation * GetColor(scattered, scene, depth + 1) : BLACK;
     }
 
     const f32 t = 0.5f * ray.Direction.y + 1.0f;
