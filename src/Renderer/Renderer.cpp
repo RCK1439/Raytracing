@@ -5,7 +5,6 @@
 #include "Scene/Materials/HitRecord.hpp"
 
 #include <glm/geometric.hpp>
-#include <omp.h>
 
 #include <iostream>
 #include <iomanip>
@@ -42,18 +41,14 @@ void Renderer::Render(const Scene& scene, const Camera& camera)
 {
     const u32 width = s_Data.Img.GetWidth();
 
-    #pragma omp parallel for
-    for (u32 p = 0; p < s_Data.TotalPixels; p++)
+    for (u32 p{}; p < s_Data.TotalPixels; p++)
     {
         const u32 x = p % width;
         const u32 y = p / width;
         PerPixel(x, y, scene, camera);
-            
-        #pragma omp critical
-        {
-            ++s_Data.CurrentPixel;
-            ShowProgressBar();
-        }
+        
+        s_Data.CurrentPixel++;
+        ShowProgressBar();
     }
 
     std::cout << std::endl; // This is for the progress bar.
@@ -74,25 +69,25 @@ void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
     }
 
     color /= static_cast<f32>(s_Data.NumSamples);
-    const glm::vec4 gammaCorrected = { sqrtf(color.r), sqrtf(color.g), sqrtf(color.b), 1.0f };
+    const glm::vec4 gammaCorrected = glm::sqrt(color);
 
     s_Data.Img.SetColor(x, y, gammaCorrected); 
 }
 
 glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth)
-{   
+{
     constexpr glm::vec4 BLACK = { 0.0f, 0.0f, 0.0f, 1.0f };
     constexpr glm::vec4 BLUE  = { 0.5f, 0.7f, 1.0f, 1.0f };
     constexpr glm::vec4 WHITE = { 1.0f, 1.0f, 1.0f, 1.0f };
 
+    if (depth >= s_Data.MaxDepth)
+        return BLACK;
+
     if (const auto hit = scene.Hit(ray, 0.0001f, std::numeric_limits<f32>::max()))
     {
         const HitRecord record = hit.value();
-        Ray scattered{};
-        glm::vec4 attenuation{};
-
-        return depth < s_Data.MaxDepth && record.Mat->Scatter(ray, record, attenuation, scattered) ?
-            attenuation * GetColor(scattered, scene, depth + 1) : BLACK;
+        if (const auto data = record.Mat->Scatter(ray, record))
+            return data->Attenuation * GetColor(data->Scattered, scene, depth + 1);
     }
 
     const f32 t = 0.5f * ray.Direction.y + 1.0f;

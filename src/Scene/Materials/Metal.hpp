@@ -14,7 +14,7 @@ public:
     Metal(const glm::vec3& albedo, f32 fuzz) :
         m_Albedo(albedo, 1.0f), m_Fuzz(std::clamp(fuzz, 0.0f, 1.0f)) {}
 
-    bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const override;
+    Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const override;
 
 private:
     glm::vec4 m_Albedo{};

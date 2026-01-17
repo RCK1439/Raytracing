@@ -7,13 +7,16 @@
 
 namespace rt {
 
-bool Metal::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
+Option<ScatterData> Metal::Scatter(const Ray& ray, const HitRecord& record) const
 {
     const glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
-    scattered = { record.Point, reflected + m_Fuzz * Random::InUnitSphere() };
-    attenuation = m_Albedo;
+    const Ray scattered = { record.Point, reflected + m_Fuzz * Random::InUnitSphere() };
+    const glm::vec4 attenuation = m_Albedo;
 
-    return glm::dot(scattered.Direction, record.Normal) > 0.0f;
+    if (glm::dot(scattered.Direction, record.Normal) > 0.0f)
+        return ScatterData { scattered, attenuation };
+
+    return {};
 }
 
 }

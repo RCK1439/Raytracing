@@ -4,15 +4,15 @@
 
 namespace rt {
 
-bool Lambertian::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
+Option<ScatterData> Lambertian::Scatter(const Ray& ray, const HitRecord& record) const
 {
     (void)ray;
-    
-    const glm::vec3 target = record.Point + record.Normal + Random::InUnitSphere();
-    scattered = { record.Point, target - record.Point };
-    attenuation = m_Albedo;
 
-    return true;
+    const glm::vec3 target = record.Point + record.Normal + Random::InUnitSphere();
+    const Ray scattered = { record.Point, target - record.Point };
+    const glm::vec4 attenuation = m_Albedo;
+
+    return ScatterData { scattered, attenuation };
 }
 
 }

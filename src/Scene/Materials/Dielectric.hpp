@@ -12,7 +12,7 @@ public:
     Dielectric(f32 refractiveIndex) :
         m_RefractiveIndex(refractiveIndex) {}
 
-    bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const override;
+    Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const override;
 
 private: 
     bool Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const;

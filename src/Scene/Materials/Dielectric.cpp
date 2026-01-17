@@ -7,9 +7,9 @@
 
 namespace rt {
 
-bool Dielectric::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const
+Option<ScatterData> Dielectric::Scatter(const Ray& ray, const HitRecord& record) const
 {
-    glm::vec3 outwardNormal;
+    glm::vec3 outwardNormal{};
     glm::vec3 refracted = glm::vec3(0.0f);
     const glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
 
@@ -34,10 +34,10 @@ bool Dielectric::Scatter(const Ray& ray, const HitRecord& record, glm::vec4& att
 
     const f32 reflectProbability = Refract(ray.Direction, outwardNormal, niOverNT, refracted) ? Schlick(cosine) : 1.0f;
 
-    scattered = Random::Float() < reflectProbability ? Ray{ record.Point, reflected } : Ray{ record.Point, refracted };
-    attenuation = { 1.0f, 1.0f, 1.0f, 1.0f };
+    const Ray scattered = Random::Float() < reflectProbability ? Ray{ record.Point, reflected } : Ray{ record.Point, refracted };
+    const glm::vec4 attenuation = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-    return true;
+    return ScatterData { scattered, attenuation };
 }
 
 bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const

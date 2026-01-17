@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Renderer/Ray.hpp"
+#include "Types.hpp"
 
 #include <glm/vec4.hpp>
 
@@ -8,12 +9,18 @@ namespace rt {
 
 struct HitRecord;
 
+struct ScatterData
+{
+    Ray       Scattered;
+    glm::vec4 Attenuation;
+};
+
 class Material
 {
 public: 
     virtual ~Material() = default;
 
-    virtual bool Scatter(const Ray& ray, const HitRecord& record, glm::vec4& attenuation, Ray& scattered) const = 0;
+    virtual Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const = 0;
 };
 
 }
