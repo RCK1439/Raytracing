@@ -7,7 +7,6 @@
 #include <glm/geometric.hpp>
 
 #include <iostream>
-#include <iomanip>
 
 namespace rt {
 
@@ -15,7 +14,6 @@ struct RendererData final
 {
     Image Img{};
     u32   MaxDepth{};
-    u32   CurrentPixel{};
     u32   TotalPixels{};
     u32   NumSamples{};
 };
@@ -27,7 +25,6 @@ void Renderer::Init(u32 width, u32 height, u32 numSamples, u32 depth)
     s_Data.Img.Resize(width, height);
         
     s_Data.MaxDepth = depth;
-    s_Data.CurrentPixel = 0;
     s_Data.TotalPixels = width * height;
     s_Data.NumSamples = numSamples;
 }
@@ -46,9 +43,6 @@ void Renderer::Render(const Scene& scene, const Camera& camera)
         const u32 x = p % width;
         const u32 y = p / width;
         PerPixel(x, y, scene, camera);
-        
-        s_Data.CurrentPixel++;
-        ShowProgressBar();
     }
 
     std::cout << std::endl; // This is for the progress bar.
@@ -92,21 +86,6 @@ glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth)
 
     const f32 t = 0.5f * ray.Direction.y + 1.0f;
     return glm::mix(WHITE, BLUE, t);    // This gives us the sky colour.
-}
-
-void Renderer::ShowProgressBar()
-{
-    constexpr u32 BAR_WIDTH = 50;
-
-    const f32 progress = static_cast<f32>(s_Data.CurrentPixel) / static_cast<f32>(s_Data.TotalPixels);
-    const u32 pos = static_cast<u32>(static_cast<f32>(BAR_WIDTH) * progress);
-
-    std::cout << "Renderering: [";
-    for (u32 i{}; i < BAR_WIDTH; i++) 
-        std::cout << (i < pos ? '#' : '.');
-
-    std::cout << "] " << std::setw(3) << static_cast<u32>(progress * 100.0f) << "%\r";
-    std::cout.flush();
 }
 
 }

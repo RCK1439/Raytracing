@@ -24,7 +24,6 @@ public:
 private:
     static void PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera);
     static glm::vec4 GetColor(const Ray& ray, const Scene& scene, u32 depth);
-    static void ShowProgressBar();
 };
 
 }
