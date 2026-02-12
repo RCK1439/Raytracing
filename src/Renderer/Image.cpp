@@ -9,41 +9,6 @@ namespace rt {
 
 static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 height);
 
-void Image::Resize(u32 width, u32 height)
-{
-    m_Data.resize(width * height);
-    m_Width = width;
-    m_Height = height;
-}
-
-u32 Image::GetColor(u32 x, u32 y) const
-{
-    assert(x < m_Width && y < m_Height);    
-    return m_Data[x + y * m_Width];
-}
-
-void Image::SetColorHex(u32 x, u32 y, u32 color)
-{
-    assert(x < m_Width && y < m_Height);
-    m_Data[x + y * m_Width] = color;
-}
-
-void Image::SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a)
-{
-    const u32 color = (a << 24) | (b << 16) | (g << 8) | (r << 0);
-    SetColorHex(x, y, color);
-}
-
-void Image::SetColor(u32 x, u32 y, const glm::vec4& color)
-{
-    const u8 r = static_cast<u8>(color.r * 254.99999f);
-    const u8 g = static_cast<u8>(color.g * 254.99999f);
-    const u8 b = static_cast<u8>(color.b * 254.99999f);
-    const u8 a = static_cast<u8>(color.a * 254.99999f);
-
-    SetColorRGBA(x, y, r, g, b, a); 
-}
-
 Result<void, RendererError> Image::Save(std::filesystem::path path) const
 {
     fpng::fpng_init();
