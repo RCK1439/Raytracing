@@ -3,6 +3,8 @@
 #include "Types.hpp"
 
 #include "Error.hpp"
+#include "Image.hpp"
+
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"
 
@@ -15,15 +17,24 @@ namespace rt {
 class Renderer final
 {
 public:
-    static void Init(u32 width, u32 height, u32 numSamples, u32 depth);
+    constexpr Renderer(u32 width, u32 height, u32 numSamples, u32 depth) :
+        m_Image(width, height),
+        m_MaxDepth(depth),
+        m_NumSamples(numSamples)
+    {}
 
-    static Result<void, RendererError> Export(std::filesystem::path outputPath);
-
-    static void Render(const Scene& scene, const Camera& camera);
+    void Render(const Scene& scene, const Camera& camera);
+    
+    inline Result<void, RendererError> Export(std::filesystem::path path) const { return m_Image.Save(path); }
 
 private:
-    static void PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera);
-    static glm::vec4 GetColor(const Ray& ray, const Scene& scene, u32 depth);
+    void PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera);
+    glm::vec4 GetColor(const Ray& ray, const Scene& scene, u32 depth) const;
+
+private:
+    Image m_Image{};
+    u32   m_MaxDepth{};
+    u32   m_NumSamples{};
 };
 
 }

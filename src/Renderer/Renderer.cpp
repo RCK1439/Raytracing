@@ -6,70 +6,56 @@
 
 #include <glm/geometric.hpp>
 
+#include <algorithm>
+#include <execution>
+#include <numeric>
+
 namespace rt {
-
-struct RendererData final
-{
-    Image Img{};
-    u32   MaxDepth{};
-    u32   TotalPixels{};
-    u32   NumSamples{};
-};
-
-static RendererData s_Data{};
-
-void Renderer::Init(u32 width, u32 height, u32 numSamples, u32 depth)
-{
-    s_Data.Img.Resize(width, height);
-        
-    s_Data.MaxDepth = depth;
-    s_Data.TotalPixels = width * height;
-    s_Data.NumSamples = numSamples;
-}
-
-Result<void, RendererError> Renderer::Export(std::filesystem::path outputPath)
-{
-    return s_Data.Img.Save(outputPath);
-}
 
 void Renderer::Render(const Scene& scene, const Camera& camera)
 {
-    const u32 width = s_Data.Img.GetWidth();
-    for (u32 p{}; p < s_Data.TotalPixels; p++)
-    {
-        const u32 x = p % width;
-        const u32 y = p / width;
-        PerPixel(x, y, scene, camera);
-    }
+    const u32 width = m_Image.GetWidth();
+    const u32 height = m_Image.GetHeight();
+    const u32 totalPixels = width * height;
+
+    std::vector<u32> pixels(totalPixels);
+    std::iota(pixels.begin(), pixels.end(), 0);
+    std::for_each(std::execution::par, pixels.begin(), pixels.end(),
+        [&](u32 p)
+        {
+            const u32 x = p % width;
+            const u32 y = p / width;
+            PerPixel(x, y, scene, camera);
+        });
 }
 
 void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
 {
     glm::vec4 color(0.0f);
 
-    for (u32 s{}; s < s_Data.NumSamples; s++)
+    for (u32 s{}; s < m_NumSamples; s++)
     {
-        const f32 u = static_cast<f32>(x + Random::Float()) / static_cast<f32>(s_Data.Img.GetWidth());
-        const f32 v = static_cast<f32>(y + Random::Float()) / static_cast<f32>(s_Data.Img.GetHeight());
+        const f32 u = static_cast<f32>(x + Random::Float()) / static_cast<f32>(m_Image.GetWidth());
+        const f32 v = static_cast<f32>(y + Random::Float()) / static_cast<f32>(m_Image.GetHeight());
 
         const Ray ray = camera.GetRay(u, v);
 
         color += GetColor(ray, scene, 0);
     }
 
-    color /= static_cast<f32>(s_Data.NumSamples);
+    color /= static_cast<f32>(m_NumSamples);
     const glm::vec4 gammaCorrected = glm::sqrt(color);
 
-    s_Data.Img.SetColor(x, y, gammaCorrected); 
+    m_Image.SetColor(x, y, gammaCorrected); 
 }
 
-glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth)
+glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth) const
 {
     constexpr glm::vec4 BLACK = { 0.0f, 0.0f, 0.0f, 1.0f };
     constexpr glm::vec4 BLUE  = { 0.5f, 0.7f, 1.0f, 1.0f };
     constexpr glm::vec4 WHITE = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-    if (depth >= s_Data.MaxDepth)
+    if (depth >= m_MaxDepth)
         return BLACK;
 
     if (const auto hit = scene.Hit(ray, 0.0001f, std::numeric_limits<f32>::max()))

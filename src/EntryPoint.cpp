@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     const auto parsed = rt::Config::FromArgs(argc, argv);
     if (!parsed)
     {
-        const rt::ConfigError err = parsed.error();
+        const auto err = parsed.error();
         std::println("{}", err.What());
         return EXIT_FAILURE;
     }
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
         return EXIT_SUCCESS;
     }
 
-    rt::Renderer::Init(cfg.Width, cfg.Height, cfg.NumberOfSamples, cfg.Depth);
+    rt::Renderer renderer(cfg.Width, cfg.Height, cfg.NumberOfSamples, cfg.Depth);
 
     std::println("Dimensions: {}x{}", cfg.Width, cfg.Height);
     std::println("Anti-aliasing samples: {}", cfg.NumberOfSamples);
@@ -49,12 +49,12 @@ int main(int argc, char* argv[])
     );
 
     timer.Start();
-    rt::Renderer::Render(scene, camera);
+    renderer.Render(scene, camera);
     timer.Stop();
 
-    if (const auto result = rt::Renderer::Export(cfg.OutputPath); !result.has_value())
+    if (const auto result = renderer.Export(cfg.OutputPath); !result.has_value())
     {
-        const rt::RendererError err = result.error();
+        const auto err = result.error();
         std::println("{}", err.What());
         return EXIT_FAILURE;
     }
