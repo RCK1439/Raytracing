@@ -6,8 +6,6 @@
 
 #include <glm/geometric.hpp>
 
-#include <iostream>
-
 namespace rt {
 
 struct RendererData final
@@ -37,15 +35,12 @@ Result<void, RendererError> Renderer::Export(std::filesystem::path outputPath)
 void Renderer::Render(const Scene& scene, const Camera& camera)
 {
     const u32 width = s_Data.Img.GetWidth();
-
     for (u32 p{}; p < s_Data.TotalPixels; p++)
     {
         const u32 x = p % width;
         const u32 y = p / width;
         PerPixel(x, y, scene, camera);
     }
-
-    std::cout << std::endl; // This is for the progress bar.
 }
 
 void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
