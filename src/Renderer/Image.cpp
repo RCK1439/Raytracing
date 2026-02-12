@@ -9,23 +9,10 @@ namespace rt {
 
 static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 height);
 
-Image::Image(u32 width, u32 height) :
-    m_Width(width), m_Height(height), m_Channels(0)
-{
-    m_Data = new u32[width * height];
-}
-
-Image::~Image()
-{
-    delete[] m_Data;
-}
-
 void Image::Resize(u32 width, u32 height)
 {
-    delete[] m_Data;
-        
-    m_Data = new u32[width * height];
-    m_Width  = width;
+    m_Data.resize(width * height);
+    m_Width = width;
     m_Height = height;
 }
 
@@ -62,7 +49,7 @@ Result<void, RendererError> Image::Save(std::filesystem::path path) const
     fpng::fpng_init();
 
     u32* const flipped = new u32[m_Width * m_Height];
-    ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
+    ImgCpyFlipped(m_Data.data(), flipped, m_Width, m_Height);
 
     const std::string fileName = path.string();
     if (!fpng::fpng_encode_image_to_file(fileName.c_str(), flipped, m_Width, m_Height, 4))
