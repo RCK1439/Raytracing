@@ -10,7 +10,7 @@ struct Ray final
     glm::vec3 Origin{};
     glm::vec3 Direction{};
 
-    inline glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
+    constexpr glm::vec3 PointAt(f32 t) const { return Origin + t * Direction; }
 };
 
 }

@@ -12,7 +12,12 @@ public:
     Scene();
 
     Option<HitRecord> Hit(const Ray& ray, f32 tMin, f32 tMax) const;
-    void Add(Sphere&& obj);
+    
+    template<typename ... Args>
+    constexpr void Add(Args&& ... args)
+    {
+        m_Objects.emplace_back(std::forward<Args>(args)...);
+    }
         
 private:
     std::vector<Sphere> m_Objects;
