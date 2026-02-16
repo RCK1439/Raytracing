@@ -20,7 +20,7 @@ public:
 
     void Render(const Scene& scene, const Camera& camera);
     
-    inline Result<void, RendererError> Export(std::filesystem::path path) const { return m_Image.Save(path); }
+    inline Result<void, RendererError> Export(const std::filesystem::path& path) const { return m_Image.Save(path); }
 
 private:
     void PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera);

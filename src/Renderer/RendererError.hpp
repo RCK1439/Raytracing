@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <ostream>
 #include <sstream>
+#include <variant>
 
 namespace RTIAW {
 
@@ -16,12 +17,14 @@ enum class RendererErrorType : u8
 struct RendererError
 {
 public:
-    std::filesystem::path OutputPath{};
-    RendererErrorType     Type{};
+    constexpr RendererError(RendererErrorType type, const std::filesystem::path& path) :
+        Args(path), Type(type) {};
 
-public:
-    constexpr RendererError(RendererErrorType type, std::filesystem::path path) :
-        OutputPath(path), Type(type) {};
+private:
+    std::variant<std::filesystem::path> Args{};
+    RendererErrorType                   Type{};
+    
+    friend std::ostream& operator<<(std::ostream& stream, const RendererError& err);
 };
 
 std::ostream& operator<<(std::ostream& stream, const RendererError& err);

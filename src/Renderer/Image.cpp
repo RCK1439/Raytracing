@@ -6,24 +6,23 @@
 
 namespace RTIAW {
 
-static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 height);
+static void ImgCpyFlipped(const Buffer<u32>& src, Buffer<u32>& dest, u32 width, u32 height);
 
-Result<void, RendererError> Image::Save(std::filesystem::path path) const
+Result<void, RendererError> Image::Save(const std::filesystem::path& path) const
 {
     fpng::fpng_init();
 
-    u32* const flipped = new u32[m_Width * m_Height];
-    ImgCpyFlipped(m_Data.GetRaw(), flipped, m_Width, m_Height);
+    Buffer<u32> flipped(m_Width * m_Height);
+    ImgCpyFlipped(m_Data, flipped, m_Width, m_Height);
 
     const std::string fileName = path.string();
-    if (!fpng::fpng_encode_image_to_file(fileName.c_str(), flipped, m_Width, m_Height, 4))
+    if (!fpng::fpng_encode_image_to_file(fileName.c_str(), flipped.GetRaw(), m_Width, m_Height, 4))
         return Err(RendererError(RendererErrorType::FAILED_TO_SAVE_IMAGE, path));
 
-    delete[] flipped;
     return {};
 }
 
-static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 height)
+static void ImgCpyFlipped(const Buffer<u32>& src, Buffer<u32>& dest, u32 width, u32 height)
 {
     u32 i{};
     for (u32 y = height - 1; y >= 1; y--)

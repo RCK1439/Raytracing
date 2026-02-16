@@ -49,7 +49,7 @@ public:
         m_Height = height;
     }
 
-    Result<void, RendererError> Save(std::filesystem::path path) const;
+    Result<void, RendererError> Save(const std::filesystem::path& path) const;
 
 private:
     Buffer<u32> m_Data{};
