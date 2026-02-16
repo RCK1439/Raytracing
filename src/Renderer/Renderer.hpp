@@ -16,11 +16,7 @@ namespace RTIAW {
 class Renderer final
 {
 public:
-    constexpr Renderer(u32 width, u32 height, u32 numSamples, u32 depth) :
-        m_Image(width, height),
-        m_MaxDepth(depth),
-        m_NumSamples(numSamples)
-    {}
+    Renderer(u32 width, u32 height, u32 numSamples, u32 depth);
 
     void Render(const Scene& scene, const Camera& camera);
     

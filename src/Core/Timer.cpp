@@ -4,14 +4,14 @@
 
 #include <print>
 
-namespace RTIAW {
+namespace RTIAW::Time {
 
-void Timer::Start() noexcept
+void Timer::Start()
 {
     m_Start = Clock::now();
 }
 
-void Timer::Stop() noexcept
+void Timer::Stop()
 {
     m_End = Clock::now();
 
@@ -19,6 +19,13 @@ void Timer::Stop() noexcept
     const f32 elapsed = duration.count();
 
     std::println("Time elapsed: {:.3f}s", elapsed);
+}
+
+u32 SinceEpoch()
+{
+    return static_cast<u32>(std::chrono::system_clock::now()
+        .time_since_epoch()
+        .count());
 }
 
 }

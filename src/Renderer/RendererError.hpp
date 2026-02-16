@@ -2,8 +2,8 @@
 
 #include "Core/Types.hpp"
 
+#include <filesystem>
 #include <ostream>
-#include <string>
 #include <sstream>
 
 namespace RTIAW {
@@ -16,12 +16,12 @@ enum class RendererErrorType : u8
 struct RendererError
 {
 public:
-    RendererErrorType Type{};
-    std::string       ImagePath{};
+    std::filesystem::path OutputPath{};
+    RendererErrorType     Type{};
 
 public:
-    constexpr RendererError(RendererErrorType type, std::string_view path) :
-        Type(type), ImagePath(path) {};
+    constexpr RendererError(RendererErrorType type, std::filesystem::path path) :
+        OutputPath(path), Type(type) {};
 };
 
 std::ostream& operator<<(std::ostream& stream, const RendererError& err);

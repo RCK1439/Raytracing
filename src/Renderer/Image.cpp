@@ -17,7 +17,7 @@ Result<void, RendererError> Image::Save(std::filesystem::path path) const
 
     const std::string fileName = path.string();
     if (!fpng::fpng_encode_image_to_file(fileName.c_str(), flipped, m_Width, m_Height, 4))
-        return Err(RendererError(RendererErrorType::FAILED_TO_SAVE_IMAGE, fileName));
+        return Err(RendererError(RendererErrorType::FAILED_TO_SAVE_IMAGE, path));
 
     delete[] flipped;
     return {};

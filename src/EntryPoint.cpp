@@ -1,6 +1,4 @@
 #include "Core/Config.hpp"
-#include "Core/Random.hpp"
-#include "Core/Timer.hpp"
 
 #include "Renderer/Renderer.hpp"
 
@@ -30,19 +28,13 @@ int main(int argc, char* argv[])
         return EXIT_SUCCESS;
     }
 
-    const unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now()
-        .time_since_epoch()
-        .count());
-    RTIAW::Random::Init(seed);
     RTIAW::Renderer renderer(cfg->Width, cfg->Height, cfg->NumberOfSamples, cfg->Depth);
 
     std::println("Dimensions: {}x{}", cfg->Width, cfg->Height);
     std::println("Anti-aliasing samples: {}", cfg->NumberOfSamples);
     std::println("Maximum bounce depth: {}", cfg->Depth);
 
-    RTIAW::Timer timer;
-
-    RTIAW::Scene scene;
+    RTIAW::Scene scene{};
     RTIAW::Camera camera(
         { 13.0f, 2.0f, 3.0f },
         { 0.0f, 0.0f, 0.0f },
@@ -53,10 +45,7 @@ int main(int argc, char* argv[])
         10.0f
     );
 
-    timer.Start();
     renderer.Render(scene, camera);
-    timer.Stop();
-
     if (const auto result = renderer.Export(cfg->OutputPath); !result.has_value())
     {
         std::println("{}", result.error());

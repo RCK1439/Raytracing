@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include "Core/Timer.hpp"
 #include "Image.hpp"
 
 #include "Core/Random.hpp"
@@ -14,8 +15,18 @@
 
 namespace RTIAW {
 
+Renderer::Renderer(u32 width, u32 height, u32 numSamples, u32 depth) :
+    m_Image(width, height),
+    m_MaxDepth(depth),
+    m_NumSamples(numSamples)
+{
+    Random::Init(Time::SinceEpoch());
+}
+
 void Renderer::Render(const Scene& scene, const Camera& camera)
 {
+    const Time::ScopedTimer timer{};
+
     const u32 width = m_Image.GetWidth();
     const u32 height = m_Image.GetHeight();
     const u32 totalPixels = width * height;
@@ -65,7 +76,7 @@ glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth) cons
             return data->Attenuation * GetColor(data->Scattered, scene, depth + 1);
 
     const f32 t = 0.5f * ray.Direction.y + 1.0f;
-    return glm::mix(WHITE, BLUE, t);    // This gives us the sky colour.
+    return glm::mix(WHITE, BLUE, t); // This gives us the sky colour
 }
 
 }
