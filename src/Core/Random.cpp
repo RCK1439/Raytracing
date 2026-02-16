@@ -6,7 +6,7 @@
 
 namespace RTIAW::Random {
 
-static u32 s_RandomState{};
+static thread_local u32 s_RandomState{};
 
 inline constexpr u32 PCGHash(u32 input)
 {
