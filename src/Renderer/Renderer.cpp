@@ -60,12 +60,9 @@ glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth) cons
     if (depth >= m_MaxDepth)
         return BLACK;
 
-    if (const auto hit = scene.Hit(ray, 0.0001f, std::numeric_limits<f32>::max()))
-    {
-        const HitRecord record = hit.value();
-        if (const auto data = record.Mat->Scatter(ray, record))
+    if (const auto record = scene.Hit(ray, 0.0001f, std::numeric_limits<f32>::max()))
+        if (const auto data = record->Mat->Scatter(ray, *record))
             return data->Attenuation * GetColor(data->Scattered, scene, depth + 1);
-    }
 
     const f32 t = 0.5f * ray.Direction.y + 1.0f;
     return glm::mix(WHITE, BLUE, t);    // This gives us the sky colour.
