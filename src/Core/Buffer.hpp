@@ -1,7 +1,8 @@
 #pragma once
 
 #include <cassert>
-namespace rt {
+
+namespace RTIAW {
 
 template<typename T>
 class Buffer

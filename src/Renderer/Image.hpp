@@ -8,7 +8,7 @@
 #include <filesystem>
 #include <glm/vec4.hpp>
 
-namespace rt {
+namespace RTIAW {
 
 class Image final
 {

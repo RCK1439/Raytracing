@@ -4,7 +4,7 @@
 
 #include <cassert>
 
-namespace rt {
+namespace RTIAW {
 
 static void ImgCpyFlipped(const u32* const src, u32* const dest, u32 width, u32 height);
 

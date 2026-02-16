@@ -7,7 +7,7 @@
 
 #include <glm/vec3.hpp>
 
-namespace rt {
+namespace RTIAW {
 
 class Sphere final
 {

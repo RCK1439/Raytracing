@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace rt {
+namespace RTIAW {
 
 class Timer final
 {

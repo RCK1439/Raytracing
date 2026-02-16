@@ -4,7 +4,7 @@
 
 #include <glm/vec3.hpp>
 
-namespace rt {
+namespace RTIAW {
 
 struct Ray final
 {

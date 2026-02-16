@@ -1,6 +1,6 @@
 #include "RendererError.hpp"
 
-namespace rt {
+namespace RTIAW {
 
 std::ostream& operator<<(std::ostream& stream, const RendererError& err)
 {

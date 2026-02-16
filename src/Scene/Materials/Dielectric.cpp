@@ -6,7 +6,7 @@
 #include <glm/vec3.hpp>
 #include <glm/geometric.hpp>
 
-namespace rt {
+namespace RTIAW {
 
 Option<ScatterData> Dielectric::Scatter(const Ray& ray, const HitRecord& record) const
 {
@@ -35,7 +35,7 @@ Option<ScatterData> Dielectric::Scatter(const Ray& ray, const HitRecord& record)
 
     const f32 reflectProbability = Refract(ray.Direction, outwardNormal, niOverNT, refracted) ? Schlick(cosine) : 1.0f;
 
-    const Ray scattered = random::Float() < reflectProbability ? Ray{ record.Point, reflected } : Ray{ record.Point, refracted };
+    const Ray scattered = Random::Float() < reflectProbability ? Ray{ record.Point, reflected } : Ray{ record.Point, refracted };
     const glm::vec4 attenuation = { 1.0f, 1.0f, 1.0f, 1.0f };
 
     return ScatterData { scattered, attenuation };

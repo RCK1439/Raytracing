@@ -2,7 +2,7 @@
 
 #include <vector>
 
-namespace rt {
+namespace RTIAW {
 
 static constexpr Option<u32> ParseNumber(std::string_view arg);
 static constexpr bool IsDigit(char ch);

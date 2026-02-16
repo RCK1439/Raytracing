@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 
-namespace rt {
+namespace RTIAW {
 
 enum class RendererErrorType : u8
 {
@@ -29,14 +29,14 @@ std::ostream& operator<<(std::ostream& stream, const RendererError& err);
 }
 
 template<>
-struct std::formatter<rt::RendererError>
+struct std::formatter<RTIAW::RendererError>
 {
     constexpr auto parse(std::format_parse_context& ctx) const
     {
         return ctx.begin();
     }
 
-    auto format(const rt::RendererError& err, std::format_context& ctx) const
+    auto format(const RTIAW::RendererError& err, std::format_context& ctx) const
     {
         std::stringstream stream;
         stream << err;

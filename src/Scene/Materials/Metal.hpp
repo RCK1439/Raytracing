@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-namespace rt {
+namespace RTIAW {
 
 class Metal final : public Material
 {

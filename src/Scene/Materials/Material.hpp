@@ -5,7 +5,7 @@
 
 #include <glm/vec4.hpp>
 
-namespace rt {
+namespace RTIAW {
 
 struct HitRecord;
 

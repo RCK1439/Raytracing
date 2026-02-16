@@ -6,7 +6,7 @@
 #include <ostream>
 #include <sstream>
 
-namespace rt {
+namespace RTIAW {
 
 struct Config
 {
@@ -37,14 +37,14 @@ std::ostream& operator<<(std::ostream& stream, ConfigParseError err);
 }
 
 template<>
-struct std::formatter<rt::ConfigParseError>
+struct std::formatter<RTIAW::ConfigParseError>
 {
     constexpr auto parse(std::format_parse_context& ctx) const
     {
         return ctx.begin();
     }
 
-    auto format(const rt::ConfigParseError& err, std::format_context& ctx) const
+    auto format(const RTIAW::ConfigParseError& err, std::format_context& ctx) const
     {
         std::stringstream stream;
         stream << err;

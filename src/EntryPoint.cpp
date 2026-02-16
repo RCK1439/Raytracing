@@ -11,7 +11,7 @@
 
 int main(int argc, char* argv[])
 {
-    const auto cfg = rt::ParseConfig(argc, argv);
+    const auto cfg = RTIAW::ParseConfig(argc, argv);
     if (!cfg)
     {
         std::println("{}", cfg.error());
@@ -32,17 +32,17 @@ int main(int argc, char* argv[])
     const unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now()
         .time_since_epoch()
         .count());
-    rt::random::Init(seed);
-    rt::Renderer renderer(cfg->Width, cfg->Height, cfg->NumberOfSamples, cfg->Depth);
+    RTIAW::Random::Init(seed);
+    RTIAW::Renderer renderer(cfg->Width, cfg->Height, cfg->NumberOfSamples, cfg->Depth);
 
     std::println("Dimensions: {}x{}", cfg->Width, cfg->Height);
     std::println("Anti-aliasing samples: {}", cfg->NumberOfSamples);
     std::println("Maximum bounce depth: {}", cfg->Depth);
 
-    rt::Timer timer;
+    RTIAW::Timer timer;
 
-    rt::Scene scene;
-    rt::Camera camera(
+    RTIAW::Scene scene;
+    RTIAW::Camera camera(
         { 13.0f, 2.0f, 3.0f },
         { 0.0f, 0.0f, 0.0f },
         { 0.0f, 1.0f, 0.0f },

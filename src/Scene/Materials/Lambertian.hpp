@@ -2,7 +2,7 @@
 
 #include "Material.hpp"
 
-namespace rt {
+namespace RTIAW {
 
 class Lambertian final : public Material
 {

@@ -11,7 +11,7 @@
 
 #include <filesystem>
 
-namespace rt {
+namespace RTIAW {
 
 class Renderer final
 {

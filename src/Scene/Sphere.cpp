@@ -3,7 +3,7 @@
 
 #include <glm/geometric.hpp>
 
-namespace rt {
+namespace RTIAW {
 
 Option<HitRecord> Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax) const
 {

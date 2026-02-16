@@ -4,7 +4,7 @@
 
 #include "Renderer/Ray.hpp"
 
-namespace rt {
+namespace RTIAW {
 
 class Camera final
 {

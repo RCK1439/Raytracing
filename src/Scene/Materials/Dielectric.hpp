@@ -4,7 +4,7 @@
 
 #include "Core/Types.hpp"
 
-namespace rt {
+namespace RTIAW {
 
 class Dielectric final : public Material
 {

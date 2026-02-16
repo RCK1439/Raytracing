@@ -4,7 +4,7 @@
 
 #include <glm/vec3.hpp>
 
-namespace rt::random {
+namespace RTIAW::Random {
 
 void Init(u32 seed);
 

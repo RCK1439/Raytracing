@@ -4,7 +4,7 @@
 
 #include <limits>
 
-namespace rt::random {
+namespace RTIAW::Random {
 
 static u32 s_RandomState{};
 
