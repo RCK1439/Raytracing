@@ -1,8 +1,8 @@
 #pragma once
 
 #include <cstdint>
-#include <memory>
 #include <expected>
+#include <memory>
 #include <optional>
 
 namespace RTIAW {

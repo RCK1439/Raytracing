@@ -3,9 +3,9 @@
 #include "Core/Random.hpp"
 
 #include "Materials/Dielectric.hpp"
+#include "Materials/HitRecord.hpp"
 #include "Materials/Lambertian.hpp"
 #include "Materials/Metal.hpp"
-#include "Materials/HitRecord.hpp"
 
 namespace RTIAW {
 

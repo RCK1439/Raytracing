@@ -5,8 +5,9 @@
 #include "Core/Buffer.hpp"
 #include "Core/Types.hpp"
 
-#include <filesystem>
 #include <glm/vec4.hpp>
+
+#include <filesystem>
 
 namespace RTIAW {
 

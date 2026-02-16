@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Renderer/Ray.hpp"
 #include "Core/Types.hpp"
+
+#include "Renderer/Ray.hpp"
 
 #include <glm/vec4.hpp>
 

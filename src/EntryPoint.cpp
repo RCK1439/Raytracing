@@ -1,10 +1,11 @@
 #include "Core/Config.hpp"
 #include "Core/Random.hpp"
 #include "Core/Timer.hpp"
+
 #include "Renderer/Renderer.hpp"
+
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"
-
 
 #include <cstdlib>
 #include <print>

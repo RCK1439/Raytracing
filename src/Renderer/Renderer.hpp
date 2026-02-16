@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/Types.hpp"
-
 #include "Image.hpp"
+
+#include "Core/Types.hpp"
 
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"

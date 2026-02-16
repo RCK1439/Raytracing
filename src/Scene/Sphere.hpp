@@ -3,6 +3,7 @@
 #include "Core/Types.hpp"
 
 #include "Materials/Material.hpp"
+
 #include "Renderer/Ray.hpp"
 
 #include <glm/vec3.hpp>
