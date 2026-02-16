@@ -10,7 +10,7 @@ namespace rt {
 
 struct Config
 {
-    std::filesystem::path OutputPath{"rtk.png"};
+    std::filesystem::path OutputPath{"rtiaw.png"};
     u32                   Width{1280};
     u32                   Height{720};
     u32                   NumberOfSamples{32};
