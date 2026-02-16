@@ -15,9 +15,9 @@ static Sphere CreateMatteSphere(const glm::vec3& position)
 {
     const glm::vec3 albedo = 
     {
-        Random::Float() * Random::Float(),
-        Random::Float() * Random::Float(),
-        Random::Float() * Random::Float()
+        random::Float() * random::Float(),
+        random::Float() * random::Float(),
+        random::Float() * random::Float()
     };
     const Ref<Lambertian> material = CreateRef<Lambertian>(albedo);
 
@@ -28,11 +28,11 @@ static Sphere CreateMetalSphere(const glm::vec3& position)
 {
     const glm::vec3 albedo =
     { 
-        0.5f * (1.0f + Random::Float()), 
-        0.5f * (1.0f + Random::Float()), 
-        0.5f * (1.0f + Random::Float()) 
+        0.5f * (1.0f + random::Float()), 
+        0.5f * (1.0f + random::Float()), 
+        0.5f * (1.0f + random::Float()) 
     };
-    const f32 fuzz = 0.5f * (1.0f * Random::Float());
+    const f32 fuzz = 0.5f * (1.0f * random::Float());
     const Ref<Metal> material = CreateRef<Metal>(albedo, fuzz);
     
     return Sphere(position, RADIUS, material);
@@ -53,8 +53,8 @@ Scene::Scene() // This makes the default cover-page scene.
     {
         for (i32 b = -11; b < 11; b++)
         {
-            const f32 chooseMaterial = Random::Float();
-            const glm::vec3 center = { a + 0.9f * Random::Float(), 0.2f, b + 0.9f * Random::Float() };
+            const f32 chooseMaterial = random::Float();
+            const glm::vec3 center = { a + 0.9f * random::Float(), 0.2f, b + 0.9f * random::Float() };
 
             if (chooseMaterial < 0.8f)
                 Add(CreateMatteSphere(center));

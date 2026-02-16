@@ -1,10 +1,10 @@
 #include "Core/Config.hpp"
+#include "Core/Random.hpp"
 #include "Core/Timer.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"
 
-// #include "Core/Random.hpp"
 
 #include <cstdlib>
 #include <print>
@@ -29,10 +29,10 @@ int main(int argc, char* argv[])
         return EXIT_SUCCESS;
     }
 
-    // const unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now()
-    //     .time_since_epoch()
-    //     .count());
-    // rt::random::init(seed);
+    const unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now()
+        .time_since_epoch()
+        .count());
+    rt::random::Init(seed);
     rt::Renderer renderer(cfg->Width, cfg->Height, cfg->NumberOfSamples, cfg->Depth);
 
     std::println("Dimensions: {}x{}", cfg->Width, cfg->Height);

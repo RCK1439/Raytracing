@@ -37,8 +37,8 @@ void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
 
     for (u32 s{}; s < m_NumSamples; s++)
     {
-        const f32 u = static_cast<f32>(x + Random::Float()) / static_cast<f32>(m_Image.GetWidth());
-        const f32 v = static_cast<f32>(y + Random::Float()) / static_cast<f32>(m_Image.GetHeight());
+        const f32 u = static_cast<f32>(x + random::Float()) / static_cast<f32>(m_Image.GetWidth());
+        const f32 v = static_cast<f32>(y + random::Float()) / static_cast<f32>(m_Image.GetHeight());
 
         const Ray ray = camera.GetRay(u, v);
 

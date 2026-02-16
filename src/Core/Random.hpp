@@ -4,23 +4,12 @@
 
 #include <glm/vec3.hpp>
 
-namespace rt {
+namespace rt::random {
 
-class Random final
-{
-public:
-    static f32 Float();
-    static glm::vec3 InUnitSphere();
-    static glm::vec3 InUnitDisk();
-};
+void Init(u32 seed);
 
-namespace random {
-
-    void init(u32 seed);
-
-    f32 random_float();
-    glm::vec3 in_unit_sphere();
-    glm::vec3 in_unit_disk();
-}
+f32 Float();
+glm::vec3 InUnitSphere();
+glm::vec3 InUnitDisk();
 
 }

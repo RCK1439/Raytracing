@@ -32,7 +32,7 @@ Camera::Camera(const glm::vec3& lookFrom,
 
 Ray Camera::GetRay(f32 s, f32 t) const
 {
-    const glm::vec3 rd = m_LensRadius * Random::InUnitDisk();
+    const glm::vec3 rd = m_LensRadius * random::InUnitDisk();
     const glm::vec3 offset = u * rd.x + v * rd.y;
 
     const glm::vec3 origin = m_Origin + offset;
