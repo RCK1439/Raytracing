@@ -1,5 +1,5 @@
 set(SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Error.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/RendererError.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Image.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Renderer.cpp
 
@@ -18,9 +18,7 @@ set(SOURCES
 )
 
 set(HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/Error/BaseError.hpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Error.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/RendererError.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Image.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Ray.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Renderer.hpp

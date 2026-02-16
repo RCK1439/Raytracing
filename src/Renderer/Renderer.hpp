@@ -2,7 +2,6 @@
 
 #include "Types.hpp"
 
-#include "Error.hpp"
 #include "Image.hpp"
 
 #include "Scene/Camera.hpp"

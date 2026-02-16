@@ -9,16 +9,14 @@
 
 int main(int argc, char* argv[])
 {
-    const auto parsed = rt::Config::FromArgs(argc, argv);
-    if (!parsed)
+    const auto cfg = rt::ParseConfig(argc, argv);
+    if (!cfg)
     {
-        const auto err = parsed.error();
-        std::println("{}", err.What());
+        std::println("{}", cfg.error());
         return EXIT_FAILURE;
     }
 
-    const rt::Config cfg = parsed.value();
-    if (cfg.ShowHelp)
+    if (cfg->ShowHelp)
     {
         std::println("-s or -S: Size of output image.            (e.g. -s 1280 720)");
         std::println("-a or -A: Number of anti-aliasing samples. (e.g. -a 32)");
@@ -29,11 +27,11 @@ int main(int argc, char* argv[])
         return EXIT_SUCCESS;
     }
 
-    rt::Renderer renderer(cfg.Width, cfg.Height, cfg.NumberOfSamples, cfg.Depth);
+    rt::Renderer renderer(cfg->Width, cfg->Height, cfg->NumberOfSamples, cfg->Depth);
 
-    std::println("Dimensions: {}x{}", cfg.Width, cfg.Height);
-    std::println("Anti-aliasing samples: {}", cfg.NumberOfSamples);
-    std::println("Maximum bounce depth: {}", cfg.Depth);
+    std::println("Dimensions: {}x{}", cfg->Width, cfg->Height);
+    std::println("Anti-aliasing samples: {}", cfg->NumberOfSamples);
+    std::println("Maximum bounce depth: {}", cfg->Depth);
 
     rt::Timer timer;
 
@@ -43,7 +41,7 @@ int main(int argc, char* argv[])
         { 0.0f, 0.0f, 0.0f },
         { 0.0f, 1.0f, 0.0f },
         20.0f,
-        static_cast<float>(cfg.Width) / static_cast<float>(cfg.Height),
+        static_cast<float>(cfg->Width) / static_cast<float>(cfg->Height),
         0.1f,
         10.0f
     );
@@ -52,10 +50,9 @@ int main(int argc, char* argv[])
     renderer.Render(scene, camera);
     timer.Stop();
 
-    if (const auto result = renderer.Export(cfg.OutputPath); !result.has_value())
+    if (const auto result = renderer.Export(cfg->OutputPath); !result.has_value())
     {
-        const auto err = result.error();
-        std::println("{}", err.What());
+        std::println("{}", result.error());
         return EXIT_FAILURE;
     }
 }

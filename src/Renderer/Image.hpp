@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Types.hpp"
-
-#include "Error.hpp"
+#include "RendererError.hpp"
 
 #include <filesystem>
 #include <glm/vec4.hpp>
