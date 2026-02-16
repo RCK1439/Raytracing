@@ -2,7 +2,7 @@
 
 #include "Material.hpp"
 
-#include "Types.hpp"
+#include "Core/Types.hpp"
 
 namespace rt {
 

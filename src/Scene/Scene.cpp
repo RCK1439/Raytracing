@@ -1,5 +1,6 @@
 #include "Scene.hpp"
-#include "Random.hpp"
+
+#include "Core/Random.hpp"
 
 #include "Materials/Dielectric.hpp"
 #include "Materials/Lambertian.hpp"

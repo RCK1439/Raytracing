@@ -1,5 +1,5 @@
-#include "Config.hpp"
-#include "Timer.hpp"
+#include "Core/Config.hpp"
+#include "Core/Timer.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Scene/Camera.hpp"
 #include "Scene/Scene.hpp"

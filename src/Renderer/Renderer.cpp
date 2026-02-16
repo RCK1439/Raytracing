@@ -1,6 +1,8 @@
 #include "Renderer.hpp"
 #include "Image.hpp"
-#include "Random.hpp"
+
+#include "Core/Random.hpp"
+
 #include "Scene/Materials/Material.hpp"
 #include "Scene/Materials/HitRecord.hpp"
 

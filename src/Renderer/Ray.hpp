@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Types.hpp"
+#include "Core/Types.hpp"
+
 #include <glm/vec3.hpp>
 
 namespace rt {

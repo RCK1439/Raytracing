@@ -1,4 +1,8 @@
 set(SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Config.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Random.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Timer.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/RendererError.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Image.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Renderer.cpp
@@ -11,13 +15,16 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Scene/Materials/Lambertian.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Scene/Materials/Metal.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/Config.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/EntryPoint.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Random.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Timer.cpp
 )
 
 set(HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Buffer.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Types.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Config.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Random.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Timer.hpp
+    
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/RendererError.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Image.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer/Ray.hpp
@@ -31,13 +38,7 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/Scene/Materials/HitRecord.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Scene/Materials/Lambertian.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Scene/Materials/Material.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Scene/Materials/Materials.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Scene/Materials/Metal.hpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/Config.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Random.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Timer.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Types.hpp
 )
 
 add_executable(rtk ${SOURCES} ${HEADERS})

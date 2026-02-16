@@ -1,42 +1,25 @@
 #pragma once
 
-#include "Types.hpp"
 #include "RendererError.hpp"
+
+#include "Core/Buffer.hpp"
+#include "Core/Types.hpp"
 
 #include <filesystem>
 #include <glm/vec4.hpp>
-
-#include <vector>
 
 namespace rt {
 
 class Image final
 {
 public:
-    using MutIter = std::vector<u32>::iterator;
-    using ConstIter = std::vector<u32>::const_iterator;
-
-    using RevMutIter = std::vector<u32>::reverse_iterator;
-    using RevConstIter = std::vector<u32>::const_reverse_iterator;
-
-public:
     constexpr Image() = default;
     constexpr Image(u32 width, u32 height) :
         m_Data(width * height), m_Width(width), m_Height(height) {}
 
-    inline constexpr u32 GetColor(u32 x, u32 y) const { return m_Data.at(x + y * m_Width); }
+    inline constexpr u32 GetColor(u32 x, u32 y) const { return m_Data[x + y * m_Width]; }
     inline constexpr u32 GetWidth() const { return m_Width; }
     inline constexpr u32 GetHeight() const { return m_Height; }
-
-    inline constexpr MutIter begin() { return m_Data.begin(); }
-    inline constexpr MutIter end() { return m_Data.end(); }
-    inline constexpr ConstIter begin() const { return m_Data.begin(); }
-    inline constexpr ConstIter end() const { return m_Data.end(); }
-
-    inline constexpr RevMutIter rbegin() { return m_Data.rbegin(); }
-    inline constexpr RevMutIter rend() { return m_Data.rend(); }
-    inline constexpr RevConstIter rbegin() const { return m_Data.rbegin(); }
-    inline constexpr RevConstIter rend() const { return m_Data.rend(); }
 
     constexpr void SetColorHex(u32 x, u32 y, u32 color)
     {
@@ -60,7 +43,7 @@ public:
 
     constexpr void Resize(u32 width, u32 height)
     {
-        m_Data.resize(width * height);
+        m_Data.Resize(width * height);
         m_Width = width;
         m_Height = height;
     }
@@ -68,9 +51,9 @@ public:
     Result<void, RendererError> Save(std::filesystem::path path) const;
 
 private:
-    std::vector<u32> m_Data{};
-    u32              m_Width{};
-    u32              m_Height{};
+    Buffer<u32> m_Data{};
+    u32         m_Width{};
+    u32         m_Height{};
 };
 
 }

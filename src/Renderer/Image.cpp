@@ -13,7 +13,7 @@ Result<void, RendererError> Image::Save(std::filesystem::path path) const
     fpng::fpng_init();
 
     u32* const flipped = new u32[m_Width * m_Height];
-    ImgCpyFlipped(m_Data.data(), flipped, m_Width, m_Height);
+    ImgCpyFlipped(m_Data.GetRaw(), flipped, m_Width, m_Height);
 
     const std::string fileName = path.string();
     if (!fpng::fpng_encode_image_to_file(fileName.c_str(), flipped, m_Width, m_Height, 4))

@@ -1,5 +1,6 @@
 #include "Camera.hpp"
-#include "Random.hpp"
+
+#include "Core/Random.hpp"
 
 #include <glm/geometric.hpp>
 #include <glm/trigonometric.hpp>

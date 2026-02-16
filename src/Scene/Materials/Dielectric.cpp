@@ -1,6 +1,7 @@
 #include "Dielectric.hpp"
 #include "HitRecord.hpp"
-#include "Random.hpp"
+
+#include "Core/Random.hpp"
 
 #include <glm/vec3.hpp>
 #include <glm/geometric.hpp>
