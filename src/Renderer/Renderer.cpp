@@ -16,11 +16,13 @@
 namespace RTIAW {
 
 Renderer::Renderer(u32 width, u32 height, u32 numSamples, u32 depth) :
+    m_PixelIndices(width * height),
     m_Image(width, height),
     m_MaxDepth(depth),
     m_NumSamples(numSamples)
 {
     Random::Init(Time::SinceEpoch());
+    std::iota(m_PixelIndices.begin(), m_PixelIndices.end(), 0);
 }
 
 void Renderer::Render(const Scene& scene, const Camera& camera)
@@ -28,12 +30,7 @@ void Renderer::Render(const Scene& scene, const Camera& camera)
     const Time::ScopedTimer timer{};
 
     const u32 width = m_Image.GetWidth();
-    const u32 height = m_Image.GetHeight();
-    const u32 totalPixels = width * height;
-
-    std::vector<u32> pixels(totalPixels);
-    std::iota(pixels.begin(), pixels.end(), 0);
-    std::for_each(std::execution::par, pixels.begin(), pixels.end(),
+    std::for_each(std::execution::par, m_PixelIndices.begin(), m_PixelIndices.end(),
         [&](u32 p)
         {
             const u32 x = p % width;
@@ -44,7 +41,7 @@ void Renderer::Render(const Scene& scene, const Camera& camera)
 
 void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
 {
-    glm::vec4 color(0.0f);
+    glm::vec4 color{};
 
     for (u32 s{}; s < m_NumSamples; s++)
     {

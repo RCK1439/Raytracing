@@ -10,6 +10,7 @@
 #include <glm/vec4.hpp>
 
 #include <filesystem>
+#include <vector>
 
 namespace RTIAW {
 
@@ -27,9 +28,10 @@ private:
     glm::vec4 GetColor(const Ray& ray, const Scene& scene, u32 depth) const;
 
 private:
-    Image m_Image{};
-    u32   m_MaxDepth{};
-    u32   m_NumSamples{};
+    std::vector<u32> m_PixelIndices{};
+    Image            m_Image{};
+    u32              m_MaxDepth{};
+    u32              m_NumSamples{};
 };
 
 }
