@@ -11,10 +11,10 @@ namespace rt {
 struct Config
 {
     std::filesystem::path OutputPath{"rtk.png"};
-    u32                   Width{1024};
-    u32                   Height{512};
+    u32                   Width{1280};
+    u32                   Height{720};
     u32                   NumberOfSamples{32};
-    u32                   Depth{50};
+    u32                   Depth{8};
     bool                  ShowHelp{};
 };
 
