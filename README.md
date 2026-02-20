@@ -2,7 +2,7 @@
 
 This project is an implementation and follow through of the [Ray Tracing in a Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) series (specifically the first book). This is my first finished graphics-related project with more coming soon hopefully.
 
-![image](resources/rtk.png "Ran with arguments '-s 1920 1080 -a 256 -d 8'")
+![image](resources/rtiaw_1080p.png "Ran with arguments '-s 1920 1080 -a 256 -d 8'")
 
 ## Getting Started
 
@@ -62,16 +62,26 @@ Raytracing/
 git clone https://github.com/RCK1439/Raytracing.git
 ```
 
-2. Compile the project with `make`:
+2. Configure CMake:
 ```bash
-make release
+cmake -B build
+```
+
+3. Compile using CMake:
+```bash
+cmake --build build
+```
+
+Alternatively, compile in release mode:
+```bash
+cmake --build build --config Release
 ```
 
 ### Running
 
-Running the program is quite simple; simply execute the following in the project root directory:
+Running the program is quite simple; simply execute the following:
 ```bash
-./bin/rtk
+./rtk
 ```
 
 #### Additional arguments
