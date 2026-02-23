@@ -9,7 +9,7 @@ namespace RTIAW {
 class Dielectric final : public Material
 {
 public: 
-    Dielectric(f32 refractiveIndex) noexcept :
+    constexpr Dielectric(f32 refractiveIndex) noexcept :
         m_RefractiveIndex(refractiveIndex) {}
 
     Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const noexcept override;

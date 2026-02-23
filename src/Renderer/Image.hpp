@@ -18,9 +18,9 @@ public:
     constexpr Image(u32 width, u32 height) noexcept :
         m_Data(width * height), m_Width(width), m_Height(height) {}
 
-    inline constexpr u32 GetColor(u32 x, u32 y) const noexcept { return m_Data[x + y * m_Width]; }
-    inline constexpr u32 GetWidth() const noexcept { return m_Width; }
-    inline constexpr u32 GetHeight() const noexcept { return m_Height; }
+    constexpr u32 GetColor(u32 x, u32 y) const noexcept { return m_Data[x + y * m_Width]; }
+    constexpr u32 GetWidth() const noexcept { return m_Width; }
+    constexpr u32 GetHeight() const noexcept { return m_Height; }
 
     constexpr void SetColorHex(u32 x, u32 y, u32 color) noexcept
     {

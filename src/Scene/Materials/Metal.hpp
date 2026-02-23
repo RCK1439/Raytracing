@@ -11,7 +11,7 @@ namespace RTIAW {
 class Metal final : public Material
 {
 public: 
-    Metal(const glm::vec3& albedo, f32 fuzz) noexcept :
+    constexpr Metal(const glm::vec3& albedo, f32 fuzz) noexcept :
         m_Albedo(albedo, 1.0f), m_Fuzz(std::clamp(fuzz, 0.0f, 1.0f)) {}
 
     Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const noexcept override;

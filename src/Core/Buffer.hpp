@@ -14,31 +14,29 @@ public:
     Buffer(const Buffer<T>&) = delete;
     Buffer(Buffer<T>&&) = delete;
 
-    inline constexpr ~Buffer() noexcept
-    {
-        delete[] m_Buffer;
-    }
+    constexpr ~Buffer() noexcept { delete[] m_Buffer; }
 
-    inline constexpr void Resize(size_t newSize) noexcept
+    constexpr void Resize(size_t newSize) noexcept
     {
         delete[] m_Buffer;
         m_Buffer = new T[newSize];
+        m_Size = newSize;
     }
 
-    inline constexpr T& operator[](size_t idx) noexcept
+    constexpr T& operator[](size_t idx) noexcept
     {
         assert(idx < m_Size);
         return m_Buffer[idx];
     }
 
-    inline constexpr const T& operator[](size_t idx) const noexcept
+    constexpr const T& operator[](size_t idx) const noexcept
     {
         assert(idx < m_Size);
         return m_Buffer[idx];
     }
 
-    inline constexpr const T* GetRaw() const noexcept { return m_Buffer; }
-    inline constexpr size_t GetSize() const noexcept { return m_Size; }
+    constexpr const T* GetRaw() const noexcept { return m_Buffer; }
+    constexpr size_t GetSize() const noexcept { return m_Size; }
 
 private:
     T*     m_Buffer{};
