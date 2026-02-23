@@ -9,15 +9,15 @@ namespace RTIAW {
 class Dielectric final : public Material
 {
 public: 
-    Dielectric(f32 refractiveIndex) :
+    Dielectric(f32 refractiveIndex) noexcept :
         m_RefractiveIndex(refractiveIndex) {}
 
-    Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const override;
+    Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const noexcept override;
 
 private: 
-    bool Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const;
+    bool Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const noexcept;
 
-    f32 Schlick(f32 cosine) const;
+    f32 Schlick(f32 cosine) const noexcept;
 
 private:
     f32 m_RefractiveIndex{};

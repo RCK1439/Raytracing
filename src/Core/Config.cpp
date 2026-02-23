@@ -4,10 +4,10 @@
 
 namespace RTIAW {
 
-static constexpr Option<u32> ParseNumber(std::string_view arg);
-static constexpr bool IsDigit(char ch);
+static constexpr Option<u32> ParseNumber(std::string_view arg) noexcept;
+static constexpr bool IsDigit(char ch) noexcept;
 
-Result<Config, ConfigParseError> ParseConfig(i32 argc, char* argv[])
+Result<Config, ConfigParseError> ParseConfig(i32 argc, char* argv[]) noexcept
 {
     std::vector<std::string> args{};
     for (i32 i{1}; i < argc; i++)
@@ -86,7 +86,7 @@ Result<Config, ConfigParseError> ParseConfig(i32 argc, char* argv[])
     return cfg;
 }
 
-std::ostream& operator<<(std::ostream& stream, ConfigParseError err)
+std::ostream& operator<<(std::ostream& stream, ConfigParseError err) noexcept
 {
     switch (err)
     {
@@ -119,7 +119,7 @@ std::ostream& operator<<(std::ostream& stream, ConfigParseError err)
     return stream;
 }
 
-static constexpr Option<u32> ParseNumber(std::string_view str)
+static constexpr Option<u32> ParseNumber(std::string_view str) noexcept
 {
     if (str[0] == '-')
         return {};
@@ -138,7 +138,7 @@ static constexpr Option<u32> ParseNumber(std::string_view str)
     return num;
 }
 
-static constexpr bool IsDigit(char ch)
+static constexpr bool IsDigit(char ch) noexcept
 {
     return ch >= '0' && ch <= '9';
 }

@@ -10,7 +10,7 @@ namespace RTIAW {
 
 struct HitRecord;
 
-struct ScatterData
+struct ScatterData final
 {
     Ray       Scattered;
     glm::vec4 Attenuation;
@@ -19,9 +19,9 @@ struct ScatterData
 class Material
 {
 public: 
-    virtual ~Material() = default;
+    virtual ~Material() noexcept = default;
 
-    virtual Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const = 0;
+    virtual Option<ScatterData> Scatter(const Ray& ray, const HitRecord& record) const noexcept = 0;
 };
 
 }

@@ -16,9 +16,9 @@ public:
         f32 aspectRatio,
         f32 aperture,
         f32 focusDistance
-    ); 
+    ) noexcept;
 
-    Ray GetRay(f32 s, f32 t) const;
+    Ray GetRay(f32 s, f32 t) const noexcept;
 
 private:
     glm::vec3 m_Origin{};

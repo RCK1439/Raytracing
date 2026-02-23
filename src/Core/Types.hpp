@@ -33,7 +33,7 @@ using Err = std::unexpected<E>;
 template<typename T>
 using Ref = std::shared_ptr<T>;
 template<typename T, typename ... Args>
-constexpr Ref<T> CreateRef(Args&& ... args)
+constexpr Ref<T> CreateRef(Args&& ... args) noexcept
 {
 	return std::make_shared<T>(std::forward<Args>(args)...);
 }

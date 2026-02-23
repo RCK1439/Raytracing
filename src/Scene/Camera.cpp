@@ -15,7 +15,8 @@ Camera::Camera(const glm::vec3& lookFrom,
     f32 aspectRatio,
     f32 aperture,
     f32 focusDistance
-) : m_Origin(lookFrom), m_LensRadius(aperture * 0.5f)
+) noexcept :
+    m_Origin(lookFrom), m_LensRadius(aperture * 0.5f)
 {
     const f32 theta = vFOV * glm::pi<f32>() / 180.0f;
     const f32 halfHeight = glm::tan(theta * 0.5f);
@@ -30,7 +31,7 @@ Camera::Camera(const glm::vec3& lookFrom,
     m_Vertical = 2.0f * halfHeight * focusDistance * v;
 }
 
-Ray Camera::GetRay(f32 s, f32 t) const
+Ray Camera::GetRay(f32 s, f32 t) const noexcept
 {
     const glm::vec3 rd = m_LensRadius * Random::InUnitDisk();
     const glm::vec3 offset = u * rd.x + v * rd.y;

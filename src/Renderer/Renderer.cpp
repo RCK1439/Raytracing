@@ -15,7 +15,7 @@
 
 namespace RTIAW {
 
-Renderer::Renderer(u32 width, u32 height, u32 numSamples, u32 depth) :
+Renderer::Renderer(u32 width, u32 height, u32 numSamples, u32 depth) noexcept :
     m_PixelIndices(width * height),
     m_Image(width, height),
     m_MaxDepth(depth),
@@ -25,7 +25,7 @@ Renderer::Renderer(u32 width, u32 height, u32 numSamples, u32 depth) :
     std::iota(m_PixelIndices.begin(), m_PixelIndices.end(), 0);
 }
 
-void Renderer::Render(const Scene& scene, const Camera& camera)
+void Renderer::Render(const Scene& scene, const Camera& camera) noexcept
 {
     const Time::ScopedTimer timer{};
 
@@ -39,7 +39,7 @@ void Renderer::Render(const Scene& scene, const Camera& camera)
         });
 }
 
-void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
+void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera) noexcept
 {
     glm::vec4 color{};
 
@@ -59,7 +59,7 @@ void Renderer::PerPixel(u32 x, u32 y, const Scene& scene, const Camera& camera)
     m_Image.SetColor(x, y, gammaCorrected); 
 }
 
-glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth) const
+glm::vec4 Renderer::GetColor(const Ray& ray, const Scene& scene, u32 depth) const noexcept
 {
     constexpr glm::vec4 BLACK = { 0.0f, 0.0f, 0.0f, 1.0f };
     constexpr glm::vec4 BLUE  = { 0.5f, 0.7f, 1.0f, 1.0f };

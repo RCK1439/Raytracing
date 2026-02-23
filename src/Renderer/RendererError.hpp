@@ -14,20 +14,20 @@ enum class RendererErrorType : u8
     FAILED_TO_SAVE_IMAGE,
 };
 
-struct RendererError
+struct RendererError final
 {
 public:
-    constexpr RendererError(RendererErrorType type, const std::filesystem::path& path) :
+    constexpr RendererError(RendererErrorType type, const std::filesystem::path& path) noexcept :
         Args(path), Type(type) {};
 
 private:
     std::variant<std::filesystem::path> Args{};
     RendererErrorType                   Type{};
     
-    friend std::ostream& operator<<(std::ostream& stream, const RendererError& err);
+    friend std::ostream& operator<<(std::ostream& stream, const RendererError& err) noexcept;
 };
 
-std::ostream& operator<<(std::ostream& stream, const RendererError& err);
+std::ostream& operator<<(std::ostream& stream, const RendererError& err) noexcept;
 
 }
 

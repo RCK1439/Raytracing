@@ -8,7 +8,7 @@
 
 namespace RTIAW {
 
-Option<ScatterData> Metal::Scatter(const Ray& ray, const HitRecord& record) const
+Option<ScatterData> Metal::Scatter(const Ray& ray, const HitRecord& record) const noexcept
 {
     const glm::vec3 reflected = glm::reflect(ray.Direction, record.Normal);
     const Ray scattered = { record.Point, reflected + m_Fuzz * Random::InUnitSphere() };

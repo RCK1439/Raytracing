@@ -6,9 +6,9 @@
 
 namespace RTIAW {
 
-static void ImgCpyFlipped(const Buffer<u32>& src, Buffer<u32>& dest, u32 width, u32 height);
+static void ImgCpyFlipped(const Buffer<u32>& src, Buffer<u32>& dest, u32 width, u32 height) noexcept;
 
-Result<void, RendererError> Image::Save(const std::filesystem::path& path) const
+Result<void, RendererError> Image::Save(const std::filesystem::path& path) const noexcept
 {
     fpng::fpng_init();
 
@@ -22,7 +22,7 @@ Result<void, RendererError> Image::Save(const std::filesystem::path& path) const
     return {};
 }
 
-static void ImgCpyFlipped(const Buffer<u32>& src, Buffer<u32>& dest, u32 width, u32 height)
+static void ImgCpyFlipped(const Buffer<u32>& src, Buffer<u32>& dest, u32 width, u32 height) noexcept
 {
     u32 i{};
     for (u32 y = height - 1; y >= 1; y--)

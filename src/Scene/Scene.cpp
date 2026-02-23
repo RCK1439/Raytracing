@@ -11,7 +11,7 @@ namespace RTIAW {
 
 constexpr f32 RADIUS = 0.2f;
 
-static Sphere CreateMatteSphere(const glm::vec3& position)
+static Sphere CreateMatteSphere(const glm::vec3& position) noexcept
 {
     const glm::vec3 albedo = 
     {
@@ -24,7 +24,7 @@ static Sphere CreateMatteSphere(const glm::vec3& position)
     return Sphere(position, RADIUS, material);
 }
 
-static Sphere CreateMetalSphere(const glm::vec3& position)
+static Sphere CreateMetalSphere(const glm::vec3& position) noexcept
 {
     const glm::vec3 albedo =
     { 
@@ -38,7 +38,7 @@ static Sphere CreateMetalSphere(const glm::vec3& position)
     return Sphere(position, RADIUS, material);
 }
 
-static Sphere CreateDielectricSphere(const glm::vec3& position)
+static Sphere CreateDielectricSphere(const glm::vec3& position) noexcept
 {
     constexpr f32 REFRACTIVE_INDEX = 1.5f;
     const Ref<Dielectric> material = CreateRef<Dielectric>(REFRACTIVE_INDEX);
@@ -46,8 +46,9 @@ static Sphere CreateDielectricSphere(const glm::vec3& position)
     return Sphere(position, RADIUS, material);
 }
 
-Scene::Scene() // This makes the default cover-page scene.
+Scene::Scene() noexcept
 {
+    // This makes the default cover-page scene
     Add(glm::vec3{ 0.0f, -1000.0f, 0.0f }, 1000.0f, CreateRef<Lambertian>(glm::vec3{ 0.5f, 0.5f, 0.5f }));
     for (i32 a = -11; a < 11; a++)
     {
@@ -70,7 +71,7 @@ Scene::Scene() // This makes the default cover-page scene.
     Add(glm::vec3{  4.0f, 1.0f, 0.0f},  1.0f, CreateRef<Metal>(glm::vec3{ 0.7f, 0.6f, 0.5f }, 0.0f));
 }
 
-Option<HitRecord> Scene::Hit(const Ray& ray, f32 tMin, f32 tMax) const
+Option<HitRecord> Scene::Hit(const Ray& ray, f32 tMin, f32 tMax) const noexcept
 {
     Option<HitRecord> finalHit{};
 

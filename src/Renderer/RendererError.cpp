@@ -2,7 +2,7 @@
 
 namespace RTIAW {
 
-std::ostream& operator<<(std::ostream& stream, const RendererError& err)
+std::ostream& operator<<(std::ostream& stream, const RendererError& err) noexcept
 {
     switch (err.Type)
     {

@@ -5,7 +5,7 @@
 
 namespace RTIAW {
 
-Option<ScatterData> Lambertian::Scatter(const Ray& ray, const HitRecord& record) const
+Option<ScatterData> Lambertian::Scatter(const Ray& ray, const HitRecord& record) const noexcept
 {
     (void)ray;
 

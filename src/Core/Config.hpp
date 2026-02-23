@@ -8,7 +8,7 @@
 
 namespace RTIAW {
 
-struct Config
+struct Config final
 {
     std::filesystem::path OutputPath{"rtiaw.png"};
     u32                   Width{1280};
@@ -30,9 +30,9 @@ enum class ConfigParseError : u8
     INVALID_DEPTH,
 };
 
-Result<Config, ConfigParseError> ParseConfig(i32 argc, char* argv[]);
+Result<Config, ConfigParseError> ParseConfig(i32 argc, char* argv[]) noexcept;
 
-std::ostream& operator<<(std::ostream& stream, ConfigParseError err);
+std::ostream& operator<<(std::ostream& stream, ConfigParseError err) noexcept;
 
 }
 

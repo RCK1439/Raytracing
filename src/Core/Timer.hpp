@@ -14,8 +14,8 @@ public:
     using TimePoint = std::chrono::time_point<Clock, Duration>;
 
 public:
-    void Start();
-    void Stop();
+    void Start() noexcept;
+    void Stop() noexcept;
     
 private:
     TimePoint m_Start{};
@@ -25,13 +25,13 @@ private:
 class ScopedTimer final
 {
 public:
-    inline ScopedTimer() { m_Timer.Start(); }
-    inline ~ScopedTimer() { m_Timer.Stop(); }
+    inline ScopedTimer() noexcept { m_Timer.Start(); }
+    inline ~ScopedTimer() noexcept { m_Timer.Stop(); }
     
 private:
     Timer m_Timer{};
 };
 
-u32 SinceEpoch();
+u32 SinceEpoch() noexcept;
 
 }

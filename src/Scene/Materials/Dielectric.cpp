@@ -8,7 +8,7 @@
 
 namespace RTIAW {
 
-Option<ScatterData> Dielectric::Scatter(const Ray& ray, const HitRecord& record) const
+Option<ScatterData> Dielectric::Scatter(const Ray& ray, const HitRecord& record) const noexcept
 {
     glm::vec3 outwardNormal{};
     glm::vec3 refracted = glm::vec3(0.0f);
@@ -41,7 +41,7 @@ Option<ScatterData> Dielectric::Scatter(const Ray& ray, const HitRecord& record)
     return ScatterData { scattered, attenuation };
 }
 
-bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const
+bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, glm::vec3& refracted) const noexcept
 {
     const f32 dt = glm::dot(v, n);
     const f32 discriminant = 1.0f - niOverNT * niOverNT * (1.0f - dt * dt);
@@ -55,7 +55,7 @@ bool Dielectric::Refract(const glm::vec3& v, const glm::vec3& n, f32 niOverNT, g
     return false;
 }
 
-f32 Dielectric::Schlick(f32 cosine) const
+f32 Dielectric::Schlick(f32 cosine) const noexcept
 {
     f32 r0 = (1.0f - m_RefractiveIndex) / (1.0f + m_RefractiveIndex);
     r0 = r0 * r0;

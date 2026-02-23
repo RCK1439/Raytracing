@@ -14,26 +14,26 @@ namespace RTIAW {
 class Image final
 {
 public:
-    constexpr Image() = default;
-    constexpr Image(u32 width, u32 height) :
+    constexpr Image() noexcept = default;
+    constexpr Image(u32 width, u32 height) noexcept :
         m_Data(width * height), m_Width(width), m_Height(height) {}
 
-    inline constexpr u32 GetColor(u32 x, u32 y) const { return m_Data[x + y * m_Width]; }
-    inline constexpr u32 GetWidth() const { return m_Width; }
-    inline constexpr u32 GetHeight() const { return m_Height; }
+    inline constexpr u32 GetColor(u32 x, u32 y) const noexcept { return m_Data[x + y * m_Width]; }
+    inline constexpr u32 GetWidth() const noexcept { return m_Width; }
+    inline constexpr u32 GetHeight() const noexcept { return m_Height; }
 
-    constexpr void SetColorHex(u32 x, u32 y, u32 color)
+    constexpr void SetColorHex(u32 x, u32 y, u32 color) noexcept
     {
         m_Data[x + y * m_Width] = color;
     }
 
-    constexpr void SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a)
+    constexpr void SetColorRGBA(u32 x, u32 y, u8 r, u8 g, u8 b, u8 a) noexcept
     {
         const u32 color = (a << 24) | (b << 16) | (g << 8) | (r << 0);
         SetColorHex(x, y, color);
     }
 
-    constexpr void SetColor(u32 x, u32 y, const glm::vec4& color)
+    constexpr void SetColor(u32 x, u32 y, const glm::vec4& color) noexcept
     {
         const u8 r = static_cast<u8>(color.r * 255.0f);
         const u8 g = static_cast<u8>(color.g * 255.0f);
@@ -42,14 +42,14 @@ public:
         SetColorRGBA(x, y, r, g, b, a); 
     }
 
-    constexpr void Resize(u32 width, u32 height)
+    constexpr void Resize(u32 width, u32 height) noexcept
     {
         m_Data.Resize(width * height);
         m_Width = width;
         m_Height = height;
     }
 
-    Result<void, RendererError> Save(const std::filesystem::path& path) const;
+    Result<void, RendererError> Save(const std::filesystem::path& path) const noexcept;
 
 private:
     Buffer<u32> m_Data{};

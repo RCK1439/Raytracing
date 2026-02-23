@@ -8,25 +8,25 @@ namespace RTIAW::Random {
 
 static thread_local u32 s_RandomState{};
 
-inline constexpr u32 PCGHash(u32 input)
+inline constexpr u32 PCGHash(u32 input) noexcept
 {
     const u32 state = input * 747796405u + 2891336453u;
     const u32 word = ((state >> ((state >> 28u) + 4u)) ^ state) * 277803737u;
     return (word >> 22u) ^ word;
 }
 
-void Init(u32 seed)
+void Init(u32 seed) noexcept
 {
     s_RandomState = seed;
 }
     
-f32 Float()
+f32 Float() noexcept
 {
     s_RandomState = PCGHash(s_RandomState);
     return static_cast<f32>(s_RandomState) / static_cast<f32>(std::numeric_limits<u32>::max());
 }
 
-glm::vec3 InUnitSphere()
+glm::vec3 InUnitSphere() noexcept
 {
     glm::vec3 point{};
     
@@ -38,7 +38,7 @@ glm::vec3 InUnitSphere()
     return point;
 }
 
-glm::vec3 InUnitDisk()
+glm::vec3 InUnitDisk() noexcept
 {
     glm::vec3 point{};
 

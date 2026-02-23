@@ -6,7 +6,7 @@
 
 namespace RTIAW {
 
-Option<HitRecord> Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax) const
+Option<HitRecord> Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax) const noexcept
 {
     const glm::vec3 displacement = ray.Origin - m_Centre;
 
@@ -24,7 +24,7 @@ Option<HitRecord> Sphere::Hit(const Ray& ray, f32 tMin, f32 tMax) const
         .or_else([&] { return CheckRoot(ray, tMin, tMax, (-b + root) * invA); });
 }
 
-Option<HitRecord> Sphere::CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp) const
+Option<HitRecord> Sphere::CheckRoot(const Ray& ray, f32 tMin, f32 tMax, f32 temp) const noexcept
 {
     if (temp >= tMax || temp <= tMin)
         return {};

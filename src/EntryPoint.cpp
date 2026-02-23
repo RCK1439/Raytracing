@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <print>
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[]) noexcept
 {
     const auto cfg = RTIAW::ParseConfig(argc, argv);
     if (!cfg)
