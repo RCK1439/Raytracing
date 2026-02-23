@@ -4,15 +4,17 @@
 
 #include "Core/Types.hpp"
 
-#include "Scene/Camera.hpp"
-#include "Scene/Scene.hpp"
-
 #include <glm/vec4.hpp>
 
 #include <filesystem>
 #include <vector>
 
 namespace RTIAW {
+
+class Scene;
+class Camera;
+
+struct Ray;
 
 class Renderer final
 {

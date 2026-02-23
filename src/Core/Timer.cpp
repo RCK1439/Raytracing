@@ -1,7 +1,5 @@
 #include "Timer.hpp"
 
-#include "Core/Types.hpp"
-
 #include <print>
 
 namespace RTIAW::Time {

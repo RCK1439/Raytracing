@@ -1,11 +1,13 @@
 #include "Renderer.hpp"
-#include "Core/Timer.hpp"
-#include "Image.hpp"
+#include "Ray.hpp"
 
+#include "Core/Timer.hpp"
 #include "Core/Random.hpp"
 
 #include "Scene/Materials/Material.hpp"
 #include "Scene/Materials/HitRecord.hpp"
+#include "Scene/Camera.hpp"
+#include "Scene/Scene.hpp"
 
 #include <glm/geometric.hpp>
 

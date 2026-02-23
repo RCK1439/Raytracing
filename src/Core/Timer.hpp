@@ -10,7 +10,7 @@ class Timer final
 {
 public:
     using Clock     = std::chrono::high_resolution_clock;
-    using Duration  = std::chrono::duration<float>;
+    using Duration  = std::chrono::duration<f32>;
     using TimePoint = std::chrono::time_point<Clock, Duration>;
 
 public:

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Types.hpp"
+#include "Types.hpp"
 
 #include <glm/vec3.hpp>
 
